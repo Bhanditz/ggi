@@ -1,0 +1,6 @@
+@import 'compass';
+@import 'susy';
+
+h1 {
+  @include text-shadow(#ccc 1px 1px 3px);
+}

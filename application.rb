@@ -33,7 +33,7 @@ configure do
     ]
 
     css :application, '/css/application.css', [
-      '/css/screen.css'
+      '/css/main.css'
     ]
 
     js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
