@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
 # ^ For syuntax highlighting
 
-require 'app'
+require './application'
+
+run Sinatra::Application

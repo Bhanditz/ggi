@@ -8,7 +8,8 @@ gem 'haml', '~> 4.0' # HTML markup
 gem 'rack', '~> 1.5'  # Middleware for Sinatra
 gem 'rake', '~> 10.1'  # Ruby tasks for command-line invocation
 gem 'sass', '~> 3.2'  # CSS Markup
-gem 'sinatra', '~> 1.4'  # If you don't know what this is, you probably should be here.
+gem 'sinatra', '~> 1.4'  # Application framework
+gem 'sinatra-assetpack', '~> 0.3', require: 'sinatra/assetpack'
 
 group 'development' do
   gem 'debugger', '~> 1.6'  # Duh.
