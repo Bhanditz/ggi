@@ -19,6 +19,10 @@ group 'production' do
   gem 'unicorn', '~> 4.8'
 end
 
+group 'assets' do
+  gem 'susy', '~> 1.0'
+end
+
 group 'test' do
   gem 'capybara', '~> 2.2'  # Makes testing websites much easier
   gem 'capybara-webkit', '~> 1.1' # Headless JS-aware browser for capybara

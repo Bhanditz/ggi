@@ -5,10 +5,11 @@
 # ...That said, this framework is here just to alleivate a little of 
 # the Compass/Sass-related configuration.
 
-require 'compass'
 require 'sinatra'
 require 'sinatra/assetpack'
 require 'haml'
+require 'compass'
+require 'susy'
 
 require_relative 'lib/ggi'
 require_relative 'routes'
@@ -18,6 +19,8 @@ configure do
   set :scss, {:style => :compact, :debug_info => false}
   Compass.add_project_configuration(File.join(Sinatra::Application.root, 
                                               'config', 'compass.rb'))
+  set :scss, Compass.sass_engine_options
+  
   register Sinatra::AssetPack
 
   assets {
@@ -37,7 +40,8 @@ configure do
     ]
 
     js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
-    css_compression :simple   # :simple | :sass | :yui | :sqwish
+    css_compression :sass   # :simple | :sass | :yui | :sqwish
   }
+
 end
 
