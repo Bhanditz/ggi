@@ -8,6 +8,7 @@ require 'sinatra'
 require 'haml'
 
 require_relative 'lib/ggi'
+require_relative 'routes'
 
 configure do
   set :haml, {:format => :html5}
