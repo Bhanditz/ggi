@@ -20,7 +20,8 @@ end
 group 'assets' do
   gem 'compass', '~> 0.12'  # A package manager for sass
   gem 'sass', '~> 3.2'  # CSS Markup
-  gem 'susy', '~> 1.0'
+  gem 'susy', '~> 1.0'  # CSS Grid and math
+  gem 'sassy-buttons', '~> 0.2'  # CSS Buttons
 end
 
 group 'test' do

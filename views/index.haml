@@ -22,9 +22,10 @@
       E
     %li.hierarchy__item
       F
-  %ul.browser_tools
-    %li.browser_tools__tool Expand All
-    %li.browser_tools__tool Collapse All
+  .browser_tools
+    %ul
+      %li.browser_tools__tool Expand All
+      %li.browser_tools__tool Collapse All
 .scores_column
   .legend
     Legend
@@ -38,8 +39,8 @@
       - scores = { GGBN: :low, GBIF: :high, NCBI: :high, EOL: :low, BHL: :low, CBOL: nil, TOL: nil }
       - scores.keys.each do |source|
         %tr.scores__score_row
-          %td.scores__score= source
-          %td.scores__score X
+          %td.scores__source= source
+          %td.scores__value X
           %td.scores__score{class: scores[source].nil? ? nil : "#{scores[source]}_score"} Y
 
 .info_column
@@ -56,4 +57,5 @@
   .info_column__score
     %dt.info_stat Total Score:
     %dd.info_val 0.8
-  %img.info_column__picture{src: 'http://media.eol.org/content/2013/08/28/09/98622_130_130.jpg'}
+  .info_column__picture
+    %img{src: 'http://media.eol.org/content/2013/08/28/09/98622_130_130.jpg'}
