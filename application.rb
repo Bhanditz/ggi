@@ -9,7 +9,6 @@ require 'sinatra'
 require 'sinatra/assetpack'
 require 'haml'
 require 'compass'
-require 'susy'
 
 require_relative 'lib/ggi'
 require_relative 'routes'
