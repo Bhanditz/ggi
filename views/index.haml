@@ -1,1 +1,59 @@
-hi
+.browser_column
+  %ul.hierarchy--root
+    %li.hierarchy__item
+      A
+    %li.hierarchy__item
+      B
+    %li.hierarchy__item.hierarchy__item--open
+      C
+      %ul.hierarchy
+        %li.hierarchy__item.hierarchy__item--low_score
+          CXX
+        %li.hierarchy__item
+          CYY
+        %li.hierarchy__item.hierarchy__item--high_score
+          CZZ
+          %ul.hierarchy
+            %li.hierarchy__item.hierarchy__item--high_score
+              CZZZ
+    %li.hierarchy__item.hierarchy__item--high_score
+      D
+    %li.hierarchy__item.hierarchy__item--low_score
+      E
+    %li.hierarchy__item
+      F
+  %ul.browser_tools
+    %li.browser_tools__tool Expand All
+    %li.browser_tools__tool Collapse All
+.scores_column
+  .legend
+    Legend
+  %table.scores
+    %thead
+      %tr.scores__headers
+        %th.scores__score_header Source
+        %th.scores__score_header Value
+        %th.scores__score_header Score
+    %tbody
+      - scores = { GGBN: :low, GBIF: :high, NCBI: :high, EOL: :low, BHL: :low, CBOL: nil, TOL: nil }
+      - scores.keys.each do |source|
+        %tr.scores__score_row
+          %td.scores__score= source
+          %td.scores__score X
+          %td.scores__score{class: scores[source].nil? ? nil : "#{scores[source]}_score"} Y
+
+.info_column
+  -# Not sure if this is really a "list"...
+  .info_column__breadcrumb Hierarchy Breadcrumb
+  .info_column__latin_name Latin Name
+  .info_column__common_name Common Name
+  .info_column__family_count
+    %dt.info_stat # of Families:
+    %dd.info_val 1
+  .info_column__source
+    %dt.info_stat Source:
+    %dd.info_val something
+  .info_column__score
+    %dt.info_stat Total Score:
+    %dd.info_val 0.8
+  %img.info_column__picture{src: 'http://media.eol.org/content/2013/08/28/09/98622_130_130.jpg'}

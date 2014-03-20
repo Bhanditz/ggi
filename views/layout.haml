@@ -4,7 +4,27 @@
     != css :application, :media => 'screen'
     != js :app
   %body
-    %h1 Hello
-    = yield
+    .container
+      .header
+        %h1.header__title Name of Site
+        %ul.header__nav
+          %li.nav__item About
+          %li.nav__item Help
+          %li.nav__item Download
+      .subhead
+        .tools
+          %form.search
+            %input.search__term{ type: :text, placeholder: "Search for a name" }
+            %input.search__button{ type: :submit, value: "Go"}
+        .tagline
+          %h2.tagline__text
+            Tagline for the site
+            %small.tagline__more_info (read more)
+      .main
+        = yield
+      .footer
+        %h2.footer__title SIBGI Logo
+        .footer__byline
+          %p Powered by EOL
 
 

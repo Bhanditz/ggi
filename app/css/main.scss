@@ -1,6 +1,102 @@
 @import 'compass';
 @import 'susy';
 
-h1 {
-  @include text-shadow(#ccc 1px 1px 3px);
+// Grid:
+$total-columns: 9;
+$column-width: 6em;
+$gutter-width: 1em;
+$grid-padding: $gutter-width;
+
+// Rhythm:
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+// Colors:
+$header_bg: #394651;
+$light_header_bg: #e2e9ef;
+
+body {
+  @include container;
+  background-color: white;
 }
+
+.header {
+  @include span-columns(9);
+  background-color: $header_bg;
+  color: white;
+
+  .header__title {
+    @include span-columns(5);
+    margin-left: 1em;
+  }
+
+  .header__nav {
+    @include horizontal-list;
+    @include omega;
+    margin-top: 2em;
+    margin-right: 1em;
+
+    .nav__item {
+    }
+
+  }
+}
+
+.subhead {
+  @include span-columns(9);
+  background-color: $light_header_bg;
+
+  .tools {
+    @include span-columns(4);
+
+    .search {
+      @include span-columns(3);
+      padding-left: 1em;
+      padding-top: 1em;
+    }
+  }
+
+  .tagline {
+    @include span-columns(4);
+    @include omega;
+
+    .tagline__more_info {
+      font-size: adjust-font-size-to(6);
+    }
+  }
+
+}
+
+.main {
+  @include span-columns(9);
+  @include clearfix;
+  background-color: white;
+
+  .browser_column {
+    @include span-columns(3);
+  }
+
+  .scores_column {
+    @include span-columns(3);
+  }
+
+  .info_column {
+    @include span-columns(3);
+    @include omega;
+  }
+
+}
+
+.footer {
+  @include span-columns(9);
+
+  .footer__title {
+    @include span-columns(4);
+  }
+
+  .footer__byline {
+    @include span-columns(4);
+    @include omega;
+  }
+}
+

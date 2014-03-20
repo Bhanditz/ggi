@@ -3,11 +3,9 @@
 
 source 'https://rubygems.org'
 
-gem 'compass', '~> 0.12'  # A package manager for sass
 gem 'haml', '~> 4.0' # HTML markup
 gem 'rack', '~> 1.5'  # Middleware for Sinatra
 gem 'rake', '~> 10.1'  # Ruby tasks for command-line invocation
-gem 'sass', '~> 3.2'  # CSS Markup
 gem 'sinatra', '~> 1.4'  # Application framework
 gem 'sinatra-assetpack', '~> 0.3', require: 'sinatra/assetpack'
 
@@ -20,6 +18,8 @@ group 'production' do
 end
 
 group 'assets' do
+  gem 'compass', '~> 0.12'  # A package manager for sass
+  gem 'sass', '~> 3.2'  # CSS Markup
   gem 'susy', '~> 1.0'
 end
 
