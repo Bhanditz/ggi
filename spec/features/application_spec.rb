@@ -1,5 +1,6 @@
-describe '/' do
+require_relative "../spec_helper.rb"
 
+describe '/' do
   it 'renders' do
     visit '/'
     expect(page.status_code).to eq 200
