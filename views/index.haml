@@ -1,5 +1,6 @@
 - mammalia = Node.get('mammalia').json
 - human = Node.get('human').json
+-# the taxonomy browser will use the FALO classification WEB-5186, WEB-5183
 .browser_column
   %ul.hierarchy--root
     %li.hierarchy__item
@@ -31,6 +32,7 @@
 .scores_column
   .legend
     Legend
+  -# attributes and values for the GGI data will be extracted from EOL TraitBank WEB-5186
   %table.scores
     %thead
       %tr.scores__headers
