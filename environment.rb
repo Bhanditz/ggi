@@ -1,16 +1,15 @@
-class Ggi
+require 'json'
 
-  puts "I'm in Ggi class"
+class Ggi
 
   # TODO
 
 end
 
-puts "I'm loading things..."
+puts "** Loading environment."
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'models'))
 Dir.glob(File.join(File.dirname(__FILE__), 'models', '**', '*.rb')) do |app|
-  puts "Loading #{app}"
   require File.basename(app, '.*')
 end
 
