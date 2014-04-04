@@ -6,6 +6,10 @@ require 'capybara'
 require 'capybara/rspec'
 require 'capybara/dsl'
 require 'capybara/webkit'
+require 'webmock'
+require 'webmock/rspec'
+
+require_relative 'support/helpers'
 
 ENV['RACK_ENV'] = 'test'
 require_relative '../application.rb'

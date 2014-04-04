@@ -10,6 +10,8 @@ gem 'rack', '~> 1.5'  # Middleware for Sinatra
 gem 'rake', '~> 10.1'  # Ruby tasks for command-line invocation
 gem 'sinatra', '~> 1.4'  # Application framework
 gem 'sinatra-assetpack', '~> 0.3', require: 'sinatra/assetpack'
+gem 'rest_client', '~> 1.7', require: 'rest-client'
+gem 'nokogiri', '~> 1.6'
 
 group 'development' do
   gem 'debugger', '~> 1.6'  # Duh.
@@ -32,4 +34,5 @@ group 'test' do
   gem 'coveralls', '~> 0.7', require: false
   gem 'rack-test', '~> 0.6'  # Allows rack use in testing
   gem 'rspec', '3.0.0.beta2'  # Testing framework allowing "specifications"
+  gem 'webmock', '~> 1.17'
 end
