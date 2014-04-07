@@ -7,7 +7,7 @@ gem 'haml', '~> 4.0' # HTML markup
 # NOTE - JSON is required in other pieces-parts, but we're being specific:
 gem 'json', '~> 1.8' # Input format.
 gem 'rack', '~> 1.5'  # Middleware for Sinatra
-gem 'rake', '~> 10.1'  # Ruby tasks for command-line invocation
+gem 'rake', '~> 10.2'  # Ruby tasks for command-line invocation
 gem 'sinatra', '~> 1.4'  # Application framework
 gem 'sinatra-assetpack', '~> 0.3', require: 'sinatra/assetpack'
 gem 'rest_client', '~> 1.7', require: 'rest-client'
