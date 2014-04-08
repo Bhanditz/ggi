@@ -29,6 +29,8 @@ class Ggi::FaloImporter
     if parent_node = parent_nodes.first
       xml_node = Nokogiri::XML::Node.new(node[:name], @tree)
       xml_node['reference'] = row['REFERENCE']
+      xml_node['uuid'] = row['UUID']
+      xml_node['eol_id'] = row['EolId']
       xml_node.parent = parent_node
     else
       puts "Ignoring %s: No Parent %s" % [node[:name], node[:parent]]

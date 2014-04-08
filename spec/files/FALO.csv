@@ -1,41 +1,41 @@
-Sapk,K,Sbk,Ik,SpP,P,SbP,IP,PvP,SpC,C,SbC,IC,SpO,O,FAMILY,REFERENCE,FAMILY,LastWord
-Superkingdom Prokaryota,,,,,,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Prokaryota
-Superkingdom Prokaryota,Kingdom Archaea,,,,,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Archaea
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Crenarchaeota
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Aigarchaeota,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Aigarchaeota
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Korarchaeota,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Korarchaeota
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thaumarchaeota,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Thaumarchaeota
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thaumarchaeota,,,,Order Cenarchaeales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Cenarchaeales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thaumarchaeota,,,,Order Cenarchaeales,Family Cenarchaeaceae,"NCBI, 2013",TRUE,Cenarchaeaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Thermoprotei
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Acidilobales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Acidilobales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Acidilobales,Family Acidilobaceae,"NCBI, 2013",TRUE,Acidilobaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Acidilobales,"Family ""Caldisphaeraceae""","NCBI, 2013; Garrity et al., 2007",TRUE,Caldisphaeraceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Desulfurococcales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Desulfurococcales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Desulfurococcales,Family Desulfurococcaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Desulfurococcaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Desulfurococcales,Family Pyrodictiaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Pyrodictiaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Fervidicoccales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Fervidicoccales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Fervidicoccales,Family Fervidicoccaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Fervidicoccaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Sulfolobales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Sulfolobales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Sulfolobales,Family Sulfolobaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Sulfolobaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Thermoproteales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Thermoproteales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Thermoproteales,Family Thermofilaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Thermofilaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Thermoproteales,Family Thermoproteaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Thermoproteaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Euryarchaeota
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Archaeoglobi,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Archaeoglobi
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Archaeoglobi,,,,Order Archaeoglobales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Archaeoglobales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Archaeoglobi,,,,Order Archaeoglobales,Family Archaeoglobaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Archaeoglobaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Halobacteria,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Halobacteria
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Halobacteria,,,,Order Halobacteriales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Halobacteriales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Halobacteria,,,,Order Halobacteriales,Family Halobacteriaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Halobacteriaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanobacteria
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,Order Methanobacteriales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanobacteriales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,Order Methanobacteriales,Family Methanobacteriaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanobacteriaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,Order Methanobacteriales,Family Methanothermaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanothermaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanococci
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,Order Methanococcales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanococcales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,Order Methanococcales,Family Methanocaldococcaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanocaldococcaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,Order Methanococcales,Family Methanococcaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanococcaceae
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanomicrobia,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanomicrobia
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanomicrobia,,,,Order Methanocellales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanocellales
-Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanomicrobia,,,,Order Methanocellales,Family Methanocellaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanocellaceae
+UUID,Sapk,K,Sbk,Ik,SpP,P,SbP,IP,PvP,SpC,C,SbC,IC,SpO,O,FAMILY,REFERENCE,IsFamily,LastWord,EolId
+7aafb247-8e46-4e74-9c85-4a7a74469dd5,Superkingdom Prokaryota,,,,,,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Prokaryota,288
+d002af0d-e9f4-46bc-84f6-ad4761f3b095,Superkingdom Prokaryota,Kingdom Archaea,,,,,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Archaea,7920
+9f7b34b1-d50c-414c-8f4c-c91ee8ef3b7e,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Crenarchaeota,7953
+58fb269f-1b1a-4bc4-8c24-a0a7a7c68d13,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Aigarchaeota,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Aigarchaeota,10594366
+63cdd06a-a79f-42c2-9ed8-726dd96ab3cf,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Korarchaeota,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Korarchaeota,10556730
+a9b68a80-0254-4c61-b32b-00cfa11c44de,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thaumarchaeota,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Thaumarchaeota,10594366
+3970fa4e-ec9f-44f8-9d35-7dffbcea317e,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thaumarchaeota,,,,Order Cenarchaeales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Cenarchaeales,10594383
+81cb633b-f303-41e2-b576-d53e57401515,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thaumarchaeota,,,,Order Cenarchaeales,Family Cenarchaeaceae,"NCBI, 2013",TRUE,Cenarchaeaceae,10594384
+87ee7c96-cd76-471a-8368-6ae48385eb8c,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Thermoprotei,7954
+32bb0ed8-cd33-465c-ba1d-fcea9c231c9b,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Acidilobales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Acidilobales,7966
+dc7494ad-40b6-43c1-9da5-428e10174ac5,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Acidilobales,Family Acidilobaceae,"NCBI, 2013",TRUE,Acidilobaceae,13032606
+7b201482-ee83-4618-8f3a-360d9f673d37,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Acidilobales,"Family ""Caldisphaeraceae""","NCBI, 2013; Garrity et al., 2007",TRUE,Caldisphaeraceae,7967
+58d5f9a3-9818-4488-8f43-a7d75bdf911b,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Desulfurococcales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Desulfurococcales,7963
+11fa6901-1768-4327-a4c2-30aac5939b71,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Desulfurococcales,Family Desulfurococcaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Desulfurococcaceae,7965
+838d2636-b94f-444d-9936-940b6f702548,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Desulfurococcales,Family Pyrodictiaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Pyrodictiaceae,7964
+584bab41-4086-43b2-ab86-7ab99957ce0d,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Fervidicoccales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Fervidicoccales,11811427
+f6fe728d-41dc-4a5d-bd11-7f3e29ba57b5,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Fervidicoccales,Family Fervidicoccaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Fervidicoccaceae,11811428
+e54dbaca-c989-43fb-a1c9-1273239bb220,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Sulfolobales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Sulfolobales,7955
+fc51736b-9393-436b-88ed-211a0ad0ea4b,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Sulfolobales,Family Sulfolobaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Sulfolobaceae,7956
+8f31ded8-a453-469c-8951-aff2d02e3f58,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Thermoproteales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Thermoproteales,7957
+d880a678-84d0-4fc0-9107-cc1a9d8bb22c,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Thermoproteales,Family Thermofilaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Thermofilaceae,7958
+02fcdcd1-f023-40a9-bf1a-208e1a9e6fd6,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Crenarchaeota,,,,,Class Thermoprotei,,,,Order Thermoproteales,Family Thermoproteaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Thermoproteaceae,7962
+e2536fef-e708-48bc-a893-282e3448ecf4,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Euryarchaeota,7921
+3688fc78-e522-469e-805b-9380c9be6e50,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Archaeoglobi,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Archaeoglobi,7959
+7e0a00fe-3037-4b51-81cc-f2c938e5ed64,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Archaeoglobi,,,,Order Archaeoglobales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Archaeoglobales,7960
+e3748d08-66d6-4835-a49c-f5aae93c9195,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Archaeoglobi,,,,Order Archaeoglobales,Family Archaeoglobaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Archaeoglobaceae,7961
+23eea55c-4750-4911-9fb0-7409fbe3c423,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Halobacteria,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Halobacteria,7949
+2e0faf64-c8fa-4ae5-8b37-8f847dfe3e5a,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Halobacteria,,,,Order Halobacteriales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Halobacteriales,7950
+9bf9b2ab-94e5-4c2e-a4ff-ef0635838eab,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Halobacteria,,,,Order Halobacteriales,Family Halobacteriaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Halobacteriaceae,7951
+f179b7ff-0723-4c02-8e86-ba8d520861d0,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanobacteria,7945
+9d3d06d1-86a6-4728-a446-f40609d147b2,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,Order Methanobacteriales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanobacteriales,7946
+f6172261-b88c-443c-a33f-2b03f2f99d3d,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,Order Methanobacteriales,Family Methanobacteriaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanobacteriaceae,7952
+279793c9-42eb-4d36-91a8-ce270a10183e,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanobacteria,,,,Order Methanobacteriales,Family Methanothermaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanothermaceae,7947
+98209543-6084-4225-a9af-fd22fde07741,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanococci,7942
+a3835cf0-fd19-48da-a83f-e79de80c3bba,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,Order Methanococcales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanococcales,7943
+007af4ff-0ba2-4f16-9950-e77f2e1ab741,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,Order Methanococcales,Family Methanocaldococcaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanocaldococcaceae,7948
+20e2565b-bd15-4f7c-a96d-f1357fa388ba,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanococci,,,,Order Methanococcales,Family Methanococcaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanococcaceae,7944
+c3bf5bb6-3a0f-4e9f-8131-eb2f9f28ba65,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanomicrobia,,,,,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanomicrobia,7933
+5edef0e3-8b7f-40ba-a74b-22db38c54d38,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanomicrobia,,,,Order Methanocellales,,"Ruggiero & Gordon (Eds.), 2013",FALSE,Methanocellales,11814283
+7fd3e1b5-7bcb-47cd-9316-979fc5f937d8,Superkingdom Prokaryota,Kingdom Archaea,,,,Phylum Euryarchaeota,,,,,Class Methanomicrobia,,,,Order Methanocellales,Family Methanocellaceae,"NCBI, 2013; Garrity et al., 2007",TRUE,Methanocellaceae,11814284
