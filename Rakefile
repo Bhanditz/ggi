@@ -3,6 +3,9 @@ require 'rake'
 require 'rspec'
 require 'rspec/core/rake_task'
 require_relative 'lib/ggi'
+APP_FILE = 'application.rb'
+APP_CLASS = 'Sinatra::Application'
+require 'sinatra/assetpack/rake'
 
 task :default => :spec
 

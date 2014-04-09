@@ -1,19 +1,22 @@
 !!!
 %html
   %head
+    %script{ src: 'http://code.jquery.com/jquery-1.9.1.js' }
+    %script{ src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.js' }
+    -# != js :app
     -# != css :application, :media => 'screen'
-    != js :app
   %body
     .container
       .header
-        %h1.header__title Name of Site
+        - header = @taxon ? ": %s %s" % [@taxon[:taxonRank].capitalize, @taxon[:scientificName]] : ''
+        %h1.header__title= "Name of Site%s" % header
         %ul.header__nav
           %li.nav__item About
           %li.nav__item Help
           %li.nav__item Download
       .subhead
         .tools
-          %form.search{ method: 'get', action: '/search' }
+          %form.search_form{ method: 'get', action: '/search' }
             %input#search_term.search__term{ type: :text, name: 'search_term',  placeholder: "Search for a name" }
             %input.search__button{ type: :submit, value: "Go"}
         .tagline
@@ -26,3 +29,28 @@
         %h2.footer__title SIBGI Logo
         .footer__byline
           %p Powered by EOL
+:javascript
+  $(function() {
+    $("#search_term").autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/autocomplete.json",
+          dataType: "jsonp",
+          data: {
+            search_term: request.search_term,
+            batch_size: 10
+          },
+          success: function( data ) {
+            response( $.map( data, function( item ) {
+              return { value: item.scientific_name }
+            }));
+          },
+        });
+      },
+      minLength: 1,
+      select: function(event, ui) {
+        $("#search_term").val(ui.item.label);
+        $(".search_form").submit();
+      },
+    });
+  });

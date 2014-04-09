@@ -30,7 +30,7 @@ class Ggi::FaloImporter
       xml_node = Nokogiri::XML::Node.new(node[:name], @tree)
       xml_node['reference'] = row['REFERENCE']
       xml_node['uuid'] = row['UUID']
-      xml_node['eol_id'] = row['EolId']
+      xml_node['eol_id'] = row['EOL_PAGE_ID']
       xml_node['rank'], xml_node['scientific_name'] = node[:name].split(/_+/)
       xml_node.parent = parent_node
     else
