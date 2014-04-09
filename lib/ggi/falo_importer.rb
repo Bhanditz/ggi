@@ -31,6 +31,7 @@ class Ggi::FaloImporter
       xml_node['reference'] = row['REFERENCE']
       xml_node['uuid'] = row['UUID']
       xml_node['eol_id'] = row['EolId']
+      xml_node['rank'], xml_node['scientific_name'] = node[:name].split(/_+/)
       xml_node.parent = parent_node
     else
       puts "Ignoring %s: No Parent %s" % [node[:name], node[:parent]]

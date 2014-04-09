@@ -11,7 +11,6 @@ require 'haml'
 require 'compass'
 
 require_relative 'environment'
-require_relative 'lib/ggi'
 require_relative 'routes'
 
 configure do

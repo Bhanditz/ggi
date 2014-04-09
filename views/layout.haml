@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    != css :application, :media => 'screen'
+    -# != css :application, :media => 'screen'
     != js :app
   %body
     .container
@@ -13,8 +13,8 @@
           %li.nav__item Download
       .subhead
         .tools
-          %form.search
-            %input.search__term{ type: :text, placeholder: "Search for a name" }
+          %form.search{ method: 'get', action: '/search' }
+            %input#search_term.search__term{ type: :text, name: 'search_term',  placeholder: "Search for a name" }
             %input.search__button{ type: :submit, value: "Go"}
         .tagline
           %h2.tagline__text
@@ -26,5 +26,3 @@
         %h2.footer__title SIBGI Logo
         .footer__byline
           %p Powered by EOL
-
-
