@@ -1,1 +1,2 @@
 falo_url: http://example.org
+eol_api_url: http://api.eol.org/ggi/%s
