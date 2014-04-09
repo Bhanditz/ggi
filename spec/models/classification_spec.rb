@@ -10,13 +10,13 @@ describe Classification do
     
     it 'returns empty array for search from 0 to 3 characters' do
       expect(Classification.autocomplete('')).to eq []
-      expect(Classification.autocomplete('m')).to eq []
-      expect(Classification.autocomplete('me')).to eq []
+      expect(Classification.autocomplete('s')).to eq []
+      expect(Classification.autocomplete('so')).to eq []
     end
 
     it 'returns data matching 3 or more characters' do
-      expect(Classification.autocomplete('met').size).to eq 11
-      expect(Classification.autocomplete('meth').size).to eq 11
+      expect(Classification.autocomplete('sol').size).to eq 2
+      expect(Classification.autocomplete('sola').size).to eq 2
     end
 
   end
@@ -33,7 +33,7 @@ describe Classification do
 
     context 'search succeeds' do
       it 'returns classification node' do
-        expect(Classification.search('FervidicoccaleS')).
+        expect(Classification.search('SolaNaceae')).
           to be_kind_of Nokogiri::XML::Element
       end
     end
