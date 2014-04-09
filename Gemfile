@@ -31,6 +31,7 @@ end
 group 'test' do
   gem 'capybara', '~> 2.2'  # Makes testing websites much easier
   gem 'capybara-webkit', '~> 1.1' # Headless JS-aware browser for capybara
+  # gem 'selenium-webdriver'
   gem 'coveralls', '~> 0.7', require: false
   gem 'rack-test', '~> 0.6'  # Allows rack use in testing
   gem 'rspec', '3.0.0.beta2'  # Testing framework allowing "specifications"
