@@ -30,7 +30,7 @@ configure do
 
     # The second parameter defines where the compressed version will be served.
     # (Note: that parameter is optional, AssetPack will figure it out.)
-    js :app, [
+    js :app, '/js/app.js', [
       '/js/jquery.js',
       '/js/jquery-ui.js',
       '/js/main.js'
