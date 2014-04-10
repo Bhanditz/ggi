@@ -17,6 +17,7 @@ describe '/' do
         fill_in('search_term', with: 'Solanaceae')
         click_button('Go')
         expect(page.status_code).to eq 200
+        expect(page.current_path).to eq '/taxon/solanaceae'
         expect(page.body).to match 'Family Solanaceae'
       end
 
