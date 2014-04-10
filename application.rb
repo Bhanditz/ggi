@@ -1,10 +1,3 @@
-# NOTE (!) ... Try not to touch this file until you need to!  
-# You should be focusing on the functionality of the classes in the 
-# app before you focus on the web development of those functions.
-
-# ...That said, this framework is here just to alleivate a little of 
-# the Compass/Sass-related configuration.
-
 require 'sinatra'
 require 'sinatra/assetpack'
 require 'haml'
@@ -25,12 +18,10 @@ configure do
   register Sinatra::AssetPack
 
   assets do
-    serve '/js',     from: 'app/js'        # Default
-    serve '/css',    from: 'app/css'       # Default
-    serve '/images', from: 'app/images'    # Default
+    serve '/js',     from: 'app/js'      
+    serve '/css',    from: 'app/css'     
+    serve '/images', from: 'app/images'  
 
-    # The second parameter defines where the compressed version will be served.
-    # (Note: that parameter is optional, AssetPack will figure it out.)
     js :app, '/js/app.js', [
       '/js/jquery.js',
       '/js/jquery-ui.js',
@@ -41,8 +32,8 @@ configure do
       '/css/main.css'
     ]
 
-    js_compression  :jsmin    # :jsmin | :yui | :closure | :uglify
-    css_compression :sass   # :simple | :sass | :yui | :sqwish
+    js_compression  :jsmin 
+    css_compression :sass   
   end
 
 end
