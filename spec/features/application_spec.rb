@@ -17,7 +17,6 @@ describe '/' do
         fill_in('search_term', with: 'Solanaceae')
         click_button('Go')
         expect(page.status_code).to eq 200
-        save_and_open_page
         expect(page.body).to match 'Family Solanaceae'
       end
 
@@ -31,7 +30,6 @@ describe '/' do
         fill_in('search_term', with: 'whatever')
         click_button('Go')
         expect(page.status_code).to eq 200
-        save_and_open_page
         expect(page.body).to match '>Name of Site<'
       end
 
