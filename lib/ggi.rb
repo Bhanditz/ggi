@@ -3,7 +3,6 @@ require 'yaml'
 require 'csv'
 require 'rest-client'
 
-require_relative '../environment'
 require_relative 'ggi/version'
 require_relative 'ggi/falo_importer'
 require_relative 'ggi/classification'
