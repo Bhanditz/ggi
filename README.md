@@ -15,6 +15,13 @@ knowledge for every biological family.
 The GGI portal is being developed by the [Encyclopedia of Life][11] team
 for the [Global Genome Initiative (GGI)][12].
 
+## Configuration
+
+Create and edit configuration file:
+
+    cp config/config.yml.example config/config.yml
+
+
 [![Continuous Integration Status][1]][2]
 [![Coverage Status][3]][4]
 [![CodePolice][5]][6]

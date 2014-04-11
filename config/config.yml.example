@@ -1,2 +1,9 @@
+# There is no hosted version of the FALO.csv file yet. For development
+# purposes copy spec/files/FALO.csv and host it on a web server (localhost,
+# dropbox etc) and put the url here. Note file:// paths do not appear to work.
 falo_url: http://example.org
-eol_api_url: http://api.eol.org/ggi/%s
+
+# GGI response is not yet available on EOL API. For development purposes run EOL
+# codebase locally using ggi_api branch and bocce demo environment e.g.
+# 0.0.0.0:3000/api/ggi/%s
+eol_api_url: http://eol.org/api/ggi/%s
