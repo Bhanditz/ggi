@@ -1,0 +1,59 @@
+%aside
+  %h2 About the site
+  %p Tagline for the site
+%section
+  %h2 Search
+  %form#search_form{ method: 'get', action: '/search' }
+    %label
+      Scientific or common name
+      %small
+        For example, enter
+        %em Solanaceae
+        or
+        %em Solanales
+      %input#search_term{ type: :text, name: 'search_term',
+        placeholder: 'Enter scientific or common name',
+        value: params[:scientific_name] }
+    %input{ type: :submit, value: 'Go'}
+
+- # FIXME Only show taxonomy browse if taxonomy selected otherwise show phylogeny
+%section
+  %nav
+    - # FIXME figure out how switching between phylogeny and taxonomy browsing
+    - #       should work and change routes accordingly for example, is
+    - #       browsing method a subset of a route or the parent i.e. does it
+    - #       make more sense as /taxon/:scientificname?browse=taxonomy and
+    - #       /taxon/:scientificname?browse=phylogeny and /?browse= etc or as
+    - #       /taxonomy/taxon/:scientificname and /phylogeny/taxon/:scientificname
+    %a{ href: '/fixme/taxonomy/' } Taxonomy
+    %a{ href: '/fixme/phylogeny' } Phylogeny
+
+  %h2 Browse taxonomy
+  %ul.hierarchy--root
+    %li.hierarchy__item
+      A
+    %li.hierarchy__item
+      B
+    %li.hierarchy__item.hierarchy__item--open
+      C
+      %ul.hierarchy
+        %li.hierarchy__item.hierarchy__item--low_score
+          CXX
+        %li.hierarchy__item
+          CYY
+        %li.hierarchy__item.hierarchy__item--high_score
+          CZZ
+          %ul.hierarchy
+            %li.hierarchy__item.hierarchy__item--high_score
+              CZZ1
+    %li.hierarchy__item.hierarchy__item--high_score
+      D
+    %li.hierarchy__item.hierarchy__item--low_score
+      E
+    %li.hierarchy__item
+      F
+  - # FIXME replace dummy href with one that works
+  %a{ href: '/fixme/collapse_all' } Collapse all
+
+= yield
+

@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %link{ rel: 'stylesheet', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', type: 'text/css' }
+    %script{ src: 'http://code.jquery.com/jquery-1.9.1.js' }
+    %script{ src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.js' }
+    != js :app
+    != css :application, :media => 'screen'
+  %body
+    %header
+      %h1
+        %a{ href: '/'} GGI Portal
+      %nav
+        - ['about', 'help', 'download'].each do |n|
+          %a{ href: "/#{n}" }
+            - if request.path_info == "/#{n}"
+              %strong= n.capitalize
+            - else
+              = n.capitalize
+
+    = yield
+    %footer
+      %h2 Sponsors
+      %a{ href: 'http://ggi.si.edu'} GGI
+      %a{ href: 'http://eol.org' } Powered by EOL

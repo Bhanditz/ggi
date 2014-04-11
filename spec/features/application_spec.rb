@@ -3,7 +3,7 @@ describe '/' do
   it 'renders' do
     visit '/'
     expect(page.status_code).to eq 200
-    expect(page.body).to match 'Go'
+    expect(page.body).to match 'GGI Portal'
   end
 
   describe 'search' do 
@@ -25,13 +25,13 @@ describe '/' do
 
     context 'a name not found search' do
 
-      it 'displays page for name not found' do
+      it 'redirects to referrer' do
         stub_falo
         visit '/'
         fill_in('search_term', with: 'whatever')
         click_button('Go')
         expect(page.status_code).to eq 200
-        expect(page.body).to match '>Name of Site<'
+        expect(page.current_path).to eq '/'
       end
 
     end

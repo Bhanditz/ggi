@@ -1,5 +1,7 @@
 get '/' do
-  haml :index
+  haml :'layouts/taxonomy' do
+    haml :index, layout: false
+  end
 end
 
 get '/search' do
@@ -24,10 +26,24 @@ get '/taxon/:scientific_name' do
   @node ||= Classification.search(params[:scientific_name])
   if @node
     @taxon = Taxon.find(@node.attr(:eol_id))
-    haml :taxon
+    haml :'layouts/taxonomy' do
+      haml :taxon, layout: false
+    end
   else
     redirect request.referrer
   end
+end
+
+get '/about' do
+  haml :about
+end
+
+get '/help' do
+  haml :help
+end
+
+get '/download' do
+  haml :download
 end
 
 
