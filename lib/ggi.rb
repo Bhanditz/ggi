@@ -2,6 +2,7 @@ require 'json'
 require 'yaml'
 require 'csv'
 require 'rest-client'
+require 'nokogiri'
 
 require_relative 'ggi/version'
 require_relative 'ggi/falo_importer'

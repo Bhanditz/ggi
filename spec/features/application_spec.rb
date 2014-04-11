@@ -25,7 +25,7 @@ describe '/' do
 
     context 'a name not found search' do
 
-      it 'displays page for found name' do
+      it 'displays page for name not found' do
         stub_falo
         visit '/'
         fill_in('search_term', with: 'whatever')
@@ -46,7 +46,7 @@ describe '/' do
         expect(page).to have_xpath '//ul[@id="ui-id-1"]/li[1]'
         expect(page).to have_xpath '//li[@class="ui-menu-item"]'
         find(:xpath, '//li[@class="ui-menu-item"][1]').click
-        # expect(page.body).to match 'Solanaceae'
+        expect(page.body).to match 'Solanales'
       end
 
     end
