@@ -40,6 +40,7 @@ describe '/' do
 
       it 'searches with autocomplete' do
         stub_falo
+        stub_find_taxon('4430') 
         visit '/'
         expect(page).to have_no_xpath '//ul[@id="ui-id-1"]/li[1]'
         fill_in('search_term', with: 'sol')
