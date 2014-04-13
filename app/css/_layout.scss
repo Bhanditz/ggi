@@ -1,0 +1,86 @@
+// Layout: layout of major content panels and global header and footer
+$base-font-size: 12px;
+$base-line-height: 18px;
+$ggi-breakpoint-medium: 40em;
+$ggi-breakpoint-large: 50em;
+@include establish-baseline;
+@include border-box-sizing;
+
+@include breakpoint($ggi-breakpoint-medium) {
+  @include establish-baseline(14px);
+}
+
+@include breakpoint($ggi-breakpoint-large) {
+  @include establish-baseline(16px);
+}
+
+html, body {
+  height: 100%;
+}
+
+.page {
+  position: relative;
+  min-height: 100%;
+  @include padding-trailer(6);
+}
+
+.container {
+  @include container;
+  @include break;
+  padding: rhythm();
+  position: relative;
+}
+
+header.page__header {
+  @extend .container;
+}
+
+.page__subheader {
+  @extend .container;
+}
+
+.page__content {
+  @extend .container;
+}
+
+@include susy-breakpoint($ggi-breakpoint-medium, 3) {
+  .tagline {
+    @include span(2 omega at 2 of 3);
+  }
+  .search {
+    @include span(1 at 1 of 3);
+  }
+}
+
+.tree {
+  @include break;
+  @include rhythm-padding;
+  @include susy-breakpoint($ggi-breakpoint-large, 3) {
+    @include span(1 at 1 of 3);
+  }
+}
+
+.tree + article {
+  @include susy-breakpoint($ggi-breakpoint-large, 3) {
+    @include span(2 at 2 of 3);
+    @include nested(2) {
+      .information {
+        @include span(1 at 1 of 2);
+      }
+      .assessment {
+        @include span(1 at 2 of 2);
+      }
+    }
+  }
+}
+
+footer.page__footer {
+  @extend .container;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  min-height: rhythm(6);
+  margin-top: -1 * rhythm(6);
+}
+
+

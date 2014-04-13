@@ -22,10 +22,13 @@ group 'production' do
 end
 
 group 'assets' do
-  gem 'compass', '~> 0.12'  # A package manager for sass
-  gem 'sass', '~> 3.2'  # CSS Markup
-  gem 'susy', '~> 1.0'  # CSS Grid and math
-  gem 'sassy-buttons', '~> 0.2'  # CSS Buttons
+  gem 'sass', '~> 3.3'  # CSS Markup
+  gem 'compass', '~> 1.0.0.alpha'  # A package manager for sass
+  gem 'compass-normalize',
+    git: 'git@github.com:ksmandersen/compass-normalize.git',
+    ref: '8398ca6e47860cc0205ad9567b80cebd6a09ba05' # 2.0
+  gem 'breakpoint', '~> 2.4'
+  gem 'susy', '~> 2.1'  # CSS Grid and math
 end
 
 group 'test' do

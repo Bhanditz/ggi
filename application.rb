@@ -11,16 +11,16 @@ configure do
   set :root, settings.root
   set :haml, format: :html5, layout: :'layouts/application'
   set :scss, style: :compact, debug_info: false
-  Compass.add_project_configuration(File.join(Sinatra::Application.root, 
+  Compass.add_project_configuration(File.join(Sinatra::Application.root,
                                               'config', 'compass.rb'))
   set :scss, Compass.sass_engine_options
 
   register Sinatra::AssetPack
 
   assets do
-    serve '/js',     from: 'app/js'      
-    serve '/css',    from: 'app/css'     
-    serve '/images', from: 'app/images'  
+    serve '/js',     from: 'app/js'
+    serve '/css',    from: 'app/css'
+    serve '/images', from: 'app/images'
 
     js :app, '/js/app.js', [
       '/js/jquery.js',
@@ -32,8 +32,8 @@ configure do
       '/css/main.css'
     ]
 
-    js_compression  :jsmin 
-    css_compression :sass   
+    js_compression  :jsmin
+    css_compression :sass
   end
 
 end

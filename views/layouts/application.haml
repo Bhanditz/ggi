@@ -6,20 +6,27 @@
     %script{ src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.js' }
     != js :app
     != css :application, :media => 'screen'
-  %body
-    %header
-      %h1
-        %a{ href: '/'} GGI Portal
-      %nav
-        - ['about', 'help', 'download'].each do |n|
-          %a{ href: "/#{n}" }
-            - if request.path_info == "/#{n}"
-              %strong= n.capitalize
-            - else
-              = n.capitalize
-
-    = yield
-    %footer
-      %h2 Sponsors
-      %a{ href: 'http://ggi.si.edu'} GGI
-      %a{ href: 'http://eol.org' } Powered by EOL
+  %body{ class: request.path_info.split('/').compact.empty? ? 'root' : request.path_info.split('/').compact.first.to_s }
+    .page
+      %header.page__header
+        %div
+          %h1
+            %a{ href: '/'} GGI Portal
+          %nav
+            %ul
+              - ['about', 'help', 'download'].each do |n|
+                %li
+                  %a{ href: "/#{n}" }
+                    - if request.path_info == "/#{n}"
+                      %strong= n.capitalize
+                    - else
+                      = n.capitalize
+      = yield
+      %footer.page__footer
+        %div
+          %h2 Sponsors
+          %ul
+            %li
+              %a{ href: 'http://ggi.si.edu'} GGI
+            %li
+              %a{ href: 'http://eol.org' } Powered by EOL

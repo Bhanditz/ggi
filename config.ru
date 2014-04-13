@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# ^ For syuntax highlighting
+# ^ For syntax highlighting
 
 require './application'
 

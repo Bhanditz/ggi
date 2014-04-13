@@ -1,64 +1,68 @@
 - if @taxon
   - vernacular_en = @taxon[:vernacularNames].find{|n| n[:language] == 'en' && n[:eol_preferred] rescue false}[:vernacularName].capitalize rescue nil
-  %h1
-    = "%s %s" % [@taxon[:taxonRank].capitalize, @taxon[:scientificName]]
-    - if vernacular_en
-      %small= vernacular_en
-
-  %section
-    %h2 Taxonomic information
-    %dl
-      %dt Classification
-      %dd= @taxon[:ancestors].map { |ancestor| ancestor[:scientificName] }.join(' > ')
-      %dt Scientific name
-      %dd= @taxon[:scientificName]
+  %article
+    %header
+      %h1
+        = "%s %s" % [@taxon[:taxonRank].capitalize, @taxon[:scientificName]]
       - if vernacular_en
-        %dt English common name
-        %dd= vernacular_en
-      - unless @taxon[:taxonRank].downcase == 'family'
-        -# FIXME count families
-        %dt Number of families
-        %dd ??
-      -# FIXME get source from classification 'reference' column
-      %dt Source
-      %dd ??
-      - # FIXME calculate total score
-      %dt Total score
-      %dd ??
-    - if @taxon[:bestImage]
-      %figure
-        %img{ src: @taxon[:bestImage][:eolThumbnailURL], alt: "Image of #{@taxon[:scientificName]}" }
-        - [:rightsHolder, :rights, :license].each do |attribute|
-          - if @taxon[:bestImage][attribute]
-            %p= @taxon[:bestImage][attribute]
+        %p= vernacular_en
 
-  - if @taxon[:taxonRank].downcase == 'family'
-    %section
-      %h2 Scores
-      %aside
-        %h3 Legend
-        %p Measurement of knowledge
-        %ul
-          %li 0.64 to 1.0 Good
-          %li 0.34 to 0.63 Average
-          %li 0 to 0.33 Poor
-      %table
-        %caption= "Assessment of knowledge about #{@taxon[:scientificName]}"
-        %thead
-          %tr
-            %th{ scope: 'col' } Source
-            %th{ scope: 'col' } Value
-            %th{ scope: 'col' } Score
-        %tbody
-          - @taxon[:measurements].each do |measurement|
-            - score = measurement[:score].to_f
-            - # FIXME add helper method to set html class for styling poor, average, good
-            - klass = nil
+    %section.information
+      %header
+        %h2 Taxonomic information
+      %dl
+        %dt Classification
+        %dd= @taxon[:ancestors].map { |ancestor| ancestor[:scientificName] }.join(' > ')
+        %dt Scientific name
+        %dd= @taxon[:scientificName]
+        - if vernacular_en
+          %dt English common name
+          %dd= vernacular_en
+        - unless @taxon[:taxonRank].downcase == 'family'
+          -# FIXME count families
+          %dt Number of families
+          %dd ??
+        -# FIXME get source from classification 'reference' column
+        %dt Source
+        %dd ??
+        - # FIXME calculate total score
+        %dt Total score
+        %dd ??
+      - if @taxon[:bestImage]
+        %figure
+          %img{ src: @taxon[:bestImage][:eolThumbnailURL], alt: "Image of #{@taxon[:scientificName]}" }
+          - [:rightsHolder, :rights, :license].each do |attribute|
+            - if @taxon[:bestImage][attribute]
+              %p= @taxon[:bestImage][attribute]
+
+    - if @taxon[:taxonRank].downcase == 'family'
+      %section.assessment
+        %header
+          %h2 Assessment
+        %table
+          %caption= "Assessment of knowledge about #{@taxon[:scientificName]}"
+          %thead
             %tr
-              - # FIXME add helper method to create custom labels
-              %th{ scope: 'row' }= measurement[:label]
-              %td= measurement[:measurementValue]
-              %td{class: klass}= measurement[:score]
+              %th{ scope: 'col' } Source
+              %th{ scope: 'col' } Value
+              %th{ scope: 'col' } Score
+          %tbody
+            - @taxon[:measurements].each do |measurement|
+              - score = measurement[:score].to_f
+              - # FIXME add helper method to set html class for styling poor, average, good
+              - klass = nil
+              %tr
+                %th{ scope: 'row' }= measurement[:label]
+                %td= measurement[:measurementValue]
+                %td{class: klass}= measurement[:score]
+        %aside
+          %header
+            %h3 Legend
+          %p Measurement of knowledge
+          %ul
+            %li 0.64 to 1.0 Good
+            %li 0.34 to 0.63 Average
+            %li 0 to 0.33 Poor
 
 - else
   %p Taxon information is missing

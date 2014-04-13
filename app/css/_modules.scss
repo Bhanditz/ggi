@@ -1,0 +1,68 @@
+// Modules: layout and positioning of sub panels e.g. search form
+.list__links {
+  li {
+    @include no-bullet;
+  }
+  a {
+    display: inline-block;
+  }
+}
+
+.list__tabs {
+  @extend .list__links;
+  @include inline-block-list(rhythm(0.5));
+}
+
+table {
+  width: 100%;
+}
+
+caption {
+  text-align: left;
+}
+
+th {
+  text-align: left;
+}
+
+th, td {
+  @include adjust-leading-to(1.5);
+}
+
+nav {
+  ul {
+    @extend .list__tabs;
+  }
+}
+
+header.page__header {
+  nav {
+    position: absolute;
+    top: rhythm(1);
+    right: 0;
+  }
+}
+
+.search {
+  input[type=search] {
+    max-width: 70%;
+  }
+  input[type=submit] {
+    max-width: 30%;
+  }
+}
+
+footer.page__footer {
+  ul {
+    @extend .list__links;
+  }
+  li {
+    &:nth-of-type(1) {
+      @include span(1 at 1 of 2);
+    }
+    &:nth-of-type(2) {
+      text-align: right;
+      @include span(1 at 2 of 2);
+    }
+  }
+}

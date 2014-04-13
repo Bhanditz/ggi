@@ -1,0 +1,122 @@
+// Theme: replaceable skin, colors, font family etc.
+
+$ggi-colors: #2B3A42 #3F5765 #BDD4DE #EFEFEF #E74C3C; // darkest dark light lightest bright
+
+@mixin ggi-color($n, $button_n: 0) {
+  $c: nth($ggi-colors, $n);
+  $cc: contrast-color($c);
+  $bc: $cc;
+  @if $button_n > 0 {
+    $bc: nth($ggi-colors, $button_n);
+  }
+  $bcc: contrast-color($bc);
+
+  @include contrasted($c);
+  a {
+    color: $cc;
+  }
+  input {
+    &[type=search] {
+      border-color: darken($c, 10%) darken($c, 8%) lighten($c, 5%);
+      @include background-image(linear-gradient(darken($cc, 5%), $cc));
+      color: $c;
+    }
+    &[type=submit] {
+      @include transition-property(background);
+      @include transition-duration(.3s);
+      border-color: lighten($bc, 10%) darken($bc, 8%) darken($bc, 5%);
+      background-color: $bc;
+      color: $bcc;
+      &:hover {
+        background: darken($bc, 10%);
+      }
+      &:active {
+        @include transition-duration(0s);
+        background: desaturate($bc, 20%);
+        color: darken($bcc, 20%);
+      }
+    }
+  }
+}
+
+a {
+  &:link, &:visited {
+    text-decoration: none;
+  }
+}
+
+.headers {
+  font-family: Georgia, Times, "Times New Roman", serif;
+}
+
+.textbox {
+  @include rhythm-borders(1px, 0.4);
+}
+
+.button {
+  @include adjust-font-size-to(1.2em);
+  @include adjust-leading-to(1);
+  padding: {
+    left: rhythm(1);
+    right: rhythm(1);
+  }
+  text-transform: lowercase;
+  border-width: 1px;
+  border-style: solid;
+}
+
+body {
+  @include ggi-color(4);
+  font-family: "Helvetica Neue", Helvetica, Sans-serif;
+}
+
+h1 {
+  @extend .headers;
+  @include adjust-font-size-to(2em);
+}
+
+h2 {
+  @extend .headers;
+}
+
+input[type=search] {
+  @extend .textbox;
+}
+input[type=submit] {
+  @extend .button;
+}
+
+thead {
+  @include trailing-border(2px);
+}
+
+header.page__header {
+  @include ggi-color(1);
+}
+
+.page__subheader {
+  @include ggi-color(5, 3);
+}
+
+.tree {
+  > h2, > ul {
+    margin: 0;
+    @include apply-side-rhythm-border(left, 2px, 1, 1em);
+    @include apply-side-rhythm-border(right, 2px, 1, 1em);
+  }
+  > h2 {
+    @include leading-border(2px, 1, 1em);
+  }
+  > ul {
+    @include padding-leader;
+    @include trailing-border(2px, 1, 1em);
+  }
+  ul {
+    @include no-bullet;
+  }
+}
+
+footer.page__footer {
+  @include ggi-color(3);
+}
+
