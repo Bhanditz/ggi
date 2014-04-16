@@ -25,7 +25,7 @@ group 'assets' do
   gem 'sass', '~> 3.3'  # CSS Markup
   gem 'compass', '~> 1.0.0.alpha'  # A package manager for sass
   gem 'compass-normalize',
-    git: 'git@github.com:ksmandersen/compass-normalize.git',
+    git: 'git://github.com/ksmandersen/compass-normalize.git',
     ref: '8398ca6e47860cc0205ad9567b80cebd6a09ba05' # 2.0
   gem 'breakpoint', '~> 2.4'
   gem 'susy', '~> 2.1'  # CSS Grid and math
