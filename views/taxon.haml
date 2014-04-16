@@ -1,9 +1,9 @@
 - if @taxon
-  - vernacular_en = @taxon[:vernacularNames].find{|n| n[:language] == 'en' && n[:eol_preferred] rescue false}[:vernacularName].capitalize rescue nil
+  - vernacular_en = @taxon.vernacularNames.find{|n| n[:language] == 'en' && n[:eol_preferred] rescue false}[:vernacularName].capitalize rescue nil
   %article
     %header
       %h1
-        = "%s %s" % [@taxon[:taxonRank].capitalize, @taxon[:scientificName]]
+        = "%s %s" % [@taxon.rank, @taxon.name]
       - if vernacular_en
         %p= vernacular_en
 
@@ -11,14 +11,15 @@
       %header
         %h2 Taxonomic information
       %dl
-        %dt Classification
-        %dd= @taxon[:ancestors].map { |ancestor| ancestor[:scientificName] }.join(' > ')
+        - if @taxon.api_ancestors
+          %dt Classification
+          %dd= @taxon.api_ancestors.map { |ancestor| ancestor[:scientificName] }.join(' > ')
         %dt Scientific name
-        %dd= @taxon[:scientificName]
+        %dd= @taxon.name
         - if vernacular_en
           %dt English common name
           %dd= vernacular_en
-        - unless @taxon[:taxonRank].downcase == 'family'
+        - unless @taxon.rank == 'Family'
           -# FIXME count families
           %dt Number of families
           %dd ??
@@ -28,26 +29,26 @@
         - # FIXME calculate total score
         %dt Total score
         %dd ??
-      - if @taxon[:bestImage]
+      - if @taxon.image
         %figure
-          %img{ src: @taxon[:bestImage][:eolThumbnailURL], alt: "Image of #{@taxon[:scientificName]}" }
+          %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
           - [:rightsHolder, :rights, :license].each do |attribute|
-            - if @taxon[:bestImage][attribute]
-              %p= @taxon[:bestImage][attribute]
+            - if @taxon.image[attribute]
+              %p= @taxon.image[attribute]
 
-    - if @taxon[:taxonRank].downcase == 'family'
+    - if @taxon.rank == 'Family'
       %section.assessment
         %header
           %h2 Assessment
         %table
-          %caption= "Assessment of knowledge about #{@taxon[:scientificName]}"
+          %caption= "Assessment of knowledge about #{@taxon.name}"
           %thead
             %tr
               %th{ scope: 'col' } Source
               %th{ scope: 'col' } Value
               %th{ scope: 'col' } Score
           %tbody
-            - @taxon[:measurements].each do |measurement|
+            - @taxon.measurements.each do |measurement|
               - score = measurement[:score].to_f
               - # FIXME add helper method to set html class for styling poor, average, good
               - klass = nil

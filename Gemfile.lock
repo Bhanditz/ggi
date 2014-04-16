@@ -152,6 +152,7 @@ DEPENDENCIES
   rest_client (~> 1.7)
   rspec (= 3.0.0.beta2)
   sass (~> 3.3)
+  simplecov
   sinatra (~> 1.4)
   sinatra-assetpack (~> 0.3)
   susy (~> 2.1)

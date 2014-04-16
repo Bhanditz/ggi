@@ -1,14 +1,21 @@
+helpers do
+  def show_node(taxon)
+    "<li><a href='/taxon/#{taxon.id}'>#{taxon.name}</a></li>"
+  end
+end
+
 get '/' do
+  @taxon ||= Taxon.find_by_name('Eukaryota')
   haml :'layouts/taxonomy' do
-    haml :index, layout: false
+    haml :taxon, layout: false
   end
 end
 
 get '/search' do
   search_term = params['search_term']
-  @node = Classification.search(search_term)
+  @node = Taxon.find(search_term) || Taxon.find_by_name(search_term)
   if @node
-    redirect "/taxon/%s" % @node.attr(:scientific_name).downcase
+    redirect "/taxon/%s" % @node.id
   else
     redirect request.referrer
   end
@@ -16,16 +23,14 @@ end
 
 get '/autocomplete' do
   opts = { search_term: params[:search_term], callback: params[:callback] }
-  names = Classification.autocomplete(opts[:search_term])[0..10]
-  names = names.map { |n| n.split('_').last }.to_json
+  taxa = Taxon.autocomplete(opts[:search_term])[0..10].map{ |t| { 'label' => t.name, 'value' => t.id }}
   content_type 'application/json', charset: 'utf-8'
-  "%s(%s)" % [opts[:callback], names]
+  "%s(%s)" % [opts[:callback], taxa.to_json]
 end
 
-get '/taxon/:scientific_name' do
-  @node ||= Classification.search(params[:scientific_name])
-  if @node
-    @taxon = Taxon.find(@node.attr(:eol_id))
+get '/taxon/:id' do
+  @taxon ||= Taxon.find(params[:id])
+  if @taxon
     haml :'layouts/taxonomy' do
       haml :taxon, layout: false
     end

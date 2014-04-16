@@ -1,8 +1,6 @@
 describe Ggi::Classification do
   before(:all) do #to avoid lazy loading of subject
-    stub_falo
-    gfi = Ggi::FaloImporter.new
-    @classification = gfi.import
+    @classification = Ggi::Classification.new
   end
 
   describe '.new' do

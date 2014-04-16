@@ -40,4 +40,5 @@ group 'test' do
   gem 'rack-test', '~> 0.6'  # Allows rack use in testing
   gem 'rspec', '3.0.0.beta2'  # Testing framework allowing "specifications"
   gem 'webmock', '~> 1.17'
+  gem 'simplecov'
 end
