@@ -2,6 +2,7 @@
 # ^ For syntax highlighting.
 
 source 'https://rubygems.org'
+ruby '2.1.1'
 
 gem 'haml', '~> 4.0' # HTML markup
 # NOTE - JSON is required in other pieces-parts, but we're being specific:
