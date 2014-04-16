@@ -1,5 +1,7 @@
 class Ggi::ClassificationImporter
 
+  @@imported = nil
+
   def initialize
     @taxon_parents = { }
     @taxon_children = { }
@@ -11,10 +13,11 @@ class Ggi::ClassificationImporter
   end
   
   def import
+    return @@imported if @@imported
     import_taxa
     import_falo_classification
     import_traits
-    [@taxa, @taxon_names, @taxon_parents, @taxon_children]
+    @@imported = [ @taxa, @taxon_names, @taxon_parents, @taxon_children ]
   end
  
   private
