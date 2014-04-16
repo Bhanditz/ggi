@@ -11,16 +11,20 @@
           },
           success: function( data ) {
             response( $.map( data, function( item ) {
-              return { value: item }
+              return { value: item.value, label: item.label }
             }));
           },
         });
       },
       minLength: 1,
-      select: function(event, ui) {
-        $("#search_term").val(ui.item.label);
-        $("#search_form").submit();
+      focus: function( event, ui ) {
+        $("#search_term").val( ui.item.label );
+        return false;
       },
+      select: function(event, ui) {
+        $("#search_term").val(ui.item.value);
+        $("#search_form").submit();
+      }
     });
   });
 

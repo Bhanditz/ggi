@@ -1,7 +1,6 @@
 describe Classification do
   describe '.classification' do
     it 'returns Ggi::Classification' do
-      stub_falo
       expect(Classification.classification).to be_kind_of Ggi::Classification
     end
   end
@@ -15,8 +14,8 @@ describe Classification do
     end
 
     it 'returns data matching 3 or more characters' do
-      expect(Classification.autocomplete('sol').size).to eq 2
-      expect(Classification.autocomplete('sola').size).to eq 2
+      expect(Classification.autocomplete('sol').size).to eq 26
+      expect(Classification.autocomplete('sola').size).to eq 5
     end
 
   end
@@ -34,7 +33,7 @@ describe Classification do
     context 'search succeeds' do
       it 'returns classification node' do
         expect(Classification.search('SolaNaceae')).
-          to be_kind_of Nokogiri::XML::Element
+          to be_kind_of Taxon
       end
     end
 

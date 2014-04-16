@@ -1,33 +1,38 @@
 describe Taxon do
   subject { Taxon }
-  describe '.find' do
 
+  describe '.method_missing' do
+    let(:taxon) { Taxon.find('E150313D-756C-40B0-4221-393CFAE2170C') }
+
+    it 'can access hash values as properties' do
+      expect(taxon.name).to eq 'Solanaceae'
+    end
+
+    it 'knows when methods are truly missing' do
+      expect{ taxon.nonsense }.to raise_error(NoMethodError)
+    end
+  end
+
+  describe '.find' do
     context 'taxon_concept_id does not exist' do
       let(:taxon_concept_id) { 'whatever' }
 
       it 'returns nil' do
-        stub_find_taxon(0)
         taxon = subject.find(taxon_concept_id)
         expect(subject.find(taxon_concept_id)).to be_nil
       end
-
     end
 
     context 'taxon_concept_id exists' do
-      let(:taxon_concept_id) { 4437 }
+      let(:taxon_concept_id) { 'E150313D-756C-40B0-4221-393CFAE2170C' }
 
       it 'returns hash' do
-        stub_find_taxon(taxon_concept_id)
-        expect(subject.find(taxon_concept_id)).to be_a Hash
+        expect(subject.find(taxon_concept_id)).to be_a Taxon
       end
 
       it 'has the name' do
-        stub_find_taxon(taxon_concept_id)
-        taxon = subject.find(taxon_concept_id)
-        expect(taxon[:scientificName]).to eq 'Solanaceae'
+        expect(subject.find(taxon_concept_id).name).to eq 'Solanaceae'
       end
-
     end
-
   end
 end

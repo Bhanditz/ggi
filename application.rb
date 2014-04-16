@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/assetpack'
 require 'haml'
 require 'compass'
+require 'debugger' if Sinatra::Base.development? || Sinatra::Base.test?
 
 require_relative 'lib/ggi'
 require_relative 'environment'
