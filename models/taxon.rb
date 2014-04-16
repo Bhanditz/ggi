@@ -42,7 +42,8 @@ class Taxon
   end
 
   def rank
-    (@taxon_hash[:dwc_record]['taxonRank'] || @taxon_hash[:taxonRank] || '').capitalize
+    (@taxon_hash[:dwc_record]['taxonRank'] || @taxon_hash[:taxonRank] || '').
+      capitalize
   end
 
   def image

@@ -1,7 +1,13 @@
 class Classification
 
   def self.classification
-    @classification ||= Ggi::Classification.new
+    return @classification if @classification
+
+    @classification = Ggi::Classification.new
+    @classification.taxa.each do |taxon_id, taxon| 
+      @classification.taxa[taxon_id] = Taxon.new(taxon)
+    end
+    @classification
   end
 
   def self.autocomplete(search_term)
