@@ -35,18 +35,7 @@
 
     %h2 Browse taxonomy
     %ul.hierarchy--root
-      - text = ''
-      - ancestors = @taxon.ancestors
-      - children = @taxon.children
-      - ancestors.each do |a|
-        - text += show_node(a) + "<ul>"
-      = text
-      = show_node(@taxon)
-      - if children.count > 0
-        %ul
-          - children.each do |c|
-            = show_node(c)
-      = "</ul>" * ancestors.length
+      = haml :_taxonomy, layout: false, locals: { taxon: @taxon }
     - # FIXME replace dummy href with one that works
     %a{ href: '/fixme/collapse_all' } Collapse all
 

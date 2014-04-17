@@ -1,7 +1,10 @@
-require 'coveralls'
-Coveralls.wear!
-# require 'simplecov'
-# SimpleCov.start
+if ENV['simplecov']
+  require 'simplecov'
+  SimpleCov.start
+else
+  require 'coveralls'
+  Coveralls.wear!
+end
 
 require 'rack/test'
 require 'capybara'

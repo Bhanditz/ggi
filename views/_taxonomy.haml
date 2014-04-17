@@ -1,0 +1,13 @@
+- ancestors = taxon.ancestors
+- children = taxon.children
+- siblings = taxon.siblings
+- ancestors.each do |a|
+  = show_node(a) + "<ul>"
+= show_node(taxon)
+- if children.count > 0
+  %ul
+    - children.each do |c|
+      = show_node(c)
+- siblings.each do |s|
+  = show_node(s)
+= "</ul>" * ancestors.length

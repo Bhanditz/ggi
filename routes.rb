@@ -1,9 +1,3 @@
-helpers do
-  def show_node(taxon)
-    "<li><a href='/taxon/#{taxon.id}'>#{taxon.name}</a></li>"
-  end
-end
-
 get '/' do
   @taxon ||= Taxon.find_by_name('Eukaryota')
   haml :'layouts/taxonomy' do
@@ -35,7 +29,22 @@ get '/taxon/:id' do
       haml :taxon, layout: false
     end
   else
-    redirect request.referrer
+    status 404
+    "404 not found"
+  end
+end
+
+get '/api/taxonomy/:id' do
+  @taxon ||= Taxon.find(params[:id])
+  if @taxon
+    haml :_taxonomy, layout: false, locals: { taxon: @taxon }
+  end
+end
+
+get '/api/details/:id' do
+  @taxon ||= Taxon.find(params[:id])
+  if @taxon
+    haml :taxon, layout: false
   end
 end
 
@@ -50,5 +59,3 @@ end
 get '/download' do
   haml :download
 end
-
-

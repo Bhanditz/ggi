@@ -2,8 +2,6 @@
 %html
   %head
     %link{ rel: 'stylesheet', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', type: 'text/css' }
-    %script{ src: 'http://code.jquery.com/jquery-1.9.1.js' }
-    %script{ src: 'http://code.jquery.com/ui/1.10.3/jquery-ui.js' }
     != js :app
     -# != css :application, :media => 'screen'
   %body{ class: request.path_info.split('/').compact.empty? ? 'root' : request.path_info.split('/').compact.first.to_s }

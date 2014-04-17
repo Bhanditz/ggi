@@ -61,6 +61,10 @@ class Taxon
     Classification.children_of(@taxon_hash[:id])
   end
 
+  def siblings
+    Classification.siblings_of(@taxon_hash[:id])
+  end
+
   def method_missing(meth, *args, &block)
     if @taxon_hash.has_key?(meth.to_sym)
       return @taxon_hash[meth.to_sym]

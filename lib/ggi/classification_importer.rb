@@ -2,6 +2,10 @@ class Ggi::ClassificationImporter
 
   @@imported = nil
 
+  def self.cache_data
+    Ggi::ClassificationImporter.new.import
+  end
+
   def initialize
     @taxon_parents = { }
     @taxon_children = { }
@@ -63,17 +67,19 @@ class Ggi::ClassificationImporter
   end
 
   def handle_taxon_row(row, header)
-    @taxa[row[header.index('taxonID')]] = 
-      { id: row[header.index('taxonID')] }
-    @taxa[row[header.index('taxonID')]][:dwc_record] = 
-      header.zip(row).to_h
-    @taxon_parents[row[header.index('taxonID')]] = 
-      row[header.index('parentNameUsageID')]
-    @taxon_children[row[header.index('parentNameUsageID')]] ||= [ ]
-    @taxon_children[row[header.index('parentNameUsageID')]] << 
-      row[header.index('taxonID')]
-    @taxon_names[row[header.index('scientificName')].downcase] ||= [ ]
-    @taxon_names[row[header.index('scientificName')].downcase] << 
-      row[header.index('taxonID')]
+    # This is what .zip does:
+    # header = [ col1, col2 ]
+    # row = [ row1ValueA, row1ValueB ]
+    # header.zip(row).to_h => { col1 => row1ValueA, col2 => row1ValueB }
+    row = header.zip(row).to_h
+    parent_id = row['parentNameUsageID']
+    parent_id = 0 if parent_id.to_s.strip.empty?
+    @taxa[row['taxonID']] = { id: row['taxonID'] }
+    @taxa[row['taxonID']][:dwc_record] = row
+    @taxon_parents[row['taxonID']] = parent_id
+    @taxon_children[parent_id] ||= [ ]
+    @taxon_children[parent_id] << row['taxonID']
+    @taxon_names[row['scientificName'].downcase] ||= [ ]
+    @taxon_names[row['scientificName'].downcase] <<  row['taxonID']
   end
 end

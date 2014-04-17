@@ -10,7 +10,7 @@ class Ggi::Classification
     return [] if search_term.size < 3
     search_term.downcase!
     @taxon_names.select { |k, v| k.match /^#{search_term}/i }.
-      values.flatten.map{ |id| @taxa[id] }
+      values.flatten.map{ |id| Taxon.find(id) }
   end
 
   def find(taxon_id)
@@ -21,7 +21,7 @@ class Ggi::Classification
     return nil if search_term.to_s == ''
     search_term.downcase!
     if @taxon_names[search_term] && taxon_id = @taxon_names[search_term].first
-      return @taxa[taxon_id]
+      return Taxon.find(taxon_id)
     end
   end
 
@@ -29,7 +29,8 @@ class Ggi::Classification
     ancestors = []
     search_id = taxon_id
     while parent_id = @taxon_parents[search_id]
-      parent = @taxa[parent_id]
+      break if parent_id == 0
+      parent = Taxon.find(parent_id)
       ancestors.unshift(parent)
       search_id = parent.id
     end
@@ -38,8 +39,20 @@ class Ggi::Classification
 
   def children_of(taxon_id)
     return [] if @taxon_children[taxon_id].nil?
-    @taxon_children[taxon_id].map{ |child_id| @taxa[child_id] }.
+    @taxon_children[taxon_id].map{ |child_id| Taxon.find(child_id) }.
       sort_by{ |t| t.name }
+  end
+
+  def siblings_of(taxon_id)
+    parent_id = @taxon_parents[taxon_id]
+    if parent_id == 0
+      parents_children = @taxon_children[0].map{ |child_id| Taxon.find(child_id) }
+    else
+      parent_taxon = Taxon.find(parent_id)
+      parents_children = parent_taxon.children
+    end
+    parents_children.delete_if{ |t| t.id == taxon_id }
+    parents_children.sort_by{ |t| t.name }
   end
 
 end

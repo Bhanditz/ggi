@@ -7,6 +7,9 @@ require 'debugger' if Sinatra::Base.development? || Sinatra::Base.test?
 require_relative 'lib/ggi'
 require_relative 'environment'
 require_relative 'routes'
+require_relative 'helpers'
+
+Ggi::ClassificationImporter.cache_data
 
 configure do
   set :root, settings.root

@@ -30,4 +30,8 @@ class Classification
     classification.children_of(taxon_id)
   end
 
+  def self.siblings_of(taxon_id)
+    classification.siblings_of(taxon_id)
+  end
+
 end
