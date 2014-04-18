@@ -7,15 +7,19 @@ describe Classification do
 
   describe '#auto_complete' do
     
-    it 'returns empty array for search from 0 to 3 characters' do
+    it 'returns empty array for search from 0 characters' do
       expect(Classification.autocomplete('')).to eq []
-      expect(Classification.autocomplete('s')).to eq []
-      expect(Classification.autocomplete('so')).to eq []
     end
 
-    it 'returns data matching 3 or more characters' do
-      expect(Classification.autocomplete('sol').size).to eq 26
+    it 'returns data matching 1 or more characters' do
+      expect(Classification.autocomplete('s').size).to eq 1550
+      expect(Classification.autocomplete('so').size).to eq 97
+      expect(Classification.autocomplete('sol').size).to eq 37
       expect(Classification.autocomplete('sola').size).to eq 5
+    end
+
+    it 'returns data matching common names' do
+      expect(Classification.autocomplete('birds').size).to eq 2
     end
 
   end
@@ -33,6 +37,11 @@ describe Classification do
     context 'search succeeds' do
       it 'returns classification node' do
         expect(Classification.search('SolaNaceae')).
+          to be_kind_of Taxon
+      end
+
+      it 'can search for common names' do
+        expect(Classification.search('Birds')).
           to be_kind_of Taxon
       end
     end

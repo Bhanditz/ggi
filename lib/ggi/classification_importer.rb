@@ -11,6 +11,7 @@ class Ggi::ClassificationImporter
     @taxon_children = { }
     @taxon_names = { }
     @taxa = { }
+    @common_names = { }
     @eol_to_falo = { }
     @data = { }
     @opts = { col_sep: "\t" }
@@ -21,7 +22,8 @@ class Ggi::ClassificationImporter
     import_taxa
     import_falo_classification
     import_traits
-    @@imported = [ @taxa, @taxon_names, @taxon_parents, @taxon_children ]
+    @@imported = [ @taxa, @taxon_names, @taxon_parents,
+                   @taxon_children, @common_names ]
   end
  
   private
@@ -34,6 +36,10 @@ class Ggi::ClassificationImporter
       next unless d.is_a?(Hash)
       if falo_id = @eol_to_falo[d[:identifier]]
         @taxa[falo_id].merge!(d)
+        d[:vernacularNames].each do |v|
+          @common_names[v[:vernacularName].capitalize] ||= []
+          @common_names[v[:vernacularName].capitalize] << falo_id
+        end
       end
     end
   end
@@ -79,7 +85,7 @@ class Ggi::ClassificationImporter
     @taxon_parents[row['taxonID']] = parent_id
     @taxon_children[parent_id] ||= [ ]
     @taxon_children[parent_id] << row['taxonID']
-    @taxon_names[row['scientificName'].downcase] ||= [ ]
-    @taxon_names[row['scientificName'].downcase] <<  row['taxonID']
+    @taxon_names[row['scientificName'].capitalize] ||= [ ]
+    @taxon_names[row['scientificName'].capitalize] <<  row['taxonID']
   end
 end

@@ -17,9 +17,10 @@ end
 
 get '/autocomplete' do
   opts = { search_term: params[:search_term], callback: params[:callback] }
-  taxa = Taxon.autocomplete(opts[:search_term])[0..10].map{ |t| { 'label' => t.name, 'value' => t.id }}
-  content_type 'application/json', charset: 'utf-8'
-  "%s(%s)" % [opts[:callback], taxa.to_json]
+  taxa = Taxon.autocomplete(opts[:search_term])[0..10]
+  cache_control :public, max_age: (60 * 60 * 24)
+  content_type :json
+  taxa.to_json
 end
 
 get '/taxon/:id' do

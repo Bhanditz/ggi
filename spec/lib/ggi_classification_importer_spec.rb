@@ -6,10 +6,10 @@ describe Ggi::ClassificationImporter do
   end
   
   describe '#import' do
-    it 'should return array with 4 elements' do 
+    it 'should return array with 5 elements' do
       res = subject.import
       expect(res).to be_kind_of Array
-      expect(res.size).to eq 4
+      expect(res.size).to eq 5
     end
   end
 end
