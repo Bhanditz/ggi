@@ -27,16 +27,20 @@
         $('#search_form').submit();
       }
     });
-    addPlusesToTaxonomy();
+    addTogglesToTaxonomy();
   });
 
-  var addPlusesToTaxonomy = function() {
-    $( '.hierarchy--root li').append($('<a/>',
-      { class: 'plus', href: '#' }).prepend(' +'));
-    $( '.hierarchy--root li a.plus').on('click', function( e ) {
-      e.preventDefault();
-      var taxon_id = $(this).closest('li').data('taxon-id');
-      loadTaxonomy(taxon_id);
+  var addTogglesToTaxonomy = function() {
+    $('.taxonomy li').each(function() {
+      if (parseInt($(this).data('children')) > 0) {
+        var toggle = $('<a/>', { class: 'toggle', href: '#' }).prepend('+');
+        $(this).append(' ').append(toggle);
+        toggle.on('click', function(e) {
+          e.preventDefault();
+          var taxonId = $(this).closest('li').data('taxon-id');
+          loadTaxonomy(taxonId);
+        });
+      }
     });
   };
 
@@ -45,8 +49,8 @@
       url: '/api/taxonomy/' + taxon_id,
       dataType: 'html',
       success: function( html ) {
-        $('.hierarchy--root').html(html);
-        addPlusesToTaxonomy();
+        $('.taxonomy').html(html);
+        addTogglesToTaxonomy();
       }
     });
   };
