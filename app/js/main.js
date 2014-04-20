@@ -28,7 +28,21 @@
       }
     });
     addTogglesToTaxonomy();
+    addCollapseTaxonomy();
   });
+
+  var collapseTaxonomy = function() {
+    $('.taxonomy > ul > li:first-child a.toggle').click();
+  }
+
+  var addCollapseTaxonomy = function() {
+    var collapseLink = $('<a/>', { href: '#', class: 'collapse-all' }).prepend('Collapse all');
+    collapseLink.on('click', function(e) {
+      e.preventDefault();
+      collapseTaxonomy();
+    });
+    collapseLink.appendTo($('.taxonomy'));
+  };
 
   var addTogglesToTaxonomy = function() {
     $('.taxonomy li').each(function() {
@@ -51,6 +65,8 @@
       success: function( html ) {
         $('.taxonomy').html(html);
         addTogglesToTaxonomy();
+        addCollapseTaxonomy();
       }
     });
   };
+
