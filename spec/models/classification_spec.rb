@@ -12,9 +12,9 @@ describe Classification do
     end
 
     it 'returns data matching 1 or more characters' do
-      expect(Classification.autocomplete('s').size).to eq 1550
-      expect(Classification.autocomplete('so').size).to eq 97
-      expect(Classification.autocomplete('sol').size).to eq 37
+      expect(Classification.autocomplete('s').size).to eq 10
+      expect(Classification.autocomplete('so').size).to eq 10
+      expect(Classification.autocomplete('sol').size).to eq 10
       expect(Classification.autocomplete('sola').size).to eq 5
     end
 

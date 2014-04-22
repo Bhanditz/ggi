@@ -57,6 +57,17 @@ class Taxon
     end
   end
 
+  def thumbnail
+    if image
+      return image[:eolThumbnailURL].gsub(/580_360/, '88_88')
+    end
+  end
+
+  def classification_summary
+    # roots will return an empty array [ ]
+    [ ancestors.first, ancestors.last ].compact.uniq
+  end
+
   def ancestors
     Classification.ancestors_of(@taxon_hash[:id])
   end
@@ -71,6 +82,15 @@ class Taxon
 
   def measurements
     @taxon_hash[:measurements] || []
+  end
+
+  def vernacularNames
+    @taxon_hash[:vernacularNames] || []
+  end
+
+  def english_vernacular_name
+    preferred_english_vernacular = vernacularNames.find{ |n| n[:language] == 'en' && n[:eol_preferred] }
+    preferred_english_vernacular ? preferred_english_vernacular[:vernacularName].capitalize : nil
   end
 
   def method_missing(meth, *args, &block)

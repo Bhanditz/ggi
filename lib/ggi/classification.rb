@@ -1,6 +1,8 @@
 class Ggi::Classification 
   attr :classification, :names, :taxa
 
+  MAX_AUTOCOMPLETE_RESULTS = 10
+
   def initialize
     @taxa, @taxon_names, @taxon_parents, @taxon_children,
       @common_names = Ggi::ClassificationImporter.new.import
@@ -64,10 +66,12 @@ class Ggi::Classification
   end
 
   def self.add_matches_from_names(names, search_term, matches)
+    return if matches.length >= self::MAX_AUTOCOMPLETE_RESULTS
     names.select { |k, v| k.match /^#{search_term}/i }.each do |name, taxon_ids|
       taxon_ids.each do |taxon_id|
-        unless matches.detect{ |m| m['value'] == taxon_id }
-          matches << { 'label' => name, 'value' => taxon_id }
+        unless matches.detect{ |m| m[:taxon].id == taxon_id }
+          matches << { matched_name: name, taxon: Taxon.find(taxon_id) }
+          return if matches.length >= self::MAX_AUTOCOMPLETE_RESULTS
         end
       end
     end

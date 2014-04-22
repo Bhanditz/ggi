@@ -10,23 +10,26 @@
             batch_size: 10
           },
           success: function( data ) {
-            response( $.map( data, function( item ) {
-              return { value: item.value, label: item.label }
-            }));
-          },
+            response(data);
+          }
         });
       },
       minLength: 1,
       delay: 0,
-      focus: function( event, ui ) {
-        $('#search_term').val( ui.item.label );
-        return false;
+      focus: function( e, ui ) {
+        e.preventDefault();
       },
-      select: function( event, ui ) {
-        $('#search_term').val( ui.item.value );
-        $('#search_form').submit();
+      select: function( e, ui ) {
+        window.location = $('.ui-autocomplete a[href$="'+ ui.item.id +'"]').attr('href');
       }
-    });
+    }).on('focus', function() {
+      $(this).autocomplete('search', $(this).val())
+    }).data('ui-autocomplete')._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .attr( "data-value", item.value )
+        .append( $( "<a>" ).html( item.label ) )
+        .appendTo( ul );
+    };
     addTogglesToTaxonomy();
     addCollapseTaxonomy();
   });

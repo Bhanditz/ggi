@@ -1,25 +1,24 @@
 - if @taxon
-  - vernacular_en = @taxon.vernacularNames.find{|n| n[:language] == 'en' && n[:eol_preferred] rescue false}[:vernacularName].capitalize rescue nil
   %article
     %header
       %h1
         = "%s %s" % [@taxon.rank, @taxon.name]
-      - if vernacular_en
-        %p= vernacular_en
+      - if @taxon.english_vernacular_name
+        %p= @taxon.english_vernacular_name
 
     %section.information
       %header
         %h2 Taxonomic information
       %dl
-        - unless @taxon.ancestors.empty?
+        - unless @taxon.classification_summary.empty?
           %dt Classification
           %dd
-            = [@taxon.ancestors.first, @taxon.ancestors.last].uniq.map{|a| capture_haml(a){|an| haml_tag :a, an.name, { href: an.id} }}.join(" &gt; ").gsub("\n", '')
+            = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
         %dt Scientific name
         %dd= @taxon.name
-        - if vernacular_en
+        - if @taxon.english_vernacular_name
           %dt English common name
-          %dd= vernacular_en
+          %dd= @taxon.english_vernacular_name
         - unless @taxon.rank == 'Family'
           -# FIXME count families
           %dt Number of families

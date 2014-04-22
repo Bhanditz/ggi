@@ -19,12 +19,12 @@ describe '/' do
     end
 
     context 'a name not found search' do
-      it 'redirects to referrer' do
+      it 'throws a 404' do
         visit '/'
         fill_in('search_term', with: 'whatever')
         click_button('Search')
-        expect(page.status_code).to eq 200
-        expect(page.current_path).to eq '/'
+        expect(page.status_code).to eq 404
+        expect(page.body).to match '404 not found'
       end
     end
 
