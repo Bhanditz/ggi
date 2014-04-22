@@ -61,7 +61,9 @@ class Ggi::ClassificationImporter
     taxon_file = File.join(__dir__, '..', '..', 'public', 'taxon.tab.gz')
     Zlib::GzipReader.open(taxon_file) do |csv|
       csv.each_line do |line|
-        CSV.parse(line, @opts) do |row|
+        # NOTE We don't use quote_char to wrap field content in taxon file.
+        #      However, adding | prevents CSV misinterpreting " in content.
+        CSV.parse(line, @opts.merge({quote_char: "|"})) do |row|
           if header.nil?
             header = row
             next

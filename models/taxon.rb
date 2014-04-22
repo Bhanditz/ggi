@@ -46,6 +46,10 @@ class Taxon
       capitalize
   end
 
+  def source
+    @taxon_hash[:dwc_record]['bibliographicCitation']
+  end
+
   def image
     if @taxon_hash[:bestImage] && @taxon_hash[:bestImage][:eolThumbnailURL]
       @taxon_hash[:bestImage][:eolThumbnailURL].gsub!(/98_68/, '580_360')

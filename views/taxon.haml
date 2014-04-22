@@ -11,7 +11,7 @@
       %header
         %h2 Taxonomic information
       %dl
-        - if @taxon.api_ancestors
+        - unless @taxon.api_ancestors.empty?
           %dt Classification
           %dd= @taxon.api_ancestors.map { |ancestor| ancestor[:scientificName] }.join(' > ')
         %dt Scientific name
@@ -23,9 +23,8 @@
           -# FIXME count families
           %dt Number of families
           %dd ??
-        -# FIXME get source from classification 'reference' column
         %dt Source
-        %dd ??
+        %dd= @taxon.source
         - # FIXME calculate total score
         %dt Total score
         %dd ??
