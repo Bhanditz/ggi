@@ -11,9 +11,10 @@
       %header
         %h2 Taxonomic information
       %dl
-        - unless @taxon.api_ancestors.empty?
+        - unless @taxon.ancestors.empty?
           %dt Classification
-          %dd= @taxon.api_ancestors.map { |ancestor| ancestor[:scientificName] }.join(' > ')
+          %dd
+            = [@taxon.ancestors.first, @taxon.ancestors.last].uniq.map{|a| capture_haml(a){|an| haml_tag :a, an.name, { href: an.id} }}.join(" &gt; ").gsub("\n", '')
         %dt Scientific name
         %dd= @taxon.name
         - if vernacular_en
