@@ -69,6 +69,10 @@ class Taxon
     Classification.siblings_of(@taxon_hash[:id])
   end
 
+  def measurements
+    @taxon_hash[:measurements] || []
+  end
+
   def method_missing(meth, *args, &block)
     if @taxon_hash.has_key?(meth.to_sym)
       return @taxon_hash[meth.to_sym]
