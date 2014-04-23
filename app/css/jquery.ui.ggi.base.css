@@ -8,9 +8,9 @@
  *
  * http://api.jqueryui.com/category/theming/
  */
-@import url("jquery.ui.no-theme.core.css");
-@import url("jquery.ui.no-theme.autocomplete.css");
-@import url("jquery.ui.no-theme.menu.css");
+@import url("jquery.ui.ggi.core.css");
+@import url("jquery.ui.ggi.autocomplete.css");
+@import url("jquery.ui.ggi.menu.css");
 
 /**
 @import url("jquery.ui.accordion.css");

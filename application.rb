@@ -38,7 +38,7 @@ configure do
     ]
 
     css :application, '/css/application.css', [
-      '/css/jquery.ui.no-theme.base.css',
+      '/css/jquery.ui.ggi.base.css',
       '/css/main.css'
     ]
 
