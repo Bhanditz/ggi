@@ -28,11 +28,17 @@ configure do
 
     js :app, '/js/app.js', [
       '/js/jquery.js',
-      '/js/jquery-ui.js',
+      '/js/jquery.ui.core.js',
+      '/js/jquery.ui.widget.js',
+      '/js/jquery.ui.position.js',
+      '/js/jquery.ui.mouse.js',
+      '/js/jquery.ui.menu.js',
+      '/js/jquery.ui.autocomplete.js',
       '/js/main.js'
     ]
 
     css :application, '/css/application.css', [
+      '/css/jquery.ui.no-theme.base.css',
       '/css/main.css'
     ]
 
