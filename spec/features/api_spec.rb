@@ -15,4 +15,3 @@ describe '/api' do
   end
 
 end
-

@@ -6,7 +6,7 @@ describe '/taxon' do
     expect(page.body).to match 'GGI Portal'
   end
 
-  it 'redirects with a invalid ID' do
+  it 'throws a 404 for invalid IDs' do
     visit '/taxon/nonsense'
     expect(page.status_code).to eq 404
     expect(page.body).to match '404 not found'
