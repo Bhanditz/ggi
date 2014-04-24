@@ -2,8 +2,7 @@
 %html
   %head
     != js :app
-    != css :jquery_ui, :media => 'screen'
-    -#!= css :application, :media => 'screen'
+    != css :application, :media => 'screen'
   %body{ class: request.path_info.split('/').compact.empty? ? 'root' : request.path_info.split('/').compact.first.to_s }
     .page
       %header.page__header

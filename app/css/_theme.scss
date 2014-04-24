@@ -159,12 +159,23 @@ header.page__header {
 .browser__actions {
   border-color: map-get($ggi-colors, light);
   border-bottom: none;
+  a {
+    @include breakpoint($ggi-breakpoint-large) {
+      @include adjust-font-size-to(0.8em);
+    }
+  }
 }
 
 .tree__wrapper {
   border-color: map-get($ggi-colors, light);
   ul {
     @include no-bullet;
+  }
+}
+
+.tree {
+  @include breakpoint($ggi-breakpoint-large) {
+    @include adjust-font-size-to(0.8em);
   }
 }
 

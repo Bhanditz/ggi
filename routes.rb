@@ -57,13 +57,19 @@ get '/api/details/:id' do
 end
 
 get '/about' do
-  haml :about
+  haml :'layouts/basic' do
+    haml :about, layout: false
+  end
 end
 
 get '/help' do
-  haml :help
+  haml :'layouts/basic' do
+    haml :help, layout: false
+  end
 end
 
 get '/download' do
-  haml :download
+  haml :'layouts/basic' do
+    haml :download, layout: false
+  end
 end

@@ -121,9 +121,6 @@ header.page__header {
   width: 100%;
   overflow: auto;
   @include rhythm-borders(1px, 0.5);
-  ul {
-    padding: 0 0 0 rhythm(0.5);
-  }
   @include breakpoint($ggi-breakpoint-large) {
     height: rhythm(30);
   }
@@ -131,6 +128,10 @@ header.page__header {
 
 .tree {
   margin-top: 0;
+  padding-left: 0;
+  ul {
+    padding: 0 0 0 rhythm(0.5);
+  }
 }
 
 .tree__item {
