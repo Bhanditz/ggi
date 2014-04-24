@@ -5,6 +5,10 @@ helpers do
     "<li class='#{html_classes.join(' ')}' data-taxon-id='#{taxon.id}' data-children='#{taxon.children.count}'><a href='#{taxon_path(taxon)}'>#{taxon.name}</a></li>"
   end
 
+  def formatted_score(score)
+    (score * 100).ceil.to_s + " / 100"
+  end
+
   def taxon_path(taxon)
     "/taxon/#{taxon.id}"
   end

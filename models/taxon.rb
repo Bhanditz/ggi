@@ -28,6 +28,10 @@ class Taxon
       capitalize
   end
 
+  def family?
+    rank == 'Family'
+  end
+
   def source
     @taxon_hash[:dwc_record]['bibliographicCitation']
   end

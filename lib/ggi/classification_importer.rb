@@ -14,6 +14,13 @@ class Ggi::ClassificationImporter
     @common_names = { }
     @eol_to_falo = { }
     @data = { }
+    @measurement_type_max_values = { }
+    @measurement_uris_to_labels = {
+      'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => 'GenBank sequences',
+      'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => 'EOL rich pages',
+      'http://eol.org/schema/terms/NumberSpecimensInGGBN' => 'GGBN records',
+      'http://eol.org/schema/terms/NumberRecordsInGBIF' => 'GBIF records',
+      'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => 'BOLD records' }
     @opts = { col_sep: "\t" }
   end
 
@@ -22,11 +29,33 @@ class Ggi::ClassificationImporter
     import_taxa
     import_mappings
     import_traits
+    calculate_scores
     @@imported = [ @taxa, @taxon_names, @taxon_parents,
                    @taxon_children, @common_names ]
   end
 
   private
+
+  def calculate_scores
+    max_taxon_score = 0
+    @taxa.each do |id, taxon|
+      taxon[:measurements] ||= []
+      taxon[:measurements].each do |m|
+        # TODO: finalize the scoring algorithms
+        m[:score] = Ggi::ClassificationImporter.scale_and_log(
+          m[:measurementValue], @measurement_type_max_values[m[:measurementType]])
+      end
+      taxon[:score] = (taxon[:measurements].map{ |m| m[:score] }.inject(:+) || 0) /
+        @measurement_uris_to_labels.length.to_f
+      if taxon[:score] > max_taxon_score
+        max_taxon_score = taxon[:score]
+      end
+    end
+    # now normalize all the scores against themselves so we have a 100 out of 100
+    @taxa.each do |id, taxon|
+      taxon[:score] = Ggi::ClassificationImporter.scale_and_log(taxon[:score], max_taxon_score)
+    end
+  end
 
   def import_traits
     traits_file = File.join(__dir__, '..', '..', 'public', 'falo_data.json.gz')
@@ -35,7 +64,8 @@ class Ggi::ClassificationImporter
     traits_data.each do |d|
       next unless d.is_a?(Hash)
       if falo_id = @eol_to_falo[d[:identifier]]
-        Ggi::ClassificationImporter.create_measurement_labels(d)
+        update_maximum_values(d)
+        create_measurement_labels(d)
         d[:measurements].delete_if{ |m| m[:label].nil? }
         @taxa[falo_id].merge!(d)
         d[:vernacularNames].each do |v|
@@ -91,23 +121,28 @@ class Ggi::ClassificationImporter
     @taxon_names[row['scientificName'].capitalize] <<  row['taxonID']
   end
 
-  def self.create_measurement_labels(taxon_hash)
-    unless taxon_hash[:measurements].nil?
-      taxon_hash[:measurements].each do |measurement|
-        measurement[:label] = case measurement[:measurementType]
-          when /NumberOfSequencesInGenBank/i
-            'GenBank sequences'
-          when /NumberRichSpeciesPagesInEOL/i
-            'EOL rich pages'
-          when /NumberSpecimensInGGBN/i
-            'GGBN records'
-          when /NumberRecordsInGBIF/i
-            'GBIF records'
-          when /NumberPublicRecordsInBOLD/i
-            'BOLD records'
-        end
+  def update_maximum_values(taxon_hash)
+    taxon_hash[:measurements].each do |m|
+      @measurement_type_max_values[m[:measurementType]] ||= 0
+      if m[:measurementValue] > @measurement_type_max_values[m[:measurementType]]
+        @measurement_type_max_values[m[:measurementType]] = m[:measurementValue]
       end
     end
+  end
+
+  def create_measurement_labels(taxon_hash)
+    unless taxon_hash[:measurements].nil?
+      taxon_hash[:measurements].each do |measurement|
+        measurement[:label] = @measurement_uris_to_labels[measurement[:measurementType]]
+      end
+    end
+  end
+
+  # TODO: finalize the scoring algorithms
+  # normalizing the ratio to be 0-9, then adding 1 and taking the log base 10 of that
+  # this is the same method we use for EOL richness scores
+  def self.scale_and_log(value, max_value)
+    Math.log(((value / max_value.to_f) * 9) + 1, 10)
   end
 
 end

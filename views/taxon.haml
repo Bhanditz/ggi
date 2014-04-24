@@ -2,7 +2,7 @@
   %article
     %header
       %h1
-        = "%s %s" % [@taxon.rank, @taxon.name]
+        = "%s %s" % [ @taxon.rank, @taxon.name ]
       - if @taxon.english_vernacular_name
         %p= @taxon.english_vernacular_name
 
@@ -19,15 +19,15 @@
         - if @taxon.english_vernacular_name
           %dt English common name
           %dd= @taxon.english_vernacular_name
-        - unless @taxon.rank == 'Family'
+        - unless @taxon.family?
           -# FIXME count families
           %dt Number of families
           %dd ??
         %dt Source
         %dd= @taxon.source
-        - # FIXME calculate total score
-        %dt Total score
-        %dd ??
+        - if @taxon.family?
+          %dt Total score
+          %dd= formatted_score(@taxon.score)
       - if @taxon.image
         %figure
           %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
@@ -35,7 +35,7 @@
             - if @taxon.image[attribute]
               %p= @taxon.image[attribute]
 
-    - if @taxon.rank == 'Family'
+    - if @taxon.family?
       %section.assessment
         %header
           %h2 Assessment
@@ -58,7 +58,7 @@
               %tr
                 %th{ scope: 'row' }= measurement[:label]
                 %td= measurement[:measurementValue]
-                %td{class: klass}= measurement[:score]
+                %td{ class: klass }= formatted_score(measurement[:score])
         %aside
           %header
             %h3 Legend
