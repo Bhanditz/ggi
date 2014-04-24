@@ -38,8 +38,12 @@ configure do
     ]
 
     css :application, '/css/application.css', [
-      '/css/jquery.ui.ggi.base.css',
       '/css/main.css'
+    ]
+
+    # TODO Merge jquery css into main once styles are ready
+    css :jquery_ui, '/css/jquery.ui.css', [
+      '/css/jquery.ui.base.css',
     ]
 
     js_compression  :jsmin

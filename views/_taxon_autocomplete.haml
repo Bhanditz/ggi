@@ -1,13 +1,19 @@
 - show_matched_name = (matched_name.casecmp(taxon.name) != 0)
-- unless taxon.classification_summary.empty?
-  = taxon.classification_summary.map{ |t| '<span>' + t.name + '</span>' }.join(" &gt; ")
-%a{ href: taxon_path(taxon) }= taxon.name
-- if taxon.english_vernacular_name
-  %span= taxon.english_vernacular_name
-  - if show_matched_name && matched_name.casecmp(taxon.english_vernacular_name) == 0
-    - show_matched_name = false
-- if show_matched_name
-  Alternative name:
-  %span= matched_name
-- if taxon.thumbnail
-  %img{ src: taxon.thumbnail }
+- modifier_class = 'autocomplete-item--with-image' if taxon.thumbnail
+%span.autocomplete-item{ data: { path: taxon_path(taxon) }, class: modifier_class }
+  - unless taxon.classification_summary.empty?
+    %span.autocomplete-item__classification
+      = taxon.classification_summary.map{ |t| t.name }.join(" &gt; ")
+  %span.autocomplete-item__taxon
+    = taxon.name
+  - if taxon.english_vernacular_name
+    %span.autocomplete-item__vernacular
+      = taxon.english_vernacular_name
+    - if show_matched_name && matched_name.casecmp(taxon.english_vernacular_name) == 0
+      - show_matched_name = false
+  - if show_matched_name
+    %span.autocomplete-item__alternate
+      Alternative name:
+      = matched_name
+  - if taxon.thumbnail
+    %img.autocomplete-item__thumbnail{ src: taxon.thumbnail, alt: '' }

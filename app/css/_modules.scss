@@ -1,4 +1,14 @@
 // Modules: layout and positioning of sub panels e.g. search form
+
+.visually-hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .list__links {
   li {
     @include no-bullet;
@@ -38,21 +48,99 @@ nav {
 header.page__header {
   nav {
     position: absolute;
-    top: rhythm(1);
+    top: rhythm(0.5);
     right: 0;
+  }
+  h1 {
+    margin: 0;
   }
 }
 
 .search {
+  h2 {
+    @extend .visually-hidden;
+  }
+  label {
+    @extend .visually-hidden;
+    display: block;
+  }
   input[type=search] {
-    max-width: 70%;
+    width: 96%;
   }
   input[type=submit] {
-    max-width: 30%;
+    display: block;
+    margin-top: rhythm(0.5);
   }
 }
 
+.ui-autocomplete {
+  li {
+    @include trailing-border(1px, 0);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.autocomplete-item {
+  display: block;
+  min-height: rhythm(3);
+  span {
+    display: block;
+  }
+  &--with-image {
+    position: relative;
+    padding-right: rhythm(3);
+  }
+  &__thumbnail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: rhythm(3);
+  }
+}
+
+.tagline {
+  h2 {
+    @extend .visually-hidden;
+  }
+}
+
+.browser {
+  > h2 {
+    @extend .visually-hidden;
+  }
+}
+
+.browser__actions {
+  width: 100%;
+  @include rhythm-borders(1px, 0.5);
+}
+
+.tree__wrapper {
+  width: 100%;
+  overflow: auto;
+  @include rhythm-borders(1px, 0.5);
+  ul {
+    padding: 0 0 0 rhythm(0.5);
+  }
+  @include breakpoint($ggi-breakpoint-large) {
+    height: rhythm(30);
+  }
+}
+
+.tree {
+  margin-top: 0;
+}
+
+.tree__item {
+  white-space: nowrap;
+}
+
 footer.page__footer {
+  h2 {
+    @extend .visually-hidden;
+  }
   ul {
     @extend .list__links;
   }

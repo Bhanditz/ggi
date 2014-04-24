@@ -1,0 +1,39 @@
+.page__subheader
+  .page__bucket
+    %aside.tagline
+      %h2 About the site
+      %p Tagline for the site
+    %section.search
+      %h2 Search
+      %form#search_form{ method: 'get', action: '/search' }
+        %label{for: 'search_term'}
+          Scientific or common name
+          %small
+            For example, enter
+            %em Solanaceae
+        %input#search_term{ type: :search, name: 'search_term',
+          placeholder: 'Enter scientific or common name',
+          value: params[:scientific_name] }
+        %input{ type: :submit, value: 'Search'}
+
+.page__content
+  .page__bucket
+    %section.browser
+      %nav
+        %ul
+          %li
+            %a{ href: "#{request.path_info}?browse_by=taxonomy" } Taxonomy
+          %li
+            %a{ href: "#{request.path_info}?browse_by=phylogeny" } Phylogeny
+
+      - if params[:browse_by] == 'phylogeny'
+        %h2 Browse phylogeny
+        .tree__wrapper.tree__wrapper--phylogeny
+          = haml :_phylogeny, layout: false
+      - else
+        %h2 Browse taxonomy
+        .tree__wrapper.tree__wrapper--taxonomy
+          = haml :_taxonomy, layout: false, locals: { taxon: @taxon }
+
+    = yield
+

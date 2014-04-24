@@ -1,15 +1,14 @@
 - ancestors = taxon.ancestors
 - children = taxon.children
 - siblings = taxon.siblings
-%h2 Browse taxonomy
-%ul
+%ul.tree.tree--taxonomy
   - ancestors.each do |a|
-    = show_node(a, :expanded) + "<ul>"
-  = show_node(taxon, children.count > 0 ? :expanded : :collapsed)
+    = tree_item(a, :expanded) + "<ul>"
+  = tree_item(taxon, children.count > 0 ? :expanded : :collapsed)
   - if children.count > 0
     %ul
       - children.each do |c|
-        = show_node(c, :collapsed)
+        = tree_item(c, :collapsed)
   - siblings.each do |s|
-    = show_node(s, :collapsed)
+    = tree_item(s, :collapsed)
   = "</ul>" * ancestors.length

@@ -2,6 +2,7 @@
   var NO_RESULTS_LABEL = 'No results';
 
   $(function() {
+    $('#search_form input[type=submit]').addClass('visually-hidden');
     $('#search_term').autocomplete({
       source: function( request, response ) {
         $.ajax({
@@ -32,7 +33,7 @@
           e.preventDefault();
           return;
         }
-        window.location = $('.ui-autocomplete a[href$="'+ ui.item.id +'"]').attr('href');
+        window.location = $(ui.item.label).data('path');
       }
     }).on('focus', function() {
       // when the autocomplete field loses focus the results disappear.
@@ -47,30 +48,33 @@
         .appendTo( ul );
     };
     addTogglesToTaxonomy();
-    addCollapseTaxonomy();
+    addTreeBrowsingActions();
   });
 
   var collapseTaxonomy = function() {
-    $('.taxonomy > ul > li:first-child a.toggle').click();
+    $('.tree--taxonomy > .tree__item:first-child a.toggle').click();
   }
 
-  var addCollapseTaxonomy = function() {
-    var collapseLink = $('<a/>', { href: '#', class: 'collapse-all' }).prepend('Collapse all');
+  var addTreeBrowsingActions = function() {
+    if ($('.browser__actions').length > 0) return;
+    var browserActions = $('<div/>', { class: 'browser__actions' }),
+        collapseLink = $('<a/>', { href: '#', class: 'browser__action--collapse' })
+          .prepend('Collapse all').appendTo(browserActions);
     collapseLink.on('click', function(e) {
       e.preventDefault();
       collapseTaxonomy();
     });
-    collapseLink.appendTo($('.taxonomy'));
+    browserActions.insertBefore($('.tree__wrapper--taxonomy'));
   };
 
   var addTogglesToTaxonomy = function() {
-    $('.taxonomy li').each(function() {
+    $('.tree__item').each(function() {
       if (parseInt($(this).data('children')) > 0) {
         var toggle = $('<a/>', { class: 'toggle', href: '#' }).prepend('+');
         $(this).append(' ').append(toggle);
         toggle.on('click', function(e) {
           e.preventDefault();
-          var taxonId = $(this).closest('li').data('taxon-id');
+          var taxonId = $(this).closest('.tree__item').data('taxon-id');
           loadTaxonomy(taxonId);
         });
       }
@@ -82,9 +86,9 @@
       url: '/api/taxonomy/' + taxon_id,
       dataType: 'html',
       success: function( html ) {
-        $('.taxonomy').html(html);
+        $('.tree__wrapper--taxonomy').html(html);
         addTogglesToTaxonomy();
-        addCollapseTaxonomy();
+        addTreeBrowsingActions();
       }
     });
   };

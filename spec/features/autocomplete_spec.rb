@@ -6,7 +6,7 @@ describe 'autocomplete', js: true do
     expect(page).to have_xpath '//ul[@id="ui-id-1"]/li[1]'
     expect(page).to have_xpath '//li[@class="ui-menu-item"]'
     find(:xpath, '//li[@class="ui-menu-item"][1]').click
-    expect(page.body).to match 'Solanales'
+    expect(page).to have_selector 'h1', text: 'Order Solirubrobacterales'
   end
 
   it 'shows the matched name when necessary' do

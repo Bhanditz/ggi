@@ -1,15 +1,15 @@
 !!!
 %html
   %head
-    %link{ rel: 'stylesheet', href: 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', type: 'text/css' }
     != js :app
-    -# != css :application, :media => 'screen'
+    != css :jquery_ui, :media => 'screen'
+    -#!= css :application, :media => 'screen'
   %body{ class: request.path_info.split('/').compact.empty? ? 'root' : request.path_info.split('/').compact.first.to_s }
     .page
       %header.page__header
-        %div
+        .page__bucket
           %h1
-            %a{ href: '/'} GGI Portal
+            %a{ href: '/'} GGI Data Portal
           %nav
             %ul
               - ['about', 'help', 'download'].each do |n|
@@ -21,7 +21,7 @@
                       = n.capitalize
       = yield
       %footer.page__footer
-        %div
+        .page__bucket
           %h2 Sponsors
           %ul
             %li

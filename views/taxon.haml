@@ -47,6 +47,10 @@
               %th{ scope: 'col' } Value
               %th{ scope: 'col' } Score
           %tbody
+            - if @taxon.measurements.empty?
+              %tr
+                %td{ colspan: 3 }
+                  No measurements were found
             - @taxon.measurements.each do |measurement|
               - score = measurement[:score].to_f
               - # FIXME add helper method to set html class for styling poor, average, good

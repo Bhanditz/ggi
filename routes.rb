@@ -1,6 +1,6 @@
 get '/' do
   @taxon ||= Taxon.find_by_name('Eukaryota')
-  haml :'layouts/taxonomy' do
+  haml :'layouts/browser' do
     haml :taxon, layout: false
   end
 end
@@ -33,7 +33,7 @@ end
 get '/taxon/:id' do
   @taxon ||= Taxon.find(params[:id])
   if @taxon
-    haml :'layouts/taxonomy' do
+    haml :'layouts/browser' do
       haml :taxon, layout: false
     end
   else

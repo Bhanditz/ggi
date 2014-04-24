@@ -1,42 +1,71 @@
 // Theme: replaceable skin, colors, font family etc.
 
-$ggi-colors: #2B3A42 #3F5765 #BDD4DE #EFEFEF #E74C3C; // darkest dark light lightest bright
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300);
 
-@mixin ggi-color($n, $button_n: 0) {
-  $c: nth($ggi-colors, $n);
-  $cc: contrast-color($c);
-  $bc: $cc;
-  @if $button_n > 0 {
-    $bc: nth($ggi-colors, $button_n);
-  }
-  $bcc: contrast-color($bc);
+$ggi-colors: (
+  darkest: #222222,
+  dark: #666666,
+  light: #cccccc,
+  lightest: #f5f5f5,
+  bright: #35a4c9
+);
 
-  @include contrasted($c);
+$ggi-font-weight: (
+  thin: 300,
+  normal: 400
+);
+
+@function ggi-contrast-color($color, $key: false) {
+  @return if($key, map-get($ggi-colors, $key), contrast-color($color));
+}
+
+@mixin ggi-color($bg-key, $fg-key: false) {
+  $bg-color: map-get($ggi-colors, $bg-key);
+  $fg-color: ggi-contrast-color($bg-color, $fg-key);
+  background-color: $bg-color;
+  color: $fg-color;
   a {
-    color: $cc;
+    color: $fg-color;
   }
-  input {
-    &[type=search] {
-      border-color: darken($c, 10%) darken($c, 8%) lighten($c, 5%);
-      @include background-image(linear-gradient(darken($cc, 5%), $cc));
-      color: $c;
-    }
-    &[type=submit] {
-      @include transition-property(background);
-      @include transition-duration(.3s);
-      border-color: lighten($bc, 10%) darken($bc, 8%) darken($bc, 5%);
-      background-color: $bc;
-      color: $bcc;
-      &:hover {
-        background: darken($bc, 10%);
-      }
-      &:active {
-        @include transition-duration(0s);
-        background: desaturate($bc, 20%);
-        color: darken($bcc, 20%);
-      }
-    }
+}
+
+@mixin ggi-color-input($bg-key, $fg-key: false) {
+  $bg-color: map-get($ggi-colors, $bg-key);
+  $fg-color: ggi-contrast-color($bg-color, $fg-key);
+  border-color: darken($bg-color, 10%) darken($bg-color, 8%) lighten($bg-color, 5%);
+  @include background-image(linear-gradient(darken($bg-color, 5%), $bg-color));
+  color: $fg-color;
+}
+
+@mixin ggi-color-button($bg-key, $fg-key: false) {
+  $bg-color: map-get($ggi-colors, $bg-key);
+  $fg-color: ggi-contrast-color($bg-color, $fg-key);
+  @include transition-property(background);
+  @include transition-duration(.3s);
+  border-color: lighten($bg-color, 10%) darken($bg-color, 8%) darken($bg-color, 5%);
+  background-color: $bg-color;
+  color: $fg-color;
+  &:hover {
+    background: darken($bg-color, 10%);
   }
+  &:active {
+    @include transition-duration(0s);
+    background: desaturate($bg-color, 20%);
+    color: darken($fg-color, 20%);
+  }
+}
+
+@mixin ggi-emboss($background) {
+  $c: map-get($ggi-colors, $background);
+  border-top: 1px solid lighten($c, 15%);
+  border-bottom: 1px solid darken($c, 8%);
+}
+
+body {
+  @include ggi-color(lightest);
+  font-family: 'Open Sans', 'sans-serif';
+  font-weight: map-get($ggi-font-weight, normal);
 }
 
 a {
@@ -46,7 +75,7 @@ a {
 }
 
 .headers {
-  font-family: Georgia, Times, "Times New Roman", serif;
+  font-weight: map-get($ggi-font-weight, thin);
 }
 
 .textbox {
@@ -55,19 +84,14 @@ a {
 
 .button {
   @include adjust-font-size-to(1.2em);
-  @include adjust-leading-to(1);
+  @include adjust-leading-to(1.2);
   padding: {
-    left: rhythm(1);
-    right: rhythm(1);
+    left: rhythm(0.5);
+    right: rhythm(0.5);
   }
   text-transform: lowercase;
   border-width: 1px;
   border-style: solid;
-}
-
-body {
-  @include ggi-color(4);
-  font-family: "Helvetica Neue", Helvetica, Sans-serif;
 }
 
 h1 {
@@ -81,42 +105,70 @@ h2 {
 
 input[type=search] {
   @extend .textbox;
+  @include ggi-color-input(lightest);
 }
+
 input[type=submit] {
   @extend .button;
+  @include ggi-color-button(darkest);
 }
 
 thead {
-  @include trailing-border(2px);
+  @include trailing-border(1px);
+  border-color: map-get($ggi-colors, light);
 }
 
 header.page__header {
-  @include ggi-color(1);
+  @include ggi-color(darkest);
 }
 
 .page__subheader {
-  @include ggi-color(5, 3);
+  @include ggi-color(bright);
+  @include ggi-emboss(bright);
 }
 
-.tree {
-  > h2, > ul {
+.ui-autocomplete {
+  background-color: darken(map-get($ggi-colors, lightest), 5%);
+  li {
+    border-color: darken(map-get($ggi-colors, lightest), 10%);
+  }
+  .ui-state-focus, .ui-state-active {
+    background-color: darken(map-get($ggi-colors, lightest), 30%);
+  }
+  &.ui-menu .ui-menu-item {
+    .ui-state-focus, .ui-state-active {
+      margin: 0;
+    }
+  }
+}
+
+.autocomplete-item {
+  &__classification, &__vernacular, &__alternate {
+    @include adjust-font-size-to(0.8em);
+  }
+}
+
+.tagline {
+  p {
+    @include adjust-font-size-to(1.2em);
+    font-weight: map-get($ggi-font-weight, thin);
     margin: 0;
-    @include apply-side-rhythm-border(left, 2px, 1, 1em);
-    @include apply-side-rhythm-border(right, 2px, 1, 1em);
   }
-  > h2 {
-    @include leading-border(2px, 1, 1em);
-  }
-  > ul {
-    @include padding-leader;
-    @include trailing-border(2px, 1, 1em);
-  }
+}
+
+.browser__actions {
+  border-color: map-get($ggi-colors, light);
+  border-bottom: none;
+}
+
+.tree__wrapper {
+  border-color: map-get($ggi-colors, light);
   ul {
     @include no-bullet;
   }
 }
 
 footer.page__footer {
-  @include ggi-color(3);
+  @include ggi-color(dark);
 }
 
