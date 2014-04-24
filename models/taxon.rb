@@ -5,7 +5,6 @@ class Taxon
     # ancestors is a key of the API response, but its also a
     # convenience method in this class
     @taxon_hash[:api_ancestors] = @taxon_hash[:ancestors]
-    set_measurement_labels
   end
 
   def self.find(id)
@@ -18,23 +17,6 @@ class Taxon
 
   def self.autocomplete(search_term)
     Classification.autocomplete(search_term)
-  end
-
-  def set_measurement_labels
-    unless @taxon_hash[:measurements].nil?
-      @taxon_hash[:measurements].each do |measurement|
-        measurement[:label] = case measurement[:label]
-          when /genbank/i
-            'GenBank sequences'
-          when /EOL/
-            'EOL rich pages'
-          when /GGBN/
-            'GGBN records'
-          when /GBIF/
-            'GBIF records'
-        end
-      end
-    end
   end
 
   def name

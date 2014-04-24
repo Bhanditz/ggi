@@ -16,25 +16,27 @@ class Ggi::ClassificationImporter
     @data = { }
     @opts = { col_sep: "\t" }
   end
-  
+
   def import
     return @@imported if @@imported
     import_taxa
-    import_falo_classification
+    import_mappings
     import_traits
     @@imported = [ @taxa, @taxon_names, @taxon_parents,
                    @taxon_children, @common_names ]
   end
- 
+
   private
 
   def import_traits
-    traits_file = File.join(__dir__, '..', '..', 'public', 'falo_data.json.gz') 
+    traits_file = File.join(__dir__, '..', '..', 'public', 'falo_data.json.gz')
     traits_json = Zlib::GzipReader.open(traits_file) { |f| f.read }
     traits_data = JSON.parse(traits_json, symbolize_names: true)
     traits_data.each do |d|
       next unless d.is_a?(Hash)
       if falo_id = @eol_to_falo[d[:identifier]]
+        Ggi::ClassificationImporter.create_measurement_labels(d)
+        d[:measurements].delete_if{ |m| m[:label].nil? }
         @taxa[falo_id].merge!(d)
         d[:vernacularNames].each do |v|
           @common_names[v[:vernacularName].capitalize] ||= []
@@ -44,15 +46,13 @@ class Ggi::ClassificationImporter
     end
   end
 
-  def import_falo_classification
-    falo_file = File.join(__dir__, '..', '..', 'public', 'falo_mapping.tab.gz')
-    Zlib::GzipReader.open(falo_file) do |csv|
-      csv.each_line do |line|
-        CSV.parse(line, @opts) do |row|
-          @taxa[row[0]][:eol_id] = row[1]
-          @eol_to_falo[row[1].to_i] = row[0];
-        end
-      end
+  def import_mappings
+    mappings_file = File.join(__dir__, '..', '..', 'public', 'falo_mappings.json.gz')
+    mappings_json = Zlib::GzipReader.open(mappings_file) { |f| f.read }
+    mappings_data = JSON.parse(mappings_json, symbolize_names: true)
+    mappings_data.each do |d|
+      @taxa[d[:falo_id]][:eol_id] = d[:eol_id]
+      @eol_to_falo[d[:eol_id]] = d[:falo_id]
     end
   end
 
@@ -90,4 +90,24 @@ class Ggi::ClassificationImporter
     @taxon_names[row['scientificName'].capitalize] ||= [ ]
     @taxon_names[row['scientificName'].capitalize] <<  row['taxonID']
   end
+
+  def self.create_measurement_labels(taxon_hash)
+    unless taxon_hash[:measurements].nil?
+      taxon_hash[:measurements].each do |measurement|
+        measurement[:label] = case measurement[:measurementType]
+          when /NumberOfSequencesInGenBank/i
+            'GenBank sequences'
+          when /NumberRichSpeciesPagesInEOL/i
+            'EOL rich pages'
+          when /NumberSpecimensInGGBN/i
+            'GGBN records'
+          when /NumberRecordsInGBIF/i
+            'GBIF records'
+          when /NumberPublicRecordsInBOLD/i
+            'BOLD records'
+        end
+      end
+    end
+  end
+
 end
