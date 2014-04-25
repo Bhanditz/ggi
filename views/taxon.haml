@@ -39,7 +39,7 @@
               - @taxon.image[:agents].each do |agent|
                 %dt= agent[:role]
                 %dd
-                  - if agent[:homepage]
+                  - if agent[:homepage] && agent[:homepage] != ''
                     - agent[:homepage] = "http://#{agent[:homepage]}" unless agent[:homepage].start_with?('http://')
                     %a{ href: agent[:homepage] }= agent[:full_name]
                   - else
@@ -52,7 +52,11 @@
               %dd= @taxon.image[:rights]
             - if @taxon.image[:license]
               %dt License
-              %dd= @taxon.image[:license]
+              %dd
+                - if @taxon.image[:license].start_with?('http://')
+                  %a{ href: @taxon.image[:license] }= @taxon.image[:license]
+                - else
+                  = @taxon.image[:license]
     - if @taxon.family?
       %section.taxon__assessment
         %header.assessment__header
