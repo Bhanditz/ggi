@@ -15,10 +15,12 @@
           %dd.information--classification
             = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
         %dt.information--scientific-name Scientific name
-        %dd.information--scientific-name= @taxon.name
+        %dd.information--scientific-name
+          %a{ href: eol_page_url(@taxon) }= @taxon.name
         - if @taxon.english_vernacular_name
           %dt.information--common-name English common name
-          %dd.information--common-name= @taxon.english_vernacular_name
+          %dd.information--common-name
+            %a{ href: eol_page_url(@taxon) }= @taxon.english_vernacular_name
       %dl.information--assessment
         - if @taxon.family?
           %dt.information--score Total score
@@ -32,7 +34,8 @@
         %dd.information--source= @taxon.source
       - if @taxon.image
         %figure.information__media
-          %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
+          %a{ href: eol_dato_url(@taxon)}
+            %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
           %figcaption
             - if @taxon.image[:agents]
               - @taxon.image[:agents].each do |agent|
