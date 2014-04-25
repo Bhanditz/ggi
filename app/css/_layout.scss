@@ -3,7 +3,7 @@ $base-font-size: 12px;
 $base-line-height: 18px;
 $ggi-breakpoint-medium: 40em;
 $ggi-breakpoint-large: 64em;
-$ggi-footer-rhythm: 3;
+$ggi-footer-rhythm: 2;
 @include establish-baseline;
 @include border-box-sizing;
 
@@ -36,6 +36,7 @@ html, body {
   position: relative;
   max-width: 120em;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 header.page__header {
@@ -48,6 +49,21 @@ header.page__header {
 
 .page__content {
   @extend .page__lane;
+}
+
+.site-navigation {
+  width: 100%;
+  text-align: right;
+}
+
+@include susy-breakpoint($ggi-breakpoint-medium, 2) {
+  .site-title {
+    @include span(1 at 1 of 2);
+    margin: 0;
+  }
+  .site-navigation {
+    @include span(1 at 2 of 2);
+  }
 }
 
 .search {
