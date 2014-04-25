@@ -14,7 +14,7 @@ class Ggi::ClassificationImporter
     @common_names = { }
     @eol_to_falo = { }
     @data = { }
-    @measurement_type_max_values = { }
+    @measurement_type_values = { }
     @measurement_uris_to_labels = {
       'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => 'GenBank sequences',
       'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => 'EOL rich pages',
@@ -32,12 +32,13 @@ class Ggi::ClassificationImporter
     import_mappings
     import_traits
     assign_nested_set_recursively
-    Ggi::ScoreCalculator::calculate_scores(
+    score_calculator = Ggi::ScoreCalculator.new(
       taxa: @taxa,
-      measurement_type_max_values: @measurement_type_max_values,
+      measurement_type_values: @measurement_type_values,
       maximum_number_of_scores: @measurement_uris_to_labels.length,
       taxon_parents: @taxon_parents,
       taxon_children: @taxon_children)
+    score_calculator.calculate_scores
     @@imported = [ @taxa, @taxon_names, @taxon_parents,
                    @taxon_children, @common_names ]
   end
@@ -51,9 +52,14 @@ class Ggi::ClassificationImporter
     traits_data.each do |d|
       next unless d.is_a?(Hash)
       if falo_id = @eol_to_falo[d[:identifier]]
-        update_maximum_values(d)
-        create_measurement_labels(d)
-        d[:measurements].delete_if{ |m| m[:label].nil? }
+        # if we have measurements for taxa that aren't families,
+        # then remove them. We only want measurments for families
+        if @taxa[falo_id][:dwc_record]['taxonRank'] == 'family'
+          verify_measurement_labels(d)
+          update_measurement_type_values(d)
+        else
+          d[:measurements] = [ ]
+        end
         @taxa[falo_id].merge!(d)
         d[:vernacularNames].each do |v|
           @common_names[v[:vernacularName].capitalize] ||= []
@@ -106,20 +112,30 @@ class Ggi::ClassificationImporter
     @taxon_names[row['scientificName'].capitalize] <<  row['taxonID']
   end
 
-  def update_maximum_values(taxon_hash)
-    taxon_hash[:measurements].each do |m|
-      @measurement_type_max_values[m[:measurementType]] ||= 0
-      if m[:measurementValue] > @measurement_type_max_values[m[:measurementType]]
-        @measurement_type_max_values[m[:measurementType]] = m[:measurementValue]
-      end
+  def update_measurement_type_values(taxon_hash)
+    @measurement_uris_to_labels.each do |uri, label|
+      measurement = taxon_hash[:measurements].detect{ |m| m[:measurementType] == uri }
+      value = measurement ? measurement[:measurementValue] : 0
+      @measurement_type_values[uri] ||= { }
+      @measurement_type_values[uri][value] ||= 0
+      @measurement_type_values[uri][value] += 1
     end
   end
 
-  def create_measurement_labels(taxon_hash)
+  def verify_measurement_labels(taxon_hash)
     unless taxon_hash[:measurements].nil?
+      # if we get multiple of the same measurement for a taxon,
+      # we will take the first and ignore subsequent instances
+      used_labels = [ ]
       taxon_hash[:measurements].each do |measurement|
         measurement[:label] = @measurement_uris_to_labels[measurement[:measurementType]]
+        if used_labels.include?(measurement[:label])
+          measurement[:label] = nil
+        end
+        used_labels << measurement[:label]
       end
+      # delete all measurements without a nice label
+      taxon_hash[:measurements].delete_if{ |m| m[:label].nil? }
     end
   end
 

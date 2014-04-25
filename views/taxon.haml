@@ -34,7 +34,6 @@
         %figure.information__media
           %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
           %figcaption
-            -# %p= @taxon.image[:title] if @taxon.image[:title]
             - if @taxon.image[:agents]
               - @taxon.image[:agents].each do |agent|
                 %dt= agent[:role]
