@@ -12,4 +12,12 @@ helpers do
   def taxon_path(taxon)
     "/taxon/#{taxon.id}"
   end
+
+  def eol_page_url(taxon)
+    "http://eol.org/pages/#{taxon.eol_id}"
+  end
+
+  def eol_dato_url(taxon)
+    "http://eol.org/data_objects/#{taxon.image[:dataObjectVersionID]}"
+  end
 end
