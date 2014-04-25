@@ -21,7 +21,9 @@ class Ggi::ClassificationImporter
       'http://eol.org/schema/terms/NumberSpecimensInGGBN' => 'GGBN records',
       'http://eol.org/schema/terms/NumberRecordsInGBIF' => 'GBIF records',
       'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => 'BOLD records' }
-    @opts = { col_sep: "\t" }
+    # NOTE: We don't use quote_char to wrap field content in taxon file.
+    #      However, adding | prevents CSV misinterpreting " in content.
+    @csv_parse_options = { col_sep: "\t", quote_char: "|" }
   end
 
   def import
@@ -29,33 +31,18 @@ class Ggi::ClassificationImporter
     import_taxa
     import_mappings
     import_traits
-    calculate_scores
+    assign_nested_set_recursively
+    Ggi::ScoreCalculator::calculate_scores(
+      taxa: @taxa,
+      measurement_type_max_values: @measurement_type_max_values,
+      maximum_number_of_scores: @measurement_uris_to_labels.length,
+      taxon_parents: @taxon_parents,
+      taxon_children: @taxon_children)
     @@imported = [ @taxa, @taxon_names, @taxon_parents,
                    @taxon_children, @common_names ]
   end
 
   private
-
-  def calculate_scores
-    max_taxon_score = 0
-    @taxa.each do |id, taxon|
-      taxon[:measurements] ||= []
-      taxon[:measurements].each do |m|
-        # TODO: finalize the scoring algorithms
-        m[:score] = Ggi::ClassificationImporter.scale_and_log(
-          m[:measurementValue], @measurement_type_max_values[m[:measurementType]])
-      end
-      taxon[:score] = (taxon[:measurements].map{ |m| m[:score] }.inject(:+) || 0) /
-        @measurement_uris_to_labels.length.to_f
-      if taxon[:score] > max_taxon_score
-        max_taxon_score = taxon[:score]
-      end
-    end
-    # now normalize all the scores against themselves so we have a 100 out of 100
-    @taxa.each do |id, taxon|
-      taxon[:score] = Ggi::ClassificationImporter.scale_and_log(taxon[:score], max_taxon_score)
-    end
-  end
 
   def import_traits
     traits_file = File.join(__dir__, '..', '..', 'public', 'falo_data.json.gz')
@@ -91,9 +78,7 @@ class Ggi::ClassificationImporter
     taxon_file = File.join(__dir__, '..', '..', 'public', 'taxon.tab.gz')
     Zlib::GzipReader.open(taxon_file) do |csv|
       csv.each_line do |line|
-        # NOTE We don't use quote_char to wrap field content in taxon file.
-        #      However, adding | prevents CSV misinterpreting " in content.
-        CSV.parse(line, @opts.merge({quote_char: "|"})) do |row|
+        CSV.parse(line, @csv_parse_options) do |row|
           if header.nil?
             header = row
             next
@@ -138,11 +123,22 @@ class Ggi::ClassificationImporter
     end
   end
 
-  # TODO: finalize the scoring algorithms
-  # normalizing the ratio to be 0-9, then adding 1 and taking the log base 10 of that
-  # this is the same method we use for EOL richness scores
-  def self.scale_and_log(value, max_value)
-    Math.log(((value / max_value.to_f) * 9) + 1, 10)
+  def assign_nested_set_recursively(options = {})
+    options[:current_value] ||= 0
+    options[:current_parent_id] ||= 0
+    if @taxon_children[options[:current_parent_id]]
+      @taxon_children[options[:current_parent_id]].each do |child_taxon_id|
+        @taxa[child_taxon_id][:left_value] = options[:current_value]
+        options[:current_value] += 1
+        options[:current_value] = assign_nested_set_recursively(options.merge({
+          current_value: options[:current_value],
+          current_parent_id: child_taxon_id,
+          }))
+        @taxa[child_taxon_id][:right_value] = options[:current_value]
+        options[:current_value] += 1
+      end
+    end
+    return options[:current_value]
   end
 
 end

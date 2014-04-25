@@ -22,16 +22,20 @@ class Classification
     classification.search(search_term)
   end
 
-  def self.ancestors_of(taxon_id)
-    classification.ancestors_of(taxon_id)
+  def self.ancestors_of(taxon)
+    classification.ancestors_of(taxon)
   end
 
-  def self.children_of(taxon_id)
-    classification.children_of(taxon_id)
+  def self.children_of(taxon)
+    classification.children_of(taxon)
   end
 
-  def self.siblings_of(taxon_id)
-    classification.siblings_of(taxon_id)
+  def self.siblings_of(taxon)
+    classification.siblings_of(taxon)
+  end
+
+  def self.number_of_families_under(taxon)
+    classification.number_of_families_under(taxon)
   end
 
 end

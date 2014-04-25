@@ -22,11 +22,12 @@
       %dl.information--assessment
         - if @taxon.family?
           %dt.information--score Total score
-          %dd.information--score= formatted_score(@taxon.score)
+        - else
+          %dt.information--score Average score
+        %dd.information--score= formatted_score(@taxon.score)
         - unless @taxon.family?
-          -# FIXME count families
           %dt.information--family-count Number of families
-          %dd.information--family-count ??
+          %dd.information--family-count= @taxon.number_of_families
         %dt.information--source Source
         %dd.information--source= @taxon.source
       - if @taxon.image

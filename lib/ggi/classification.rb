@@ -34,9 +34,9 @@ class Ggi::Classification
     end
   end
 
-  def ancestors_of(taxon_id)
+  def ancestors_of(taxon)
     ancestors = []
-    search_id = taxon_id
+    search_id = taxon.id
     while parent_id = @taxon_parents[search_id]
       break if parent_id == 0
       parent = Taxon.find(parent_id)
@@ -46,14 +46,14 @@ class Ggi::Classification
     return ancestors
   end
 
-  def children_of(taxon_id)
-    return [] if @taxon_children[taxon_id].nil?
-    @taxon_children[taxon_id].map{ |child_id| Taxon.find(child_id) }.
+  def children_of(taxon)
+    return [] if @taxon_children[taxon.id].nil?
+    @taxon_children[taxon.id].map{ |child_id| Taxon.find(child_id) }.
       sort_by{ |t| t.name }
   end
 
-  def siblings_of(taxon_id)
-    parent_id = @taxon_parents[taxon_id]
+  def siblings_of(taxon)
+    parent_id = @taxon_parents[taxon.id]
     if parent_id == 0
       parents_children =
         @taxon_children[0].map{ |child_id| Taxon.find(child_id) }
@@ -61,8 +61,13 @@ class Ggi::Classification
       parent_taxon = Taxon.find(parent_id)
       parents_children = parent_taxon.children
     end
-    parents_children.delete_if{ |t| t.id == taxon_id }
+    parents_children.delete_if{ |t| t.id == taxon.id }
     parents_children.sort_by{ |t| t.name }
+  end
+
+  def number_of_families_under(taxon)
+    @taxa.select{ |id, t|
+      t.family? && t.left_value.between?(taxon.left_value, taxon.right_value) }.length
   end
 
   def self.add_matches_from_names(names, search_term, matches)

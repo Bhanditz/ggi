@@ -55,15 +55,19 @@ class Taxon
   end
 
   def ancestors
-    Classification.ancestors_of(@taxon_hash[:id])
+    Classification.ancestors_of(self)
   end
 
   def children
-    Classification.children_of(@taxon_hash[:id])
+    Classification.children_of(self)
   end
 
   def siblings
-    Classification.siblings_of(@taxon_hash[:id])
+    Classification.siblings_of(self)
+  end
+
+  def number_of_families
+    Classification.number_of_families_under(self)
   end
 
   def measurements
