@@ -71,17 +71,21 @@ header.page__header {
   }
 }
 
-.browser + article {
+.taxon__information, .taxon__assessment {
+  padding-top: rhythm(2);
+}
+
+.taxon {
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     @include span(2 at 2 of 3);
     @include nested(2) {
-      .information {
+      .taxon__information {
         @include span(1 at 1 of 2);
         img {
           max-width: 100%;
         }
       }
-      .assessment {
+      .taxon__assessment {
         @include span(1 at 2 of 2);
       }
     }

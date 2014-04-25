@@ -1,46 +1,63 @@
 - if @taxon
-  %article
-    %header
+  %article.taxon
+    %header.taxon__header
       %h1
         = "%s %s" % [ @taxon.rank, @taxon.name ]
       - if @taxon.english_vernacular_name
         %p= @taxon.english_vernacular_name
 
-    %section.information
-      %header
+    %section.taxon__information
+      %header.information__header
         %h2 Taxonomic information
-      %dl
+      %dl.information--nomenclature
         - unless @taxon.classification_summary.empty?
-          %dt Classification
-          %dd
+          %dt.information--classification Classification
+          %dd.information--classification
             = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
-        %dt Scientific name
-        %dd= @taxon.name
+        %dt.information--scientific-name Scientific name
+        %dd.information--scientific-name= @taxon.name
         - if @taxon.english_vernacular_name
-          %dt English common name
-          %dd= @taxon.english_vernacular_name
+          %dt.information--common-name English common name
+          %dd.information--common-name= @taxon.english_vernacular_name
+      %dl.information--assessment
+        - if @taxon.family?
+          %dt.information--score Total score
+          %dd.information--score= formatted_score(@taxon.score)
         - unless @taxon.family?
           -# FIXME count families
-          %dt Number of families
-          %dd ??
-        %dt Source
-        %dd= @taxon.source
-        - if @taxon.family?
-          %dt Total score
-          %dd= formatted_score(@taxon.score)
+          %dt.information--family-count Number of families
+          %dd.information--family-count ??
+        %dt.information--source Source
+        %dd.information--source= @taxon.source
       - if @taxon.image
-        %figure
+        %figure.information__media
           %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
-          - [:rightsHolder, :rights, :license].each do |attribute|
-            - if @taxon.image[attribute]
-              %p= @taxon.image[attribute]
-
+          %figcaption
+            -# %p= @taxon.image[:title] if @taxon.image[:title]
+            - if @taxon.image[:agents]
+              - @taxon.image[:agents].each do |agent|
+                %dt= agent[:role]
+                %dd
+                  - if agent[:homepage]
+                    - agent[:homepage] = "http://#{agent[:homepage]}" unless agent[:homepage].start_with?('http://')
+                    %a{ href: agent[:homepage] }= agent[:full_name]
+                  - else
+                    = agent[:full_name]
+            - if @taxon.image[:rightsHolder]
+              %dt Rights holder
+              %dd= @taxon.image[:rightsHolder]
+            - if @taxon.image[:rights]
+              %dt Rights
+              %dd= @taxon.image[:rights]
+            - if @taxon.image[:license]
+              %dt License
+              %dd= @taxon.image[:license]
     - if @taxon.family?
-      %section.assessment
-        %header
+      %section.taxon__assessment
+        %header.assessment__header
           %h2 Assessment
         %table
-          %caption= "Assessment of knowledge about #{@taxon.name}"
+          %caption.assessment__caption= "Assessment of knowledge about #{@taxon.name}"
           %thead
             %tr
               %th{ scope: 'col' } Source
@@ -63,10 +80,13 @@
           %header
             %h3 Legend
           %p Measurement of knowledge
-          %ul
-            %li 0.64 to 1.0 Good
-            %li 0.34 to 0.63 Average
-            %li 0 to 0.33 Poor
+          %dl
+            %dt Good
+            %dd 0.64 to 1.0
+            %dt Average
+            %dd 0.34 to 0.63
+            %dt Poor
+            %dd 0 to 0.33
 
 - else
   %p Taxon information is missing

@@ -1,7 +1,7 @@
 // Theme: replaceable skin, colors, font family etc.
 
 @import url(http://fonts.googleapis.com/css?family=Montserrat);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300);
 
 $ggi-colors: (
   darkest: #222222,
@@ -12,21 +12,34 @@ $ggi-colors: (
 );
 
 $ggi-font-weight: (
-  thin: 300,
-  normal: 400
+  light: 300,
+  normal: 400,
+  bold: 700
 );
 
 @function ggi-contrast-color($color, $key: false) {
   @return if($key, map-get($ggi-colors, $key), contrast-color($color));
 }
 
-@mixin ggi-color($bg-key, $fg-key: false) {
+@mixin ggi-color($bg-key, $fg-key: false, $a-key: false) {
   $bg-color: map-get($ggi-colors, $bg-key);
   $fg-color: ggi-contrast-color($bg-color, $fg-key);
+  $a-color: if($a-key, map-get($ggi-colors, $a-key), $fg-color);
   background-color: $bg-color;
   color: $fg-color;
   a {
-    color: $fg-color;
+    &:link {
+      color: $a-color;
+    }
+    &:visited {
+      color: $a-color;
+    }
+    &:hover {
+      color: $a-color;
+    }
+    &:active {
+      color: $a-color;
+    }
   }
 }
 
@@ -72,10 +85,13 @@ a {
   &:link, &:visited {
     text-decoration: none;
   }
+  &:hover, &:active {
+    text-decoration: underline;
+  }
 }
 
 .headers {
-  font-weight: map-get($ggi-font-weight, thin);
+  font-weight: map-get($ggi-font-weight, light);
 }
 
 .textbox {
@@ -103,6 +119,22 @@ h2 {
   @extend .headers;
 }
 
+dt {
+  text-transform: uppercase;
+  font-weight: map-get($ggi-font-weight, light);
+  @include adjust-font-size-to(0.9em, 1.21);
+}
+
+dd {
+  @include adjust-leading-to(1.22);
+}
+
+figcaption {
+  @include breakpoint($ggi-breakpoint-large) {
+    @include adjust-font-size-to(0.8em);
+  }
+}
+
 input[type=search] {
   @extend .textbox;
   @include ggi-color-input(lightest);
@@ -116,6 +148,11 @@ input[type=submit] {
 thead {
   @include trailing-border(1px);
   border-color: map-get($ggi-colors, light);
+  text-transform: uppercase;
+}
+
+th {
+  font-weight: map-get($ggi-font-weight, light);
 }
 
 header.page__header {
@@ -151,14 +188,12 @@ header.page__header {
 .tagline {
   p {
     @include adjust-font-size-to(1.2em);
-    font-weight: map-get($ggi-font-weight, thin);
+    font-weight: map-get($ggi-font-weight, light);
     margin: 0;
   }
 }
 
 .browser__actions {
-  border-color: map-get($ggi-colors, light);
-  border-bottom: none;
   a {
     @include breakpoint($ggi-breakpoint-large) {
       @include adjust-font-size-to(0.8em);
@@ -175,7 +210,29 @@ header.page__header {
 
 .tree {
   @include breakpoint($ggi-breakpoint-large) {
-    @include adjust-font-size-to(0.8em);
+    @include adjust-font-size-to(0.9em);
+  }
+}
+
+dt.information {
+  &--score {
+    @include adjust-font-size-to(1.4em, 2);
+    font-weight: map-get($ggi-font-weight, light);
+  }
+}
+
+dd.information {
+  &--scientific-name {
+    @include adjust-font-size-to(1.3em, 1.1);
+    font-weight: map-get($ggi-font-weight, bold);
+  }
+  &--classification,
+  &--common-name {
+    font-weight: map-get($ggi-font-weight, light);
+  }
+  &--score {
+    @include adjust-font-size-to(1.5em);
+    font-weight: map-get($ggi-font-weight, bold);
   }
 }
 

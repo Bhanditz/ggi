@@ -1,8 +1,10 @@
 !!!
 %html
   %head
-    != js :app
+    %title GGI Data Portal
+    %meta{ name: 'viewport', content: 'width=device-width' }
     != css :application, :media => 'screen'
+    != js :app
   %body{ class: request.path_info.split('/').compact.empty? ? 'root' : request.path_info.split('/').compact.first.to_s }
     .page
       %header.page__header

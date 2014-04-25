@@ -23,6 +23,31 @@
   @include inline-block-list(rhythm(0.5));
 }
 
+dl {
+  overflow: hidden;
+  margin-top: 0;
+}
+
+dt {
+  float: left;
+  padding-right: rhythm(0.5);
+  clear: both;
+}
+
+dd {
+  margin-left: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 table {
   width: 100%;
 }
@@ -110,11 +135,18 @@ header.page__header {
   > h2 {
     @extend .visually-hidden;
   }
+  position: relative;
+  nav {
+    a {
+      padding: rhythm(0.5);
+    }
+  }
 }
 
 .browser__actions {
-  width: 100%;
-  @include rhythm-borders(1px, 0.5);
+  position: absolute;
+  top: rhythm(1.6);
+  right: rhythm(0.5);
 }
 
 .tree__wrapper {
@@ -122,7 +154,7 @@ header.page__header {
   overflow: auto;
   @include rhythm-borders(1px, 0.5);
   @include breakpoint($ggi-breakpoint-large) {
-    height: rhythm(30);
+    height: rhythm(23);
   }
 }
 
@@ -134,8 +166,35 @@ header.page__header {
   }
 }
 
+.toggle {
+  display: inline-block;
+  padding-left: rhythm(0.5);
+  padding-right: rhythm(1);
+}
+
 .tree__item {
   white-space: nowrap;
+}
+
+.taxon__header,
+.information__header,
+.assessment__header,
+.assessment__caption {
+  @extend .visually-hidden;
+}
+
+dt.information {
+  &--classification,
+  &--scientific-name,
+  &--common-name {
+    @extend .visually-hidden;
+  }
+}
+
+.information__media {
+  img {
+    max-height: rhythm(12);
+  }
 }
 
 footer.page__footer {

@@ -1,3 +1,4 @@
+%a{ name: '.' }
 .page__subheader
   .page__bucket
     %aside.tagline
@@ -21,9 +22,9 @@
     %section.browser
       %nav
         %ul
-          %li
+          %li{ class: params[:browse_by] == 'phylogeny' ? nil : 'browser__nav--current'}
             %a{ href: "#{request.path_info}?browse_by=taxonomy" } Taxonomy
-          %li
+          %li{ class: params[:browse_by] == 'phylogeny' ? 'browser__nav--current' : nil}
             %a{ href: "#{request.path_info}?browse_by=phylogeny" } Phylogeny
 
       - if params[:browse_by] == 'phylogeny'

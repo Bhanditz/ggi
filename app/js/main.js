@@ -2,53 +2,55 @@
   var NO_RESULTS_LABEL = 'No results';
 
   $(function() {
-    $('#search_form input[type=submit]').addClass('visually-hidden');
-    $('#search_term').autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: '/autocomplete',
-          dataType: 'json',
-          data: {
-            search_term: request.term,
-            batch_size: 10
-          },
-          success: function( data ) {
-            if (!data.length) {
-              data = [ NO_RESULTS_LABEL ];
+    if ($('#search_form').length > 0) {
+      $('#search_form input[type=submit]').addClass('visually-hidden');
+      $('#search_term').autocomplete({
+        source: function( request, response ) {
+          $.ajax({
+            url: '/autocomplete',
+            dataType: 'json',
+            data: {
+              search_term: request.term,
+              batch_size: 10
+            },
+            success: function( data ) {
+              if (!data.length) {
+                data = [ NO_RESULTS_LABEL ];
+              }
+              response(data);
             }
-            response(data);
-          }
-        });
-      },
-      minLength: 1,
-      delay: 0,
-      // we do not want the text in the search field to change as the
-      // user mouses over the autocomplete results
-      focus: function( e, ui ) {
-        e.preventDefault();
-      },
-      // when a user clicks a result, take them to the taxon page immediately
-      select: function( e, ui ) {
-        if (ui.item.label === NO_RESULTS_LABEL) {
+          });
+        },
+        minLength: 1,
+        delay: 0,
+        // we do not want the text in the search field to change as the
+        // user mouses over the autocomplete results
+        focus: function( e, ui ) {
           e.preventDefault();
-          return;
+        },
+        // when a user clicks a result, take them to the taxon page immediately
+        select: function( e, ui ) {
+          if (ui.item.label === NO_RESULTS_LABEL) {
+            e.preventDefault();
+            return;
+          }
+          window.location = $(ui.item.label).data('path');
         }
-        window.location = $(ui.item.label).data('path');
-      }
-    }).on('focus', function() {
-      // when the autocomplete field loses focus the results disappear.
-      // this will make sure they come back when the field regains focus
-      $(this).autocomplete('search', $(this).val());
-    }).data('ui-autocomplete')._renderItem = function( ul, item ) {
-      // a custom render of an autocomplete result. This is nearly the same
-      // as the default render, except the contents are rendered as HTML not text
-      return $( "<li>" )
-        .attr( "data-value", item.value )
-        .append( $( "<a>" ).html( item.label ) )
-        .appendTo( ul );
-    };
-    addTogglesToTaxonomy();
-    addTreeBrowsingActions();
+      }).on('focus', function() {
+        // when the autocomplete field loses focus the results disappear.
+        // this will make sure they come back when the field regains focus
+        $(this).autocomplete('search', $(this).val());
+      }).data('ui-autocomplete')._renderItem = function( ul, item ) {
+        // a custom render of an autocomplete result. This is nearly the same
+        // as the default render, except the contents are rendered as HTML not text
+        return $( "<li>" )
+          .attr( "data-value", item.value )
+          .append( $( "<a>" ).html( item.label ) )
+          .appendTo( ul );
+      };
+      addTogglesToTaxonomy();
+      addTreeBrowsingActions();
+    }
   });
 
   var collapseTaxonomy = function() {
