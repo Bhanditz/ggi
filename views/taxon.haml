@@ -37,28 +37,8 @@
           %a{ href: eol_dato_url(@taxon)}
             %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
           %figcaption
-            - if @taxon.image[:agents]
-              - @taxon.image[:agents].each do |agent|
-                %dt= agent[:role]
-                %dd
-                  - if agent[:homepage] && agent[:homepage] != ''
-                    - agent[:homepage] = "http://#{agent[:homepage]}" unless agent[:homepage].start_with?('http://')
-                    %a{ href: agent[:homepage] }= agent[:full_name]
-                  - else
-                    = agent[:full_name]
-            - if @taxon.image[:rightsHolder]
-              %dt Rights holder
-              %dd= @taxon.image[:rightsHolder]
-            - if @taxon.image[:rights]
-              %dt Rights
-              %dd= @taxon.image[:rights]
-            - if @taxon.image[:license]
-              %dt License
-              %dd
-                - if @taxon.image[:license].start_with?('http://')
-                  %a{ href: @taxon.image[:license] }= @taxon.image[:license]
-                - else
-                  = @taxon.image[:license]
+            %p= image_attribution(@taxon.image)
+            = license(@taxon.image[:license])
     - if @taxon.family?
       %section.taxon__assessment
         %header.assessment__header

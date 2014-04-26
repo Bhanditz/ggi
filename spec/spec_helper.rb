@@ -21,8 +21,17 @@ require_relative '../application.rb'
 Capybara.javascript_driver = :webkit
 Capybara.app = Sinatra::Application
 
-RSpec.configure do |c|
-  c.include Capybara::DSL
+RSpec.configure do |config|
+  config.include Capybara::DSL
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+  config.alias_example_to :expect_it
+end
+
+RSpec::Core::MemoizedHelpers.module_eval do
+  alias to should
+  alias to_not should_not
 end
 
 WebMock.disable_net_connect!(:allow_localhost => true)

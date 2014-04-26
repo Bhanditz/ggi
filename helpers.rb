@@ -20,4 +20,36 @@ helpers do
   def eol_dato_url(taxon)
     "http://eol.org/data_objects/#{taxon.image[:dataObjectVersionID]}"
   end
+
+  def image_attribution(image)
+    agents = {}
+    if image[:agents].kind_of?(Array)
+      agents = image[:agents].map do |a|
+        { a[:role] => a[:full_name] }
+      end.compact.reduce({}, :merge)
+      provider = agents.delete("provider")
+    end
+    owner = image[:rightsHolder] || agents[:photographer] || agents.first[1]
+    owner = "By #{owner}" if owner
+    provider = "via #{provider}" if provider
+    [owner, provider].compact.join(' ');
+  end
+
+  def license(license)
+    uri = URI(license)
+    return license unless uri.scheme == 'http'
+    path = uri.path.to_s.gsub('.html', '').split('/').reject{ |p| p.empty? }
+    html_class = path.join('--').gsub(/[.]/, '-')
+    title = path.reject{|p| p == 'licenses'}.join(' ').upcase
+    case uri.host
+    when 'creativecommons.org'
+      type = path[1].gsub('-', '_')
+      label = Ggi::Svg.send(type) if type && Ggi::Svg.respond_to?(type)
+      title = "Creative Commons #{title}"
+    when 'www.gnu.org'
+      label = title = "GNU #{title}"
+    end
+    label ||= title
+    "<a rel='license' title='Image licensed under #{title}' class='#{html_class}' href='#{uri.to_s}'>#{label}</a>"
+  end
 end

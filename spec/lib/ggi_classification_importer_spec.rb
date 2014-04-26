@@ -4,7 +4,7 @@ describe Ggi::ClassificationImporter do
   describe '.new' do
     it { should be_kind_of Ggi::ClassificationImporter }
   end
-  
+
   describe '#import' do
     it 'should return array with 5 elements' do
       res = subject.import
