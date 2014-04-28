@@ -2,36 +2,30 @@
   %article.taxon
     %header.taxon__header
       %h1
-        = "%s %s" % [ @taxon.rank, @taxon.name ]
-      - if @taxon.english_vernacular_name
-        %p= @taxon.english_vernacular_name
+        %a{ href: eol_page_url(@taxon) }
+          = "%s %s" % [ @taxon.rank, @taxon.name ]
 
     %section.taxon__information
       %header.information__header
         %h2 Taxonomic information
       %dl.information--nomenclature
-        - unless @taxon.classification_summary.empty?
-          %dt.information--classification Classification
-          %dd.information--classification
-            = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
-        %dt.information--scientific-name Scientific name
-        %dd.information--scientific-name
-          %a{ href: eol_page_url(@taxon) }= @taxon.name
         - if @taxon.english_vernacular_name
           %dt.information--common-name English common name
           %dd.information--common-name
             %a{ href: eol_page_url(@taxon) }= @taxon.english_vernacular_name
+        - unless @taxon.classification_summary.empty?
+          %dt.information--classification Classification
+          %dd.information--classification
+            = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
+        %dt.information--source Reference
+        %dd.information--source= @taxon.source
       %dl.information--assessment
-        - if @taxon.family?
-          %dt.information--score Total score
-        - else
-          %dt.information--score Average score
-        %dd.information--score= formatted_score(@taxon.score)
         - unless @taxon.family?
           %dt.information--family-count Number of families
           %dd.information--family-count= @taxon.number_of_families
-        %dt.information--source Source
-        %dd.information--source= @taxon.source
+        %dt.information--score
+          = @taxon.family? ? 'Total score' : 'Average score'
+        %dd.information--score= formatted_score(@taxon.score)
       - if @taxon.image
         %figure.information__media
           %a{ href: eol_dato_url(@taxon)}

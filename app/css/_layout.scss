@@ -87,10 +87,6 @@ header.page__header {
   }
 }
 
-.taxon__information, .taxon__assessment {
-  padding-top: rhythm(2);
-}
-
 .taxon {
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     @include span(2 at 2 of 3);

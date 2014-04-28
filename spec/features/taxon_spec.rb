@@ -23,4 +23,8 @@ describe '/taxon' do
     expect_it { to have_selector('img[src*=media]') }
     expect_it { to_not have_selector('a[class*=licenses]') }
   end
+  context 'with empty image owner' do
+    before { visit '/taxon/5A6107B7-B7C5-1CFD-6BB1-265C4349F19B' }
+    expect_it { to have_selector('figcaption p', text: 'Via biopix') }
+  end
 end

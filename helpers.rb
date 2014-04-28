@@ -29,10 +29,11 @@ helpers do
       end.compact.reduce({}, :merge)
       provider = agents.delete("provider")
     end
-    owner = image[:rightsHolder] || agents[:photographer] || agents.first[1]
+    owner = image[:rightsHolder] || agents[:photographer]
+    owner = agents.first[1] if owner.nil? && !agents.empty?
     owner = "By #{owner}" if owner
     provider = "via #{provider}" if provider
-    [owner, provider].compact.join(' ');
+    [owner, provider].compact.join(' ').capitalize;
   end
 
   def license(license)

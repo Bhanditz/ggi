@@ -222,10 +222,6 @@ dt.information {
 }
 
 dd.information {
-  &--scientific-name {
-    @include adjust-font-size-to(1.3em, 1.1);
-    font-weight: map-get($ggi-font-weight, bold);
-  }
   &--classification,
   &--common-name {
     font-weight: map-get($ggi-font-weight, light);
