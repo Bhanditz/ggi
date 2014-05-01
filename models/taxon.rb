@@ -1,10 +1,10 @@
 class Taxon
 
+  attr_accessor :score, :left_value, :right_value
+
   def initialize(taxon_hash)
     @taxon_hash = taxon_hash
-    # ancestors is a key of the API response, but its also a
-    # convenience method in this class
-    @taxon_hash[:api_ancestors] = @taxon_hash[:ancestors]
+    self.score = 0
   end
 
   def self.find(id)
@@ -13,6 +13,10 @@ class Taxon
 
   def self.find_by_name(name)
     Classification.search(name)
+  end
+
+  def self.all
+    Classification.taxa
   end
 
   def self.autocomplete(search_term)

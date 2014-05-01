@@ -1,88 +1,89 @@
 class Ggi::ScoreCalculator
 
-  def initialize(options = {})
-    @taxa = options[:taxa]
-    @measurement_type_values = options[:measurement_type_values]
-    @maximum_number_of_scores = options[:maximum_number_of_scores]
-    @taxon_parents = options[:taxon_parents]
-    @taxon_children = options[:taxon_children]
-    @measurement_type_values_counts_below = { }
-    initial_calculations
+  def self.begin
+    calculator = Ggi::ScoreCalculator.new
+    calculator.calculate_scores
   end
 
-  def initial_calculations
-    # efficiently count the number of records, per attribute, which
-    # are below a given value. We will use these to calculate percentile
+  def initialize
+    @measurement_type_values = { }
+    @measurement_type_values_counts_below = { }
+    @count_of_measurement_types =
+      Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.length.to_f
+  end
+
+  def calculate_scores
+    collect_measurement_statistics
+    collect_statistics_for_percentiles
+    calculate_and_assign_scores_recursively
+  end
+
+  # count the occurrences of each value for each measurement type
+  # we need to know how many of each value there are to calculate
+  # family percentiles later on
+  def collect_measurement_statistics
+    Taxon.all.select{ |t| t.family? }.each do |taxon|
+      Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
+        measurement = taxon.measurements.detect{ |m| m[:measurementType] == uri }
+        value = measurement ? measurement[:measurementValue] : 0
+        @measurement_type_values[uri] ||= { }
+        @measurement_type_values[uri][value] ||= 0
+        @measurement_type_values[uri][value] += 1
+      end
+    end
+  end
+
+  # efficiently count the number of records, per attribute, which
+  # are below a given value. We will use these to calculate percentile
+  def collect_statistics_for_percentiles
     @measurement_type_values.each do |type, value_counts|
       @measurement_type_values_counts_below[type] = { }
       sorted_values = value_counts.keys.sort
       sorted_values.each_with_index do |value, index|
-        @measurement_type_values_counts_below[type][value] =
-          (index == 0) ? 0 : @measurement_type_values_counts_below[type][sorted_values[index - 1]] +
-            @measurement_type_values[type][sorted_values[index - 1]]
+        @measurement_type_values_counts_below[type][value] = (index == 0) ? 0 :
+          @measurement_type_values_counts_below[type][sorted_values[index - 1]] +
+          @measurement_type_values[type][sorted_values[index - 1]]
       end
     end
-    # count the total number of records which have a value
-    # for a given attribute. If we assume that all records with
-    # unknown values actually have a value of 0, then this should essentially
-    # equal the number of families
-    @measurement_type_totals = Hash[ @measurement_type_values.map{ |type, values|
-      [ type, values.map{ |k, v| v }.inject(:+).to_f ] } ]
+    @total_number_of_families = Taxon.all.select{ |t| t.family? }.length.to_f
   end
 
-  def calculate_scores
-    calculate_measurement_scores
-    # calculate_family_scores
-    calculate_above_family_scores
-  end
-
-  def calculate_measurement_scores
-    @taxa.each do |id, taxon|
-      taxon[:measurements] ||= []
-      taxon[:measurements].each do |m|
-        m[:score] = percentile(m[:measurementValue], m[:measurementType])
+  # now use the data collected to calculate and assign
+  # percentile scores to the tree using a depth-first traversal.
+  # Scores for higher taxa are averages of its families' scores
+  def calculate_and_assign_scores_recursively(options = {})
+    childs_family_scores = [ ]
+    children = options[:taxon].nil? ? Classification.roots : options[:taxon].children
+    if children
+      children.each do |child_taxon|
+        if child_taxon.family?
+          calculate_score_for_family(child_taxon)
+          childs_family_scores << child_taxon.score
+        else
+          childs_family_scores += calculate_and_assign_scores_recursively(
+            options.merge({ family_scores: [ ], taxon: child_taxon }))
+        end
       end
-      taxon[:score] = (taxon[:measurements].map{ |m| m[:score] }.inject(:+) || 0) /
-        @maximum_number_of_scores.to_f
+      # we started at the root, and now we're back so we're done
+      return unless options[:taxon]
+      options[:taxon].score = childs_family_scores.empty? ? 0 :
+        childs_family_scores.inject(:+) / childs_family_scores.length
     end
+    return childs_family_scores
   end
 
-  # def calculate_family_scores
-  #   # normalize all the scores against themselves so we have a 100 out of 100
-  #   max_taxon_score = @taxa.collect{ |id, taxon| taxon[:score] }.max
-  #   @taxa.each do |id, taxon|
-  #     taxon[:score] = scale_and_log(taxon[:score], max_taxon_score)
-  #   end
-  # end
-
-  def calculate_above_family_scores
-    stack = @taxa.select{ |id, taxon| taxon[:dwc_record]['taxonRank'] == 'family' }.
-      collect{ |id, taxon| @taxon_parents[id] }.compact.uniq
-    while stack.length > 1
-      lookup_id = stack.shift
-      this_nodes_parent_id = @taxon_parents[lookup_id]
-      if children_ids = @taxon_children[lookup_id]
-        @taxa[lookup_id][:score] =
-          children_ids.map{ |child_id| @taxa[child_id][:score] }.inject(:+) /
-          children_ids.length
-      end
-      unless this_nodes_parent_id == 0 || stack.include?(this_nodes_parent_id)
-        stack << this_nodes_parent_id
-      end
+  def calculate_score_for_family(family)
+    family.measurements ||= []
+    family.measurements.each do |m|
+      m[:score] = percentile(m[:measurementValue], m[:measurementType])
     end
+    family.score = (family.measurements.map{ |m| m[:score] }.inject(:+) || 0) /
+      @count_of_measurement_types
   end
-
-  # # TODO: finalize the scoring algorithms
-  # # normalizing the ratio to be 0-9, then adding 1 and taking the log base 10 of that
-  # # this is the same method we use for EOL richness scores
-  # def scale_and_log(value, max_value)
-  #   Math.log(((value / max_value.to_f) * 9) + 1, 10)
-  # end
 
   def percentile(value, type)
     return 0 if ! value || value == 0
-    @measurement_type_values_counts_below[type][value] /
-      @measurement_type_totals[type]
+    @measurement_type_values_counts_below[type][value] / @total_number_of_families
   end
 
 end

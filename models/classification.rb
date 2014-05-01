@@ -1,17 +1,15 @@
 class Classification
 
   def self.classification
-    return @classification if @classification
-
-    @classification = Ggi::Classification.new
-    @classification.taxa.each do |taxon_id, taxon| 
-      @classification.taxa[taxon_id] = Taxon.new(taxon)
-    end
-    @classification
+    @classification ||= Ggi::Classification.new
   end
 
   def self.autocomplete(search_term)
     classification.autocomplete(search_term)
+  end
+
+  def self.taxa
+    classification.taxa.values
   end
 
   def self.find(taxon_id)
@@ -20,6 +18,10 @@ class Classification
 
   def self.search(search_term)
     classification.search(search_term)
+  end
+
+  def self.roots
+    classification.roots
   end
 
   def self.ancestors_of(taxon)

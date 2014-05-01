@@ -6,7 +6,7 @@ helpers do
   end
 
   def formatted_score(score)
-    (score * 100).ceil.to_s + " / 100"
+    (score * 100).ceil.to_s
   end
 
   def taxon_path(taxon)

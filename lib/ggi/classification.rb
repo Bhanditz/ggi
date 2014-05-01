@@ -1,5 +1,4 @@
-class Ggi::Classification 
-  attr :classification, :names, :taxa
+class Ggi::Classification
 
   MAX_AUTOCOMPLETE_RESULTS = 10
 
@@ -19,6 +18,10 @@ class Ggi::Classification
     matches
   end
 
+  def taxa
+    return @taxa
+  end
+
   def find(taxon_id)
     return @taxa[taxon_id]
   end
@@ -32,6 +35,10 @@ class Ggi::Classification
                                       name.casecmp(search_term) == 0 }
       return Taxon.find(match[1].first)
     end
+  end
+
+  def roots
+    @taxon_children[0].map{ |child_id| Taxon.find(child_id) }
   end
 
   def ancestors_of(taxon)
@@ -55,8 +62,7 @@ class Ggi::Classification
   def siblings_of(taxon)
     parent_id = @taxon_parents[taxon.id]
     if parent_id == 0
-      parents_children =
-        @taxon_children[0].map{ |child_id| Taxon.find(child_id) }
+      parents_children = roots
     else
       parent_taxon = Taxon.find(parent_id)
       parents_children = parent_taxon.children
@@ -65,9 +71,13 @@ class Ggi::Classification
     parents_children.sort_by{ |t| t.name }
   end
 
-  def number_of_families_under(taxon)
+  def families_within(taxon)
     @taxa.select{ |id, t|
-      t.family? && t.left_value.between?(taxon.left_value, taxon.right_value) }.length
+      t.left_value.between?(taxon.left_value, taxon.right_value) && t.family? }.values
+  end
+
+  def number_of_families_under(taxon)
+    families_within(taxon).length
   end
 
   def self.add_matches_from_names(names, search_term, matches)

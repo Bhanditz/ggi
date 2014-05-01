@@ -2,8 +2,18 @@ class Ggi::ClassificationImporter
 
   @@imported = nil
 
+  MEASUREMENT_URIS_TO_LABELS = {
+    'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => 'GenBank sequences',
+    'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => 'EOL rich pages',
+    'http://eol.org/schema/terms/NumberSpecimensInGGBN' => 'GGBN records',
+    'http://eol.org/schema/terms/NumberRecordsInGBIF' => 'GBIF records',
+    'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => 'BOLD records',
+    'http://eol.org/schema/terms/NumberReferencesInBHL' => 'BHL pages' }
+
   def self.cache_data
     Ggi::ClassificationImporter.new.import
+    Ggi::NestedSetBuilder.begin
+    Ggi::ScoreCalculator.begin
   end
 
   def initialize
@@ -13,14 +23,6 @@ class Ggi::ClassificationImporter
     @taxa = { }
     @common_names = { }
     @eol_to_falo = { }
-    @data = { }
-    @measurement_type_values = { }
-    @measurement_uris_to_labels = {
-      'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => 'GenBank sequences',
-      'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => 'EOL rich pages',
-      'http://eol.org/schema/terms/NumberSpecimensInGGBN' => 'GGBN records',
-      'http://eol.org/schema/terms/NumberRecordsInGBIF' => 'GBIF records',
-      'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => 'BOLD records' }
     # NOTE: We don't use quote_char to wrap field content in taxon file.
     #      However, adding | prevents CSV misinterpreting " in content.
     @csv_parse_options = { col_sep: "\t", quote_char: "|" }
@@ -31,14 +33,9 @@ class Ggi::ClassificationImporter
     import_taxa
     import_mappings
     import_traits
-    assign_nested_set_recursively
-    score_calculator = Ggi::ScoreCalculator.new(
-      taxa: @taxa,
-      measurement_type_values: @measurement_type_values,
-      maximum_number_of_scores: @measurement_uris_to_labels.length,
-      taxon_parents: @taxon_parents,
-      taxon_children: @taxon_children)
-    score_calculator.calculate_scores
+    @taxa.each do |taxon_id, taxon|
+      @taxa[taxon_id] = Taxon.new(taxon)
+    end
     @@imported = [ @taxa, @taxon_names, @taxon_parents,
                    @taxon_children, @common_names ]
   end
@@ -56,7 +53,6 @@ class Ggi::ClassificationImporter
         # then remove them. We only want measurments for families
         if @taxa[falo_id][:dwc_record]['taxonRank'] == 'family'
           verify_measurement_labels(d)
-          update_measurement_type_values(d)
         else
           d[:measurements] = [ ]
         end
@@ -112,23 +108,14 @@ class Ggi::ClassificationImporter
     @taxon_names[row['scientificName'].capitalize] <<  row['taxonID']
   end
 
-  def update_measurement_type_values(taxon_hash)
-    @measurement_uris_to_labels.each do |uri, label|
-      measurement = taxon_hash[:measurements].detect{ |m| m[:measurementType] == uri }
-      value = measurement ? measurement[:measurementValue] : 0
-      @measurement_type_values[uri] ||= { }
-      @measurement_type_values[uri][value] ||= 0
-      @measurement_type_values[uri][value] += 1
-    end
-  end
-
   def verify_measurement_labels(taxon_hash)
     unless taxon_hash[:measurements].nil?
       # if we get multiple of the same measurement for a taxon,
       # we will take the first and ignore subsequent instances
       used_labels = [ ]
       taxon_hash[:measurements].each do |measurement|
-        measurement[:label] = @measurement_uris_to_labels[measurement[:measurementType]]
+        measurement[:label] =
+          Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS[measurement[:measurementType]]
         if used_labels.include?(measurement[:label])
           measurement[:label] = nil
         end
@@ -137,24 +124,6 @@ class Ggi::ClassificationImporter
       # delete all measurements without a nice label
       taxon_hash[:measurements].delete_if{ |m| m[:label].nil? }
     end
-  end
-
-  def assign_nested_set_recursively(options = {})
-    options[:current_value] ||= 0
-    options[:current_parent_id] ||= 0
-    if @taxon_children[options[:current_parent_id]]
-      @taxon_children[options[:current_parent_id]].each do |child_taxon_id|
-        @taxa[child_taxon_id][:left_value] = options[:current_value]
-        options[:current_value] += 1
-        options[:current_value] = assign_nested_set_recursively(options.merge({
-          current_value: options[:current_value],
-          current_parent_id: child_taxon_id,
-          }))
-        @taxa[child_taxon_id][:right_value] = options[:current_value]
-        options[:current_value] += 1
-      end
-    end
-    return options[:current_value]
   end
 
 end
