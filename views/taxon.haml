@@ -17,8 +17,10 @@
           %dt.information--classification Classification
           %dd.information--classification
             = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
-        %dt.information--source Reference
-        %dd.information--source= @taxon.source
+        - unless @taxon.source.empty?
+          %dt.information--source Reference
+          %dd.information--source
+            %a{ href: '/about' }= @taxon.source
       %dl.information--assessment
         - unless @taxon.family?
           %dt.information--family-count Number of families
@@ -54,7 +56,7 @@
               - # FIXME add helper method to set html class for styling poor, average, good
               - klass = nil
               %tr
-                %th{ scope: 'row' }= measurement[:label]
+                %th{ scope: 'row' }= measurement_source[measurement[:measurementType]]
                 %td.assessment__value= measurement[:measurementValue]
                 %td.assessment__score{ class: klass }= formatted_score(measurement[:score])
         %aside

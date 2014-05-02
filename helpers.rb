@@ -21,6 +21,15 @@ helpers do
     "http://eol.org/data_objects/#{taxon.image[:dataObjectVersionID]}"
   end
 
+  def measurement_source
+    { 'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => '<a href="https://www.ncbi.nlm.nih.gov/genbank">GenBank</a> sequences <a href="http://eol.org/schema/terms/NumberOfSequencesInGenBank">?</a>',
+      'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => '<a href="http://eol.org"><abbr title="Encyclopedia of Life">EOL</abbr></a> rich pages <a href="http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL">?</a>',
+      'http://eol.org/schema/terms/NumberSpecimensInGGBN' => '<a href="http://ggbn.org"><abbr title="Global Genome Biodiversity Network">GGBN</abbr></a> records <a href="http://eol.org/schema/terms/NumberSpecimensInGGBN">?</a>',
+      'http://eol.org/schema/terms/NumberRecordsInGBIF' => '<a href="http://gbif.org"><abbr title="Global Biodiversity Information Facility">GBIF</abbr></a> records <a href="http://eol.org/schema/terms/NumberRecordsInGBIF">?</a>',
+      'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => '<a href="http://boldsystems.org"><abbr title="Barcode of Life Data">BOLD</abbr></a> records <a href="http://eol.org/schema/terms/NumberPublicRecordsInBOLD">?</a>',
+      'http://eol.org/schema/terms/NumberReferencesInBHL' => '<a href="http://biodiversitylibrary.org"><abbr title="Biodiversity Heritage Library">BHL</abbr></a> pages <a href="http://eol.org/schema/terms/NumberReferencesInBHL">?</a>' }
+  end
+
   def image_attribution(image)
     agents = {}
     if image[:agents].kind_of?(Array)
