@@ -42,8 +42,8 @@
           %thead
             %tr
               %th{ scope: 'col' } Source
-              %th{ scope: 'col' } Value
-              %th{ scope: 'col' } Score
+              %th.assessment__value{ scope: 'col' } Value
+              %th.assessment__score{ scope: 'col' } Score
           %tbody
             - if @taxon.measurements.empty?
               %tr
@@ -55,8 +55,8 @@
               - klass = nil
               %tr
                 %th{ scope: 'row' }= measurement[:label]
-                %td= measurement[:measurementValue]
-                %td{ class: klass }= formatted_score(measurement[:score])
+                %td.assessment__value= measurement[:measurementValue]
+                %td.assessment__score{ class: klass }= formatted_score(measurement[:score])
         %aside
           %header
             %h3 Legend

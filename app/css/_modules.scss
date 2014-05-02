@@ -191,6 +191,11 @@ dt.information {
   }
 }
 
+.assessment__value,
+.assessment__score {
+  text-align: right;
+}
+
 footer.page__footer {
   h2 {
     @extend .visually-hidden;
