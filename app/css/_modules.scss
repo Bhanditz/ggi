@@ -178,7 +178,7 @@ nav {
   @extend .visually-hidden;
 }
 
-dt.information {
+.nomenclature__label {
   &--classification,
   &--common-name {
     @extend .visually-hidden;
@@ -191,9 +191,14 @@ dt.information {
   }
 }
 
-.assessment__value,
-.assessment__score {
-  text-align: right;
+.measurement__label, .measurement__datum {
+  &--score, &--value {
+    text-align: right;
+  }
+}
+
+.assessment__legend {
+  margin-top: rhythm(2);
 }
 
 footer.page__footer {

@@ -2,11 +2,24 @@ helpers do
   def tree_item(taxon, state, current = false)
     html_classes = ['tree__item', "tree__item--#{state.to_s}"]
     html_classes << 'tree__item--selected' if current
-    "<li class='#{html_classes.join(' ')}' data-taxon-id='#{taxon.id}' data-children='#{taxon.children.count}'><a href='#{taxon_path(taxon)}'>#{taxon.name}</a></li>"
+    if (qualifier = score_qualifier(formatted_score(taxon.score)))
+      html_classes << "tree__item--#{qualifier}"
+    end
+    "<li class='#{html_classes.compact.join(' ')}' data-taxon-id='#{taxon.id}' "\
+      "data-children='#{taxon.children.count}'><a href='#{taxon_path(taxon)}'>"\
+      "#{taxon.name}</a></li>"
   end
 
   def formatted_score(score)
     (score * 100).ceil.to_s
+  end
+
+  def score_qualifier(score_formatted)
+    return nil if score_formatted.to_s.empty?
+    return 'poor' if score_formatted.to_i < 34
+    return 'good' if score_formatted.to_i > 63
+    return 'average' if score_formatted.to_i.between?(34, 63)
+    nil
   end
 
   def taxon_path(taxon)
@@ -22,12 +35,29 @@ helpers do
   end
 
   def measurement_source
-    { 'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => '<a href="https://www.ncbi.nlm.nih.gov/genbank">GenBank</a> sequences <a href="http://eol.org/schema/terms/NumberOfSequencesInGenBank">?</a>',
-      'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => '<a href="http://eol.org"><abbr title="Encyclopedia of Life">EOL</abbr></a> rich pages <a href="http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL">?</a>',
-      'http://eol.org/schema/terms/NumberSpecimensInGGBN' => '<a href="http://ggbn.org"><abbr title="Global Genome Biodiversity Network">GGBN</abbr></a> records <a href="http://eol.org/schema/terms/NumberSpecimensInGGBN">?</a>',
-      'http://eol.org/schema/terms/NumberRecordsInGBIF' => '<a href="http://gbif.org"><abbr title="Global Biodiversity Information Facility">GBIF</abbr></a> records <a href="http://eol.org/schema/terms/NumberRecordsInGBIF">?</a>',
-      'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => '<a href="http://boldsystems.org"><abbr title="Barcode of Life Data">BOLD</abbr></a> records <a href="http://eol.org/schema/terms/NumberPublicRecordsInBOLD">?</a>',
-      'http://eol.org/schema/terms/NumberReferencesInBHL' => '<a href="http://biodiversitylibrary.org"><abbr title="Biodiversity Heritage Library">BHL</abbr></a> pages <a href="http://eol.org/schema/terms/NumberReferencesInBHL">?</a>' }
+    { 'http://eol.org/schema/terms/NumberOfSequencesInGenBank' =>
+        '<a href="https://www.ncbi.nlm.nih.gov/genbank">GenBank</a> sequences '\
+        '<a href="http://eol.org/schema/terms/NumberOfSequencesInGenBank">?</a>',
+      'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' =>
+        '<a href="http://eol.org"><abbr title="Encyclopedia of Life">EOL</abbr>'\
+        '</a> rich pages <a '\
+        'href="http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL">?</a>',
+      'http://eol.org/schema/terms/NumberSpecimensInGGBN' =>
+        '<a href="http://ggbn.org"><abbr title="Global Genome Biodiversity '\
+        'Network">GGBN</abbr></a> records '\
+        '<a href="http://eol.org/schema/terms/NumberSpecimensInGGBN">?</a>',
+      'http://eol.org/schema/terms/NumberRecordsInGBIF' =>
+        '<a href="http://gbif.org"><abbr title="Global Biodiversity Information'\
+        'Facility">GBIF</abbr></a> records '\
+        '<a href="http://eol.org/schema/terms/NumberRecordsInGBIF">?</a>',
+      'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' =>
+        '<a href="http://boldsystems.org"><abbr title="Barcode of Life Data">'\
+        'BOLD</abbr></a> records '\
+        '<a href="http://eol.org/schema/terms/NumberPublicRecordsInBOLD">?</a>',
+      'http://eol.org/schema/terms/NumberReferencesInBHL' =>
+        '<a href="http://biodiversitylibrary.org"><abbr title="Biodiversity '\
+        'Heritage Library">BHL</abbr></a> pages <a '\
+        'href="http://eol.org/schema/terms/NumberReferencesInBHL">?</a>' }
   end
 
   def image_attribution(image)
@@ -60,6 +90,7 @@ helpers do
       label = title = "GNU #{title}"
     end
     label ||= title
-    "<a rel='license' title='Image licensed under #{title}' class='#{html_class}' href='#{uri.to_s}'>#{label}</a>"
+    "<a rel='license' title='Image licensed under #{title}' "\
+      "class='#{html_class}' href='#{uri.to_s}'>#{label}</a>"
   end
 end

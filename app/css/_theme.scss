@@ -8,7 +8,10 @@ $ggi-colors: (
   dark: #666666,
   light: #cccccc,
   lightest: #f5f5f5,
-  bright: #35a4c9
+  bright: #35a4c9,
+  poor: #cc0000,
+  average: #1f5294,
+  good: green
 );
 
 $ggi-font-weight: (
@@ -27,20 +30,7 @@ $ggi-font-weight: (
   $a-color: if($a-key, map-get($ggi-colors, $a-key), $fg-color);
   background-color: $bg-color;
   color: $fg-color;
-  a {
-    &:link {
-      color: $a-color;
-    }
-    &:visited {
-      color: $a-color;
-    }
-    &:hover {
-      color: $a-color;
-    }
-    &:active {
-      color: $a-color;
-    }
-  }
+  @include ggi-color-links($a-color, $a-color, $a-color, $a-color)
 }
 
 @mixin ggi-color-input($bg-key, $fg-key: false) {
@@ -66,6 +56,23 @@ $ggi-font-weight: (
     @include transition-duration(0s);
     background: desaturate($bg-color, 20%);
     color: darken($fg-color, 20%);
+  }
+}
+
+@mixin ggi-color-links($link, $visited: false, $hover: false, $active: false) {
+  a {
+    &:link {
+      color: $link;
+    }
+    &:visited {
+      color: if($visited, $visited, $link);
+    }
+    &:hover {
+      color: if($hover, $hover, $link);
+    }
+    &:active {
+      color: if($active, $active, $link);
+    }
   }
 }
 
@@ -106,6 +113,21 @@ a {
   text-transform: lowercase;
   border-width: 1px;
   border-style: solid;
+}
+
+.qualifier--good {
+  color: map-get($ggi-colors, good);
+  @include ggi-color-links(map-get($ggi-colors, good));
+}
+
+.qualifier--average {
+  color: map-get($ggi-colors, average);
+  @include ggi-color-links(map-get($ggi-colors, average));
+}
+
+.qualifier--poor {
+  color: map-get($ggi-colors, poor);
+  @include ggi-color-links(map-get($ggi-colors, poor));
 }
 
 h1 {
@@ -212,21 +234,78 @@ header.page__header {
   }
 }
 
-dt.information {
-  &--score {
-    @include adjust-font-size-to(1.4em, 2);
-    font-weight: map-get($ggi-font-weight, light);
+.tree__item {
+  &--poor {
+    @extend .qualifier--poor;
+  }
+  &--average {
+    @extend .qualifier--average;
+  }
+  &--good {
+    @extend .qualifier--good;
   }
 }
 
-dd.information {
+.nomenclature__datum {
   &--classification,
   &--common-name {
     font-weight: map-get($ggi-font-weight, light);
   }
+}
+
+.assessment_summary__label {
+  &--score {
+    @include adjust-font-size-to(1.4em, 2);
+    font-weight: map-get($ggi-font-weight, light);
+  }
+  &--poor {
+    @extend .qualifier--poor;
+  }
+  &--average {
+    @extend .qualifier--average;
+  }
+  &--good {
+    @extend .qualifier--good;
+  }
+}
+
+.assessment_summary__datum {
   &--score {
     @include adjust-font-size-to(1.5em);
     font-weight: map-get($ggi-font-weight, bold);
+  }
+  &--poor {
+    @extend .qualifier--poor;
+  }
+  &--average {
+    @extend .qualifier--average;
+  }
+  &--good {
+    @extend .qualifier--good;
+  }
+}
+
+.assessment__measurement {
+  &--poor {
+    @extend .qualifier--poor;
+  }
+  &--average {
+    @extend .qualifier--average;
+  }
+  &--good {
+    @extend .qualifier--good;
+  }
+}
+
+.legend__label, .legend__definition {
+  &--poor {
+    @extend .qualifier--poor;
+  }
+  &--average {
+    @extend .qualifier--average;
+  }
+  &--good {
+    @extend .qualifier--good;
   }
 }
 

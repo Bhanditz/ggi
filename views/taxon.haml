@@ -8,26 +8,28 @@
     %section.taxon__information
       %header.information__header
         %h2 Taxonomic information
-      %dl.information--nomenclature
+      %dl.nomenclature
         - if @taxon.english_vernacular_name
-          %dt.information--common-name English common name
-          %dd.information--common-name
+          %dt.nomenclature__label--common-name English common name
+          %dd.nomenclature__datum--common-name
             %a{ href: eol_page_url(@taxon) }= @taxon.english_vernacular_name
         - unless @taxon.classification_summary.empty?
-          %dt.information--classification Classification
-          %dd.information--classification
+          %dt.nomenclature__label--classification Classification
+          %dd.nomenclature__datum--classification
             = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
         - unless @taxon.source.empty?
-          %dt.information--source Reference
-          %dd.information--source
+          %dt.nomenclature__label--reference Reference
+          %dd.nomenclature__datum--reference
             %a{ href: '/about' }= @taxon.source
-      %dl.information--assessment
+      %dl.assessment_summary
+        - taxon_score_formatted = formatted_score(@taxon.score)
         - unless @taxon.family?
-          %dt.information--family-count Number of families
-          %dd.information--family-count= @taxon.number_of_families
-        %dt.information--score
+          %dt.assessment_summary__label--family_count Number of families
+          %dd.assessment_summary__datum--family_count= @taxon.number_of_families
+        %dt.assessment_summary__label--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
           = @taxon.family? ? 'Total score' : 'Average score'
-        %dd.information--score= formatted_score(@taxon.score)
+        %dd.assessment_summary__datum--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
+          = taxon_score_formatted
       - if @taxon.image
         %figure.information__media
           %a{ href: eol_dato_url(@taxon)}
@@ -43,33 +45,31 @@
           %caption.assessment__caption= "Assessment of knowledge about #{@taxon.name}"
           %thead
             %tr
-              %th{ scope: 'col' } Source
-              %th.assessment__value{ scope: 'col' } Value
-              %th.assessment__score{ scope: 'col' } Score
+              %th.measurement__label--source{ scope: 'col' } Source
+              %th.measurement__label--value{ scope: 'col' } Value
+              %th.measurement__label--score{ scope: 'col' } Score
           %tbody
             - if @taxon.measurements.empty?
               %tr
                 %td{ colspan: 3 }
                   No measurements were found
             - @taxon.measurements.each do |measurement|
-              - score = measurement[:score].to_f
-              - # FIXME add helper method to set html class for styling poor, average, good
-              - klass = nil
-              %tr
-                %th{ scope: 'row' }= measurement_source[measurement[:measurementType]]
-                %td.assessment__value= measurement[:measurementValue]
-                %td.assessment__score{ class: klass }= formatted_score(measurement[:score])
-        %aside
+              - score = formatted_score(measurement[:score])
+              %tr{ class: "assessment__measurement--#{score_qualifier(score)}" }
+                %th.measurement__datum--source{ scope: 'row' }= measurement_source[measurement[:measurementType]]
+                %td.measurement__datum--value= measurement[:measurementValue]
+                %td.measurement__datum--score= score
+        %aside.assessment__legend
           %header
             %h3 Legend
           %p Measurement of knowledge
           %dl
-            %dt Good
-            %dd 64 to 100
-            %dt Average
-            %dd 34 to 63
-            %dt Poor
-            %dd 0 to 33
+            %dt.legend__label--good Good
+            %dd.legend__definition--good 64 to 100
+            %dt.legend__label--average Average
+            %dd.legend__definition--average 34 to 63
+            %dt.legend__label--poor Poor
+            %dd.legend__definition--poor 0 to 33
 
 - else
   %p Taxon information is missing
