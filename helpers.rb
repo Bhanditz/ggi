@@ -4,9 +4,10 @@ helpers do
     html_classes << 'tree__item--selected' if current
     if (qualifier = score_qualifier(formatted_score(taxon.score)))
       html_classes << "tree__item--#{qualifier}"
+      icon = score_icon(qualifier)
     end
     "<li class='#{html_classes.compact.join(' ')}' data-taxon-id='#{taxon.id}' "\
-      "data-children='#{taxon.children.count}'><a href='#{taxon_path(taxon)}'>"\
+      "data-children='#{taxon.children.count}'>#{icon}<a href='#{taxon_path(taxon)}'>"\
       "#{taxon.name}</a></li>"
   end
 
@@ -20,6 +21,10 @@ helpers do
     return 'good' if score_formatted.to_i > 63
     return 'average' if score_formatted.to_i.between?(34, 63)
     nil
+  end
+
+  def score_icon(score_qualifier)
+    Ggi::Svg.send(score_qualifier) rescue nil
   end
 
   def taxon_path(taxon)
@@ -93,4 +98,5 @@ helpers do
     "<a rel='license' title='Image licensed under #{title}' "\
       "class='#{html_class}' href='#{uri.to_s}'>#{label}</a>"
   end
+
 end
