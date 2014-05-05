@@ -40,6 +40,7 @@ dd {
 
 img {
   max-width: 100%;
+  max-height: 100%;
 }
 
 figure {
@@ -213,15 +214,19 @@ footer.page__footer {
   }
   li {
     &:nth-of-type(1) {
-      @include span(1 at 1 of 2);
+      @include span(2 at 1 of 3);
     }
     &:nth-of-type(2) {
       text-align: right;
-      @include span(1 at 2 of 2);
+      @include span(1 at 3 of 3);
     }
   }
 }
 
 .footer__link--ggi {
   max-width: rhythm(15);
+}
+
+.footer__link--eol {
+  max-width: rhythm(7);
 }
