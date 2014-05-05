@@ -89,9 +89,8 @@ body {
 }
 
 a {
-  &:link, &:visited {
-  }
-  &:hover, &:active {
+  abbr, abbr[title] {
+    border-bottom: none;
   }
 }
 
