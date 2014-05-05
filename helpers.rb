@@ -79,7 +79,7 @@ helpers do
     uri = URI(license)
     return license unless uri.scheme == 'http'
     path = uri.path.to_s.gsub('.html', '').split('/').reject{ |p| p.empty? }
-    html_class = path.join('--').gsub(/[.]/, '-')
+    html_class = path.join('--').gsub(/\./, '-')
     title = path.reject{|p| p == 'licenses'}.join(' ').upcase
     case uri.host
     when 'creativecommons.org'
