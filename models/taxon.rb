@@ -55,13 +55,13 @@ class Taxon
   def image
     if @taxon_hash[:bestImage] && @taxon_hash[:bestImage][:eolThumbnailURL]
       @taxon_hash[:bestImage][:eolThumbnailURL].gsub!(/#{IMG_SIZE[:thumb]}/, IMG_SIZE[:large])
-      return @taxon_hash[:bestImage]
+      @taxon_hash[:bestImage]
     end
   end
 
   def thumbnail
     if image
-      return image[:eolThumbnailURL].gsub(/#{IMG_SIZE[:large]}/, IMG_SIZE[:icon])
+      image[:eolThumbnailURL].gsub(/#{IMG_SIZE[:large]}/, IMG_SIZE[:icon])
     end
   end
 
@@ -101,9 +101,10 @@ class Taxon
 
   def method_missing(meth, *args, &block)
     if @taxon_hash.has_key?(meth.to_sym)
-      return @taxon_hash[meth.to_sym]
+      @taxon_hash[meth.to_sym]
+    else
+      super
     end
-    super
   end
 
 end

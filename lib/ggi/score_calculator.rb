@@ -31,8 +31,8 @@ private
     Taxon.all.select { |t| t.family? }.each do |taxon|
       Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
         measurement = taxon.measurements.detect { |m| m[:measurementType] == uri }
-        value = measurement ? measurement[:measurementValue] : 0
-        @measurement_type_values[uri] ||= Hash.new(0)
+        value = measurement ? measurement[:measurementValue] : DEFAULT_SCORE
+        @measurement_type_values[uri] ||= Hash.new(DEFAULT_SCORE)
         @measurement_type_values[uri][value] += 1
       end
     end
@@ -71,10 +71,10 @@ private
       end
       # we started at the root, and now we're back so we're done
       return unless options[:taxon]
-      options[:taxon].score = childs_family_scores.empty? ? 0 :
+      options[:taxon].score = childs_family_scores.empty? ? DEFAULT_SCORE :
         childs_family_scores.inject(:+) / childs_family_scores.length
     end
-    return childs_family_scores
+    childs_family_scores
   end
 
   def calculate_score_for_family(family)
@@ -82,12 +82,12 @@ private
     family.measurements.each do |m|
       m[:score] = percentile(m[:measurementValue], m[:measurementType])
     end
-    family.score = (family.measurements.map { |m| m[:score] }.inject(:+) || 0) /
+    family.score = (family.measurements.map { |m| m[:score] }.inject(:+) || DEFAULT_SCORE) /
       Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.length.to_f
   end
 
   def percentile(value, type)
-    return 0 if ! value || value == 0
+    return 0 if ! value || value == DEFAULT_SCORE
     @measurement_type_values_counts_below[type][value] / @total_number_of_families
   end
 

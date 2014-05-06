@@ -6,21 +6,21 @@ class Ggi::Classification
   end
 
   def taxa
-    return @taxa
+    @taxa
   end
 
   def find(taxon_id)
-    return @taxa[taxon_id]
+    @taxa[taxon_id]
   end
 
   def search(search_term)
     return nil if search_term.to_s == ''
     if match = @taxon_names.detect { |name, taxon_id|
                                       name.casecmp(search_term) == 0 }
-      return Taxon.find(match[1].first)
+      Taxon.find(match[1].first)
     elsif match = @common_names.detect { |name, taxon_id|
                                       name.casecmp(search_term) == 0 }
-      return Taxon.find(match[1].first)
+      Taxon.find(match[1].first)
     end
   end
 
@@ -37,7 +37,7 @@ class Ggi::Classification
       ancestors.unshift(parent)
       search_id = parent.id
     end
-    return ancestors
+    ancestors
   end
 
   def children_of(taxon)
