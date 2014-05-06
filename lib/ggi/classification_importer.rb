@@ -33,14 +33,38 @@ class Ggi::ClassificationImporter
     import_taxa
     import_mappings
     import_traits
-    @taxa.each do |taxon_id, taxon|
-      @taxa[taxon_id] = Taxon.new(taxon)
-    end
+    convert_taxa_to_objects
     @@imported = [ @taxa, @taxon_names, @taxon_parents,
                    @taxon_children, @common_names ]
   end
 
   private
+
+  def import_taxa
+    header = nil
+    taxon_file = File.join(__dir__, '..', '..', 'public', 'taxon.tab.gz')
+    Zlib::GzipReader.open(taxon_file) do |csv|
+      csv.each_line do |line|
+        CSV.parse(line, @csv_parse_options) do |row|
+          if header.nil?
+            header = row
+            next
+          end
+          handle_taxon_row(row, header)
+        end
+      end
+    end
+  end
+
+  def import_mappings
+    mappings_file = File.join(__dir__, '..', '..', 'public', 'falo_mappings.json.gz')
+    mappings_json = Zlib::GzipReader.open(mappings_file) { |f| f.read }
+    mappings_data = JSON.parse(mappings_json, symbolize_names: true)
+    mappings_data.each do |d|
+      @taxa[d[:falo_id]][:eol_id] = d[:eol_id]
+      @eol_to_falo[d[:eol_id]] = d[:falo_id]
+    end
+  end
 
   def import_traits
     traits_file = File.join(__dir__, '..', '..', 'public', 'falo_data.json.gz')
@@ -65,29 +89,9 @@ class Ggi::ClassificationImporter
     end
   end
 
-  def import_mappings
-    mappings_file = File.join(__dir__, '..', '..', 'public', 'falo_mappings.json.gz')
-    mappings_json = Zlib::GzipReader.open(mappings_file) { |f| f.read }
-    mappings_data = JSON.parse(mappings_json, symbolize_names: true)
-    mappings_data.each do |d|
-      @taxa[d[:falo_id]][:eol_id] = d[:eol_id]
-      @eol_to_falo[d[:eol_id]] = d[:falo_id]
-    end
-  end
-
-  def import_taxa
-    header = nil
-    taxon_file = File.join(__dir__, '..', '..', 'public', 'taxon.tab.gz')
-    Zlib::GzipReader.open(taxon_file) do |csv|
-      csv.each_line do |line|
-        CSV.parse(line, @csv_parse_options) do |row|
-          if header.nil?
-            header = row
-            next
-          end
-          handle_taxon_row(row, header)
-        end
-      end
+  def convert_taxa_to_objects
+    @taxa.each do |taxon_id, taxon|
+      @taxa[taxon_id] = Taxon.new(taxon)
     end
   end
 
