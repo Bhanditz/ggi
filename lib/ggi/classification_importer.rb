@@ -70,18 +70,18 @@ class Ggi::ClassificationImporter
     traits_file = File.join(__dir__, '..', '..', 'public', 'falo_data.json.gz')
     traits_json = Zlib::GzipReader.open(traits_file) { |f| f.read }
     traits_data = JSON.parse(traits_json, symbolize_names: true)
-    traits_data.each do |d|
-      next unless d.is_a?(Hash)
-      if falo_id = @eol_to_falo[d[:identifier]]
+    traits_data.each do |datum|
+      next unless datum.is_a?(Hash)
+      if falo_id = @eol_to_falo[datum[:identifier]]
         # if we have measurements for taxa that aren't families,
         # then remove them. We only want measurments for families
         if @taxa[falo_id][:dwc_record]['taxonRank'] == 'family'
-          verify_measurement_labels(d)
+          verify_measurement_labels(datum)
         else
-          d[:measurements] = [ ]
+          datum[:measurements] = [ ]
         end
-        @taxa[falo_id].merge!(d)
-        d[:vernacularNames].each do |v|
+        @taxa[falo_id].merge!(datum)
+        datum[:vernacularNames].each do |v|
           @common_names[v[:vernacularName].capitalize] ||= []
           @common_names[v[:vernacularName].capitalize] << falo_id
         end
