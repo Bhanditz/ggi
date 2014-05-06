@@ -4,7 +4,7 @@ class Taxon
 
   def initialize(taxon_hash)
     @taxon_hash = taxon_hash
-    self.score = 0
+    @score = 0
   end
 
   def self.find(id)
