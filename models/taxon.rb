@@ -2,6 +2,18 @@ class Taxon
 
   attr_accessor :score, :left_value, :right_value
 
+  # TODO - Taxon probably doesn't need to know about these. Might be worth
+  # extracting these to an "Eol" class of some kind, but I would wait until
+  # more information of this kind is required.
+  #
+  # These are strings used by EOL in URLs, representing the standard sizes
+  # of images:
+  IMG_SIZE = {
+    large: '580_360',
+    thumb: '98_68',
+    icon: '88_88'
+  }
+
   def initialize(taxon_hash)
     @taxon_hash = taxon_hash
     @score = 0
@@ -42,14 +54,14 @@ class Taxon
 
   def image
     if @taxon_hash[:bestImage] && @taxon_hash[:bestImage][:eolThumbnailURL]
-      @taxon_hash[:bestImage][:eolThumbnailURL].gsub!(/98_68/, '580_360')
+      @taxon_hash[:bestImage][:eolThumbnailURL].gsub!(/#{IMG_SIZE[:thumb]}/, IMG_SIZE[:large])
       return @taxon_hash[:bestImage]
     end
   end
 
   def thumbnail
     if image
-      return image[:eolThumbnailURL].gsub(/580_360/, '88_88')
+      return image[:eolThumbnailURL].gsub(/#{IMG_SIZE[:large]}/, IMG_SIZE[:icon])
     end
   end
 
