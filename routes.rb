@@ -17,8 +17,7 @@ get '/search' do
 end
 
 get '/autocomplete' do
-  opts = { search_term: params[:search_term], callback: params[:callback] }
-  autocomplete_results = Taxon.autocomplete(opts[:search_term])
+  autocomplete_results = Taxon.autocomplete(params[:search_term])
   cache_control :public, max_age: (60 * 60 * 24)
   content_type :json
   autocomplete_results.map do |r|

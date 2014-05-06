@@ -1,11 +1,10 @@
 feature 'Global navigation' do
-  scenario 'user browses all pages' do
-    visit '/'
-    click_link 'About'
-    expect(page).to have_selector('h1', text: 'About')
-    click_link 'Help'
-    expect(page).to have_selector('h1', text: 'Help')
-    click_link 'Download'
-    expect(page).to have_selector('h1', text: 'Download')
+  before { visit '/' }
+  
+  ['About', 'Help', 'Download'].each do |link|
+    it "links to #{link}" do
+      click_link link
+      expect(page).to have_selector('h1', text: link)
+    end
   end
 end
