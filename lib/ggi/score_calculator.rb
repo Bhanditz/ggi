@@ -1,6 +1,6 @@
 class Ggi::ScoreCalculator
 
-  def self.begin
+  def self.calculate
     calculator = Ggi::ScoreCalculator.new
     calculator.calculate_scores
   end

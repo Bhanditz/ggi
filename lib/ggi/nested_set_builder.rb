@@ -19,7 +19,7 @@ class Ggi::NestedSetBuilder
       return options[:value]
     end
 
-    alias_method :begin, :assign_nested_set_recursively
+    alias_method :build, :assign_nested_set_recursively
 
   end
 end

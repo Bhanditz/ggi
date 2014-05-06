@@ -12,8 +12,8 @@ class Ggi::ClassificationImporter
 
   def self.cache_data
     Ggi::ClassificationImporter.new.import
-    Ggi::NestedSetBuilder.begin
-    Ggi::ScoreCalculator.begin
+    Ggi::NestedSetBuilder.build
+    Ggi::ScoreCalculator.calculate
   end
 
   def initialize
