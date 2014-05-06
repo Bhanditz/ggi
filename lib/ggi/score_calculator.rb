@@ -16,6 +16,8 @@ class Ggi::ScoreCalculator
     calculate_and_assign_scores_recursively
   end
 
+private
+
   # count the occurrences of each value for each measurement type
   # we need to know how many of each value there are to calculate
   # family percentiles later on
