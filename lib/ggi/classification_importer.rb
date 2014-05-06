@@ -21,6 +21,8 @@ class Ggi::ClassificationImporter
     @taxon_children = { }
     @taxon_names = { }
     @taxa = { }
+    # TODO - I changed this to Hash.new([]) and specs failed, which suggests
+    # we're expecting nil values, when perhaps we should be using #has_key?:
     @common_names = { }
     @eol_to_falo = { }
     # NOTE: We don't use quote_char to wrap field content in taxon file.
@@ -82,8 +84,9 @@ class Ggi::ClassificationImporter
         end
         @taxa[falo_id].merge!(datum)
         datum[:vernacularNames].each do |v|
-          @common_names[v[:vernacularName].capitalize] ||= []
-          @common_names[v[:vernacularName].capitalize] << falo_id
+          name = v[:vernacularName].capitalize
+          @common_names[name] ||= []
+          @common_names[name] << falo_id
         end
       end
     end
@@ -108,8 +111,9 @@ class Ggi::ClassificationImporter
     @taxon_parents[row['taxonID']] = parent_id
     @taxon_children[parent_id] ||= [ ]
     @taxon_children[parent_id] << row['taxonID']
-    @taxon_names[row['scientificName'].capitalize] ||= [ ]
-    @taxon_names[row['scientificName'].capitalize] <<  row['taxonID']
+    name = row['scientificName'].capitalize
+    @taxon_names[name] ||= [ ]
+    @taxon_names[name] <<  row['taxonID']
   end
 
   def verify_measurement_labels(taxon_hash)
