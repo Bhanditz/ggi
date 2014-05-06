@@ -8,8 +8,6 @@ class Ggi::ScoreCalculator
   def initialize
     @measurement_type_values = { }
     @measurement_type_values_counts_below = { }
-    @count_of_measurement_types =
-      Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.length.to_f
   end
 
   def calculate_scores
@@ -78,7 +76,7 @@ class Ggi::ScoreCalculator
       m[:score] = percentile(m[:measurementValue], m[:measurementType])
     end
     family.score = (family.measurements.map{ |m| m[:score] }.inject(:+) || 0) /
-      @count_of_measurement_types
+      Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.length.to_f
   end
 
   def percentile(value, type)
