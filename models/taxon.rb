@@ -83,7 +83,7 @@ class Taxon
   end
 
   def english_vernacular_name
-    preferred_english_vernacular = vernacularNames.find{ |n| n[:language] == 'en' && n[:eol_preferred] }
+    preferred_english_vernacular = vernacularNames.find { |n| n[:language] == 'en' && n[:eol_preferred] }
     preferred_english_vernacular ? preferred_english_vernacular[:vernacularName].capitalize : nil
   end
 

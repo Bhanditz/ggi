@@ -9,7 +9,7 @@ describe Taxon do
     end
 
     it 'knows when methods are truly missing' do
-      expect{ taxon.nonsense }.to raise_error(NoMethodError)
+      expect { taxon.nonsense }.to raise_error(NoMethodError)
     end
   end
 

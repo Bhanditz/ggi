@@ -28,17 +28,17 @@ class Ggi::Classification
 
   def search(search_term)
     return nil if search_term.to_s == ''
-    if match = @taxon_names.detect{ |name, taxon_id|
+    if match = @taxon_names.detect { |name, taxon_id|
                                       name.casecmp(search_term) == 0 }
       return Taxon.find(match[1].first)
-    elsif match = @common_names.detect{ |name, taxon_id|
+    elsif match = @common_names.detect { |name, taxon_id|
                                       name.casecmp(search_term) == 0 }
       return Taxon.find(match[1].first)
     end
   end
 
   def roots
-    @taxon_children[0].map{ |child_id| Taxon.find(child_id) }
+    @taxon_children[0].map { |child_id| Taxon.find(child_id) }
   end
 
   def ancestors_of(taxon)
@@ -55,8 +55,8 @@ class Ggi::Classification
 
   def children_of(taxon)
     return [] if @taxon_children[taxon.id].nil?
-    @taxon_children[taxon.id].map{ |child_id| Taxon.find(child_id) }.
-      sort_by{ |t| t.name }
+    @taxon_children[taxon.id].map { |child_id| Taxon.find(child_id) }.
+      sort_by { |t| t.name }
   end
 
   def siblings_of(taxon)
@@ -67,12 +67,12 @@ class Ggi::Classification
       parent_taxon = Taxon.find(parent_id)
       parents_children = parent_taxon.children
     end
-    parents_children.delete_if{ |t| t.id == taxon.id }
-    parents_children.sort_by{ |t| t.name }
+    parents_children.delete_if { |t| t.id == taxon.id }
+    parents_children.sort_by { |t| t.name }
   end
 
   def families_within(taxon)
-    @taxa.select{ |id, t|
+    @taxa.select { |id, t|
       t.left_value.between?(taxon.left_value, taxon.right_value) && t.family? }.values
   end
 
@@ -84,7 +84,7 @@ class Ggi::Classification
     return if matches.length >= self::MAX_AUTOCOMPLETE_RESULTS
     names.select { |k, v| k.match /^#{search_term}/i }.each do |name, taxon_ids|
       taxon_ids.each do |taxon_id|
-        unless matches.detect{ |m| m[:taxon].id == taxon_id }
+        unless matches.detect { |m| m[:taxon].id == taxon_id }
           matches << { matched_name: name, taxon: Taxon.find(taxon_id) }
           return if matches.length >= self::MAX_AUTOCOMPLETE_RESULTS
         end

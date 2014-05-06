@@ -122,7 +122,7 @@ class Ggi::ClassificationImporter
         used_labels << measurement[:label]
       end
       # delete all measurements without a nice label
-      taxon_hash[:measurements].delete_if{ |m| m[:label].nil? }
+      taxon_hash[:measurements].delete_if { |m| m[:label].nil? }
     end
   end
 

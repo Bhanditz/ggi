@@ -20,9 +20,9 @@ class Ggi::ScoreCalculator
   # we need to know how many of each value there are to calculate
   # family percentiles later on
   def collect_measurement_statistics
-    Taxon.all.select{ |t| t.family? }.each do |taxon|
+    Taxon.all.select { |t| t.family? }.each do |taxon|
       Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
-        measurement = taxon.measurements.detect{ |m| m[:measurementType] == uri }
+        measurement = taxon.measurements.detect { |m| m[:measurementType] == uri }
         value = measurement ? measurement[:measurementValue] : 0
         @measurement_type_values[uri] ||= { }
         @measurement_type_values[uri][value] ||= 0
@@ -43,7 +43,7 @@ class Ggi::ScoreCalculator
           @measurement_type_values[type][sorted_values[index - 1]]
       end
     end
-    @total_number_of_families = Taxon.all.select{ |t| t.family? }.length.to_f
+    @total_number_of_families = Taxon.all.select { |t| t.family? }.length.to_f
   end
 
   # now use the data collected to calculate and assign
@@ -75,7 +75,7 @@ class Ggi::ScoreCalculator
     family.measurements.each do |m|
       m[:score] = percentile(m[:measurementValue], m[:measurementType])
     end
-    family.score = (family.measurements.map{ |m| m[:score] }.inject(:+) || 0) /
+    family.score = (family.measurements.map { |m| m[:score] }.inject(:+) || 0) /
       Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.length.to_f
   end
 
