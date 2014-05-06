@@ -243,6 +243,9 @@ header.page__header {
   &--good {
     @extend .qualifier--good;
   }
+  &--selected {
+    font-weight: map-get($ggi-font-weight, bold);
+  }
 }
 
 .nomenclature__datum {

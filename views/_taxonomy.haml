@@ -4,7 +4,7 @@
 %ul.tree.tree--taxonomy
   - ancestors.each do |a|
     = tree_item(a, :expanded) + "<ul>"
-  = tree_item(taxon, children.count > 0 ? :expanded : :collapsed)
+  = tree_item(taxon, children.count > 0 ? :expanded : :collapsed, true)
   - if children.count > 0
     %ul
       - children.each do |c|
