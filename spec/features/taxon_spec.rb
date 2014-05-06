@@ -27,4 +27,10 @@ describe '/taxon' do
     before { visit '/taxon/5A6107B7-B7C5-1CFD-6BB1-265C4349F19B' }
     expect_it { to have_selector('figcaption p', text: 'Via biopix') }
   end
+  context 'family with no measurements' do
+    before { visit '/taxon/EBFEFD48-F690-D5CB-77FB-A6F49A7B346E' }
+    ['GenBank', 'EOL', 'GGBN', 'GBIF', 'BOLD', 'BHL'].each do |label|
+      expect_it { to have_selector('th', text: /#{label}/) }
+    end
+  end
 end
