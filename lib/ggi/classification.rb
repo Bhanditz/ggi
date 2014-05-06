@@ -68,42 +68,7 @@ class Ggi::Classification
   end
 
   def autocomplete(search_term)
-    matcher = AutocompleteMatcher.new(search_term)
-    matcher.add_hash(@taxon_names)
-    matcher.add_hash(@common_names)
-    matcher.matches
-  end
-  
-  private
-  
-  class AutocompleteMatcher
-    
-    MAX_AUTOCOMPLETE_RESULTS = 10
-
-    def initialize(search_term)
-      @search_term = search_term.downcase
-      @matches = {}
-    end
-
-    def matches; @matches.values; end
-    def full; (@search_term == '') or (@matches.length >= MAX_AUTOCOMPLETE_RESULTS); end
-    
-    def add_hash(name_ids_hash)
-      name_ids_hash.each do |name, ids|
-        break if full
-        add_ids(name, ids) if name.match(/^#{@search_term}/i)
-      end
-    end
-    
-    def add_ids(name, ids)
-      ids.each do |i|
-        if !@matches.member?(i)
-          @matches[i] = { matched_name: name, taxon: Taxon.find(i) }
-        end
-        break if full
-      end
-    end
-
+    Ggi::Autocompleter.search(search_term, [@taxon_names, @common_names])
   end
 
 end
