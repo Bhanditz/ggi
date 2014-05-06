@@ -1,5 +1,7 @@
 class Ggi::ScoreCalculator
 
+  DEFAULT_SCORE = 0
+
   def self.calculate
     calculator = Ggi::ScoreCalculator.new
     calculator.calculate_scores
