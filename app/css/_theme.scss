@@ -245,6 +245,9 @@ header.page__header {
   }
   &--selected {
     font-weight: map-get($ggi-font-weight, bold);
+    a {
+      text-decoration: none;
+    }
   }
 }
 
