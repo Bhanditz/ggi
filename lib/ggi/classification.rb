@@ -15,12 +15,10 @@ class Ggi::Classification
 
   def search(search_term)
     return nil if search_term.to_s == ''
-    if match = @taxon_names.detect { |name, taxon_id|
-                                      name.casecmp(search_term) == 0 }
-      Taxon.find(match[1].first)
-    elsif match = @common_names.detect { |name, taxon_id|
-                                      name.casecmp(search_term) == 0 }
-      Taxon.find(match[1].first)
+    if taxon_match = search_hash_for_term(@taxon_names, search_term)
+      taxon_match
+    elsif common_match = search_hash_for_term(@common_names, search_term)
+      common_match
     end
   end
 
@@ -71,3 +69,12 @@ class Ggi::Classification
     Ggi::Autocompleter.search(search_term, [@taxon_names, @common_names])
   end
 
+private
+
+  def search_hash_for_term(hash, term)
+    if match = hash.detect { |name, id| name.casecmp(term) == 0 }
+      Taxon.find(match[1][0])
+    end
+  end
+
+end
