@@ -175,7 +175,7 @@ nav {
 
 .information__header,
 .assessment__header,
-.assessment__caption {
+.measurements__caption {
   @extend .visually-hidden;
 }
 
@@ -198,8 +198,14 @@ nav {
   }
 }
 
-.assessment__legend {
-  margin-top: rhythm(2);
+.assessment__measurements {
+  margin-bottom: rhythm(3);
+}
+
+.legend__header {
+  h3 {
+    margin-top: 0;
+  }
 }
 
 .legend__label {

@@ -37,12 +37,12 @@
           %figcaption
             %p= image_attribution(@taxon.image)
             = license(@taxon.image[:license])
-    - if @taxon.family?
-      %section.taxon__assessment
+    %section.taxon__assessment
+      - if @taxon.family?
         %header.assessment__header
           %h2 Assessment
-        %table
-          %caption.assessment__caption= "Assessment of knowledge about #{@taxon.name}"
+        %table.assessment__measurements
+          %caption.measurements__caption= "Assessment of knowledge about #{@taxon.name}"
           %thead
             %tr
               %th.measurement__label--source{ scope: 'col' } Source
@@ -57,23 +57,23 @@
                 %td.measurement__datum--value
                   = measurement.nil? ? 0 : measurement[:measurementValue]
                 %td.measurement__datum--score= score
-        %aside.assessment__legend
-          %header
-            %h3 Legend
-          %p Measurement of knowledge
-          %dl
-            %dt.legend__label--good Good
-            %dd.legend__definition--good
-              = score_icon('good')
-              64 to 100
-            %dt.legend__label--average Average
-            %dd.legend__definition--average
-              = score_icon('average')
-              34 to 63
-            %dt.legend__label--poor Poor
-            %dd.legend__definition--poor
-              = score_icon('poor')
-              0 to 33
+      %aside.assessment__legend
+        %header.legend__header
+          %h3 Legend
+        %p Measurement of knowledge
+        %dl
+          %dt.legend__label--good Good
+          %dd.legend__definition--good
+            = score_icon('good')
+            67 to 100
+          %dt.legend__label--average Average
+          %dd.legend__definition--average
+            = score_icon('average')
+            34 to 66
+          %dt.legend__label--poor Poor
+          %dd.legend__definition--poor
+            = score_icon('poor')
+            0 to 33
 
 - else
   %p Taxon information is missing

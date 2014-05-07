@@ -3,12 +3,13 @@ class Ggi::ClassificationImporter
   @@imported = nil
 
   MEASUREMENT_URIS_TO_LABELS = {
-    'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => 'GenBank sequences',
-    'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => 'EOL rich pages',
-    'http://eol.org/schema/terms/NumberSpecimensInGGBN' => 'GGBN records',
-    'http://eol.org/schema/terms/NumberRecordsInGBIF' => 'GBIF records',
+    'http://eol.org/schema/terms/NumberReferencesInBHL' => 'BHL pages',
     'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' => 'BOLD records',
-    'http://eol.org/schema/terms/NumberReferencesInBHL' => 'BHL pages' }
+    'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' => 'EOL rich pages',
+    'http://eol.org/schema/terms/NumberRecordsInGBIF' => 'GBIF records',
+    'http://eol.org/schema/terms/NumberOfSequencesInGenBank' => 'GenBank sequences',
+    'http://eol.org/schema/terms/NumberSpecimensInGGBN' => 'GGBN records'
+  }
 
   def self.cache_data
     Ggi::ClassificationImporter.new.import
