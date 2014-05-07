@@ -24,10 +24,6 @@ private
   # we need to know how many of each value there are to calculate
   # family percentiles later on
   def collect_measurement_statistics
-    # calling Taxon (which is a model) makes this class tightly coupled to
-    # the model, and thus not really a lib. ...Rather than deal with that,
-    # though, I might suggest we don't use models at all and just put
-    # everything in the lib.  ...or vice-versa.  We should discuss.
     Ggi::Taxon.all.select { |t| t.family? }.each do |taxon|
       Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
         measurement = taxon.measurements.detect { |m| m[:measurementType] == uri }
