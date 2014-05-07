@@ -71,4 +71,3 @@ class Ggi::Classification
     Ggi::Autocompleter.search(search_term, [@taxon_names, @common_names])
   end
 
-end
