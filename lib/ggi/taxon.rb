@@ -20,19 +20,19 @@ class Ggi::Taxon
   end
 
   def self.find(id)
-    Classification.find(id)
+    Ggi::Classification.find(id)
   end
 
   def self.find_by_name(name)
-    Classification.search(name)
+    Ggi::Classification.search(name)
   end
 
   def self.all
-    Classification.taxa
+    Ggi::Classification.taxa
   end
 
   def self.autocomplete(search_term)
-    Classification.autocomplete(search_term)
+    Ggi::Classification.autocomplete(search_term)
   end
 
   def name
@@ -71,19 +71,19 @@ class Ggi::Taxon
   end
 
   def ancestors
-    Classification.ancestors_of(self)
+    Ggi::Classification.ancestors_of(self)
   end
 
   def children
-    Classification.children_of(self)
+    Ggi::Classification.children_of(self)
   end
 
   def siblings
-    Classification.siblings_of(self)
+    Ggi::Classification.siblings_of(self)
   end
 
   def number_of_families
-    Classification.number_of_families_under(self)
+    Ggi::Classification.number_of_families_under(self)
   end
 
   def measurements

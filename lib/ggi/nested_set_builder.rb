@@ -3,7 +3,7 @@ class Ggi::NestedSetBuilder
 
     def assign_nested_set_recursively(options = {})
       options[:value] ||= 0
-      children = options[:taxon].nil? ? Classification.roots : options[:taxon].children
+      children = options[:taxon].nil? ? Ggi::Classification.roots : options[:taxon].children
       if children
         children.each do |child_taxon|
           child_taxon.left_value = options[:value]

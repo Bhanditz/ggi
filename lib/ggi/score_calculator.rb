@@ -58,7 +58,7 @@ private
   # Scores for higher taxa are averages of its families' scores
   def calculate_and_assign_scores_recursively(options = {})
     childs_family_scores = [ ]
-    children = options[:taxon].nil? ? Classification.roots : options[:taxon].children
+    children = options[:taxon].nil? ? Ggi::Classification.roots : options[:taxon].children
     if children
       children.each do |child_taxon|
         if child_taxon.family?

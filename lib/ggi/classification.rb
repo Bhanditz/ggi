@@ -1,5 +1,29 @@
 class Ggi::Classification
 
+  # This is kinda-sorta acting like a singleton to an instance of this class.
+  def self.classification
+    @classification ||= Ggi::Classification.new
+  end
+
+  # NOTE - not the most elegant solution, but this should keep things
+  # working until a better one can be devised. For the moment, though,
+  def self.method_missing(method_name, *arguments, &block)
+    if classification.respond_to?(method_name)
+      classification.send(method_name, *arguments, &block)
+    else
+      super
+    end
+  end
+
+  def self.respond_to_missing?(method_name, include_private = false)
+    classification.respond_to?(method_name) || super
+  end
+
+  # TODO - probably should give this a different name
+  def self.taxa
+    classification.taxa.values
+  end
+
   def initialize
     @taxa, @taxon_names, @taxon_parents, @taxon_children,
       @common_names = Ggi::ClassificationImporter.new.import
