@@ -1,4 +1,4 @@
-class Taxon
+class Ggi::Taxon
 
   attr_accessor :score, :left_value, :right_value
 

@@ -94,7 +94,7 @@ class Ggi::ClassificationImporter
 
   def convert_taxa_to_objects
     @taxa.each do |taxon_id, taxon|
-      @taxa[taxon_id] = Taxon.new(taxon)
+      @taxa[taxon_id] = Ggi::Taxon.new(taxon)
     end
   end
 

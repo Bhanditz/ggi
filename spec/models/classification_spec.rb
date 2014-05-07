@@ -37,12 +37,12 @@ describe Classification do
     context 'search succeeds' do
       it 'returns classification node' do
         expect(Classification.search('SolaNaceae')).
-          to be_kind_of Taxon
+          to be_kind_of Ggi::Taxon
       end
 
       it 'can search for common names' do
         expect(Classification.search('Birds')).
-          to be_kind_of Taxon
+          to be_kind_of Ggi::Taxon
       end
     end
 

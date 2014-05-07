@@ -11,6 +11,7 @@ require_relative 'ggi/classification'
 require_relative 'ggi/autocompleter'
 require_relative 'ggi/nested_set_builder'
 require_relative 'ggi/svg'
+require_relative 'ggi/taxon'
 
 class Ggi
 

@@ -42,6 +42,6 @@ class Ggi::Autocompleter
   end
 
   def result(name, i)
-    { matched_name: name, taxon: Taxon.find(i) }
+    { matched_name: name, taxon: Ggi::Taxon.find(i) }
   end
 end

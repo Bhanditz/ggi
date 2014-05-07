@@ -1,8 +1,8 @@
-describe Taxon do
-  subject { Taxon }
+describe Ggi::Taxon do
+  subject { Ggi::Taxon }
 
   describe '.method_missing' do
-    let(:taxon) { Taxon.find('E150313D-756C-40B0-4221-393CFAE2170C') }
+    let(:taxon) { Ggi::Taxon.find('E150313D-756C-40B0-4221-393CFAE2170C') }
 
     it 'can access hash values as properties' do
       expect(taxon.name).to eq 'Solanaceae'
@@ -27,7 +27,7 @@ describe Taxon do
       let(:taxon_concept_id) { 'E150313D-756C-40B0-4221-393CFAE2170C' }
 
       it 'returns hash' do
-        expect(subject.find(taxon_concept_id)).to be_a Taxon
+        expect(subject.find(taxon_concept_id)).to be_a Ggi::Taxon
       end
 
       it 'has the name' do

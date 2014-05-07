@@ -1,6 +1,6 @@
 describe '/api' do
 
-  let(:taxon) { Taxon.find('E150313D-756C-40B0-4221-393CFAE2170C') }
+  let(:taxon) { Ggi::Taxon.find('E150313D-756C-40B0-4221-393CFAE2170C') }
 
   it 'returns taxonomy HTML' do
     visit '/api/taxonomy/' + taxon.id

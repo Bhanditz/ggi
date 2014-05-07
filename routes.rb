@@ -1,5 +1,5 @@
 get '/' do
-  @taxon ||= Taxon.find_by_name('Eukaryota')
+  @taxon ||= Ggi::Taxon.find_by_name('Eukaryota')
   haml :'layouts/browser' do
     haml :taxon, layout: false
   end
@@ -7,7 +7,7 @@ end
 
 get '/search' do
   search_term = params['search_term']
-  @node = Taxon.find(search_term) || Taxon.find_by_name(search_term)
+  @node = Ggi::Taxon.find(search_term) || Ggi::Taxon.find_by_name(search_term)
   if @node
     redirect taxon_path(@node)
   else
@@ -17,7 +17,7 @@ get '/search' do
 end
 
 get '/autocomplete' do
-  autocomplete_results = Taxon.autocomplete(params[:search_term])
+  autocomplete_results = Ggi::Taxon.autocomplete(params[:search_term])
   cache_control :public, max_age: (60 * 60 * 24)
   content_type :json
   autocomplete_results.map do |r|
@@ -30,7 +30,7 @@ get '/autocomplete' do
 end
 
 get '/taxon/:id' do
-  @taxon ||= Taxon.find(params[:id])
+  @taxon ||= Ggi::Taxon.find(params[:id])
   if @taxon
     haml :'layouts/browser' do
       haml :taxon, layout: false
@@ -42,14 +42,14 @@ get '/taxon/:id' do
 end
 
 get '/api/taxonomy/:id' do
-  @taxon ||= Taxon.find(params[:id])
+  @taxon ||= Ggi::Taxon.find(params[:id])
   if @taxon
     haml :_taxonomy, layout: false, locals: { taxon: @taxon }
   end
 end
 
 get '/api/details/:id' do
-  @taxon ||= Taxon.find(params[:id])
+  @taxon ||= Ggi::Taxon.find(params[:id])
   if @taxon
     haml :taxon, layout: false
   end

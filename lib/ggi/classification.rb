@@ -23,7 +23,7 @@ class Ggi::Classification
   end
 
   def roots
-    @taxon_children[0].map { |child_id| Taxon.find(child_id) }
+    @taxon_children[0].map { |child_id| Ggi::Taxon.find(child_id) }
   end
 
   def ancestors_of(taxon)
@@ -31,7 +31,7 @@ class Ggi::Classification
     search_id = taxon.id
     while parent_id = @taxon_parents[search_id]
       break if parent_id == 0
-      parent = Taxon.find(parent_id)
+      parent = Ggi::Taxon.find(parent_id)
       ancestors.unshift(parent)
       search_id = parent.id
     end
@@ -40,7 +40,7 @@ class Ggi::Classification
 
   def children_of(taxon)
     return [] if @taxon_children[taxon.id].nil?
-    @taxon_children[taxon.id].map { |child_id| Taxon.find(child_id) }.
+    @taxon_children[taxon.id].map { |child_id| Ggi::Taxon.find(child_id) }.
       sort_by { |t| t.name }
   end
 
@@ -49,7 +49,7 @@ class Ggi::Classification
     if parent_id == 0
       parents_children = roots
     else
-      parent_taxon = Taxon.find(parent_id)
+      parent_taxon = Ggi::Taxon.find(parent_id)
       parents_children = parent_taxon.children
     end
     parents_children.delete_if { |t| t.id == taxon.id }
@@ -73,7 +73,7 @@ private
 
   def search_hash_for_term(hash, term)
     if match = hash.detect { |name, id| name.casecmp(term) == 0 }
-      Taxon.find(match[1][0])
+      Ggi::Taxon.find(match[1][0])
     end
   end
 

@@ -28,7 +28,7 @@ private
     # the model, and thus not really a lib. ...Rather than deal with that,
     # though, I might suggest we don't use models at all and just put
     # everything in the lib.  ...or vice-versa.  We should discuss.
-    Taxon.all.select { |t| t.family? }.each do |taxon|
+    Ggi::Taxon.all.select { |t| t.family? }.each do |taxon|
       Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
         measurement = taxon.measurements.detect { |m| m[:measurementType] == uri }
         value = measurement ? measurement[:measurementValue] : DEFAULT_SCORE
@@ -50,7 +50,7 @@ private
           @measurement_type_values[type][sorted_values[index - 1]]
       end
     end
-    @total_number_of_families = Taxon.all.select { |t| t.family? }.length.to_f
+    @total_number_of_families = Ggi::Taxon.all.select { |t| t.family? }.length.to_f
   end
 
   # now use the data collected to calculate and assign
