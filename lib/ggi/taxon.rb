@@ -107,4 +107,10 @@ class Ggi::Taxon
     end
   end
 
+  def name_matches?(matched_name)
+    (matched_name.casecmp(name) == 0) ||
+      (english_vernacular_name &&
+        (matched_name.casecmp(english_vernacular_name) == 0))
+  end
+
 end

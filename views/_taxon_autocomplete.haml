@@ -1,4 +1,3 @@
-- show_matched_name = (matched_name.casecmp(taxon.name) != 0)
 - modifier_class = 'autocomplete-item--with-image' if taxon.thumbnail
 %span.autocomplete-item{ data: { path: taxon_path(taxon) }, class: modifier_class }
   - unless taxon.classification_summary.empty?
@@ -9,9 +8,7 @@
   - if taxon.english_vernacular_name
     %span.autocomplete-item__vernacular
       = taxon.english_vernacular_name
-    - if show_matched_name && matched_name.casecmp(taxon.english_vernacular_name) == 0
-      - show_matched_name = false
-  - if show_matched_name
+  - unless taxon.name_matches?(matched_name)
     %span.autocomplete-item__alternate
       Alternative name:
       = matched_name
