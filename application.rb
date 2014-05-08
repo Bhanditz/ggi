@@ -5,7 +5,6 @@ require 'compass'
 require 'debugger' if Sinatra::Base.development? || Sinatra::Base.test?
 
 require_relative 'lib/ggi'
-require_relative 'environment'
 require_relative 'routes'
 require_relative 'helpers'
 
