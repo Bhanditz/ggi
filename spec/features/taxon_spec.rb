@@ -63,6 +63,7 @@ describe '/taxon' do
   let(:korarchaeota) { Ggi::Classification.classification.search('korarchaeota') }
   let(:bacillariophyceae) { Ggi::Classification.classification.search('bacillariophyceae') }
   let(:alisphaeraceae) { Ggi::Classification.classification.search('alisphaeraceae') }
+  let(:spermatophytina) { Ggi::Classification.classification.search('spermatophytina') }
 
   context 'when high scoring family solanaceae' do
     before { visit "/taxon/#{solanaceae.id}" }
@@ -109,6 +110,16 @@ describe '/taxon' do
     end
     context 'with empty image owner' do
       expect_it { to have_selector('figcaption p', text: 'Via biopix') }
+    end
+  end
+
+  context 'when subphylum spermatophytina' do
+    before { visit "/taxon/#{spermatophytina.id}" }
+    it_behaves_like 'a taxon', true, false, nil do
+      let(:taxon) { spermatophytina }
+    end
+    context 'with empty reference' do
+      expect_it { to_not have_selector('dt', text: 'Reference') }
     end
   end
 

@@ -17,7 +17,7 @@
           %dt.nomenclature__label--classification Classification
           %dd.nomenclature__datum--classification
             = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
-        - unless @taxon.source.empty?
+        - unless @taxon.source.to_s.empty?
           %dt.nomenclature__label--reference Reference
           %dd.nomenclature__datum--reference
             %a{ href: '/about' }= @taxon.source
