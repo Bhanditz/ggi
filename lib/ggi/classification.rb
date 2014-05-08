@@ -90,7 +90,9 @@ class Ggi::Classification
   end
 
   def autocomplete(search_term)
-    Ggi::Autocompleter.search(search_term, [@taxon_names, @common_names])
+    Ggi::Autocompleter.search(search_term, [@taxon_names, @common_names]).map do |id, name|
+      { matched_name: name, taxon: Ggi::Taxon.find(id) }
+    end
   end
 
 private
