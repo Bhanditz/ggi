@@ -9,7 +9,7 @@
       %header.information__header
         %h2 Taxonomic information
       %dl.nomenclature
-        - if @taxon.english_vernacular_name
+        - unless @taxon.english_vernacular_name.to_s.empty?
           %dt.nomenclature__label--common-name English common name
           %dd.nomenclature__datum--common-name
             %a{ href: eol_page_url(@taxon) }= @taxon.english_vernacular_name
@@ -31,12 +31,16 @@
         %dd.assessment_summary__datum--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
           = taxon_score_formatted
       - if @taxon.image
+        - attribution = image_attribution(@taxon.image).to_s
+        - license_html = license(@taxon.image[:license]).to_s
         %figure.information__media
           %a{ href: eol_dato_url(@taxon)}
             %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
-          %figcaption
-            %p= image_attribution(@taxon.image)
-            = license(@taxon.image[:license])
+          - unless (attribution.empty? && license_html.empty?)
+            %figcaption
+              - unless attribution.empty?
+                %p= attribution
+              = license_html
     %section.taxon__assessment
       - if @taxon.family?
         %header.assessment__header

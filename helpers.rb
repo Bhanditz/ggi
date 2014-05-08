@@ -69,15 +69,17 @@ helpers do
     agents = {}
     if image[:agents].kind_of?(Array)
       agents = image[:agents].map do |a|
-        { a[:role] => a[:full_name] }
+        { a[:role].to_sym => a[:full_name] }
       end.compact.reduce({}, :merge)
-      provider = agents.delete("provider")
+      provider = agents.delete(:provider)
     end
     owner = image[:rightsHolder] || agents[:photographer]
     owner = agents.first[1] if owner.nil? && !agents.empty?
-    owner = "By #{owner}" if owner
+    owner = "by #{owner}" if owner
     provider = "via #{provider}" if provider
-    [owner, provider].compact.join(' ').capitalize;
+    attribution = [owner, provider].compact.join(' ')
+    attribution[0] = attribution[0].capitalize unless attribution.empty?
+    attribution
   end
 
   def license(license)
