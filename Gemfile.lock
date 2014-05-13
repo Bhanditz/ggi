@@ -10,6 +10,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
     breakpoint (2.4.2)
       sass (~> 3.3.0)
       sassy-maps (< 1.0.0)
@@ -55,6 +59,7 @@ GEM
     ffi (1.9.3)
     haml (4.0.5)
       tilt
+    htmlentities (4.3.1)
     jsmin (1.0.1)
     json (1.8.1)
     kgio (2.9.2)
@@ -96,6 +101,7 @@ GEM
     rspec-mocks (3.0.0.beta2)
       rspec-support (= 3.0.0.beta2)
     rspec-support (3.0.0.beta2)
+    rubyzip (1.0.0)
     safe_yaml (1.0.3)
     sass (3.3.7)
     sassy-maps (0.3.2)
@@ -136,6 +142,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  axlsx (~> 2.0)
   breakpoint (~> 2.4)
   capybara (~> 2.2)
   capybara-webkit (~> 1.1)

@@ -7,6 +7,8 @@ APP_FILE = 'application.rb'
 APP_CLASS = 'Sinatra::Application'
 require 'sinatra/assetpack/rake'
 
+Dir.glob('lib/tasks/*.rake').each { |r| load r}
+
 task :default => :spec
 
 RSpec::Core::RakeTask.new do |t|

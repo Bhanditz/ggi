@@ -13,6 +13,7 @@ gem 'sinatra', '~> 1.4'  # Application framework
 gem 'sinatra-assetpack', '~> 0.3', require: 'sinatra/assetpack'
 gem 'rest_client', '~> 1.7', require: 'rest-client'
 gem 'nokogiri', '~> 1.6'
+gem 'axlsx', '~> 2.0'
 
 group 'development' do
   gem 'debugger', '~> 1.6'  # Duh.
