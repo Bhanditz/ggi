@@ -16,9 +16,6 @@ namespace 'ggi' do
         families = Ggi::Classification.classification.taxa.select do |id, taxon|
           taxon.rank.downcase == 'family'
         end
-        prefix = ['subkingdom', 'infrakingdom', 'superphylum', 'subphylum',
-          'infraphylum', 'parvphylum', 'superclass', 'subclass', 'infraclass',
-          'superorder' ]
         measurement_uris = {
           bhl: 'http://eol.org/schema/terms/NumberReferencesInBHL',
           bold: 'http://eol.org/schema/terms/NumberPublicRecordsInBOLD',
@@ -39,15 +36,15 @@ namespace 'ggi' do
           package.workbook.add_worksheet(name: 'FALO plus data') do |falo_sheet|
             falo_sheet.add_row [
               'Sort',
-              'SupraKingdom',
+              'Superkingdom',
               'Kingdom',
-              'Sbk',
-              'Ik',
+              'Subkingdom',
+              'Infrakingdom',
               'Superphylum',
               'Phylum',
               'Subphylum',
               'Infraphylum',
-              'ParviPhylum',
+              'Parvphylum',
               'Superclass',
               'Class',
               'Subclass',
@@ -68,14 +65,9 @@ namespace 'ggi' do
               'NCBI_Percentile',
               'GGBN_Percentile',
               'GGI score',
-              'REFERENCE' ]
+              'Reference' ]
             families.each do |id, taxon|
-              ancestors = {}
-              taxon.ancestors.each do |t|
-                ancestors[t.rank.downcase] =
-                  prefix.include?(t.rank.downcase) ?
-                    "#{t.rank} #{t.name}" : t.name
-              end
+              ancestors = Hash[ taxon.ancestors.map{|t| [t.rank.downcase, t.name]} ]
               measurements = Hash[ measurement_uris.map{|k,v| [v, Hash.new(0)]} ]
               taxon.measurements.each do |m|
                 unless m[:score].nil?
@@ -121,10 +113,6 @@ namespace 'ggi' do
           package.workbook.add_worksheet(name: 'Data for pivots') do |pivot_sheet|
             pivot_sheet.add_row ['Family', 'Value', 'Source']
             families.each do |id, taxon|
-              pivot_sheet.add_row [
-                taxon.name,
-                1,
-                'FALO' ]
               taxon.measurements.each do |measurement|
                 unless measurement[:score].nil?
                   pivot_sheet.add_row [
