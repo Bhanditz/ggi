@@ -64,8 +64,10 @@ class Ggi::ClassificationImporter
     mappings_json = Zlib::GzipReader.open(mappings_file) { |f| f.read }
     mappings_data = JSON.parse(mappings_json, symbolize_names: true)
     mappings_data.each do |d|
-      @taxa[d[:falo_id]][:eol_id] = d[:eol_id]
-      @eol_to_falo[d[:eol_id]] = d[:falo_id]
+      if @taxa[d[:falo_id]]
+        @taxa[d[:falo_id]][:eol_id] = d[:eol_id]
+        @eol_to_falo[d[:eol_id]] = d[:falo_id]
+      end
     end
   end
 
