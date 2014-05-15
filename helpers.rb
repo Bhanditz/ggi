@@ -66,15 +66,16 @@ helpers do
   end
 
   def image_attribution(image)
-    agents = {}
+    agents_by_role = {}
     if image[:agents].kind_of?(Array)
-      agents = image[:agents].map do |a|
+      agents_by_role = image[:agents].select{|a| !a[:role].nil?}.map do |a|
         { a[:role].to_sym => a[:full_name] }
       end.compact.reduce({}, :merge)
-      provider = agents.delete(:provider)
+      provider = agents_by_role.delete(:provider)
+      photographer = agents_by_role.delete(:photographer)
+      other = agents_by_role.values.first
     end
-    owner = image[:rightsHolder] || agents[:photographer]
-    owner = agents.first[1] if owner.nil? && !agents.empty?
+    owner = image[:rightsHolder] || photographer || other
     owner = "by #{owner}" if owner
     provider = "via #{provider}" if provider
     attribution = [owner, provider].compact.join(' ')
