@@ -1,6 +1,6 @@
 shared_examples 'a record not found' do
   it { expect(subject.status_code).to eq 404 }
-  it { expect(subject.body).to match /404 not found/ }
+  it { expect(subject.body).to match /Page not found/ }
 end
 
 shared_examples 'a media rich taxon' do |license, attribution|

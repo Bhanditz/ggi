@@ -1,3 +1,19 @@
+configure :production do
+  set :show_exceptions, false
+end
+
+not_found do
+  haml :'layouts/basic' do
+    haml :'404', layout: false
+  end
+end
+
+error do
+  haml :'layouts/basic' do
+    haml :'500', layout: false
+  end
+end
+
 get '/' do
   @taxon ||= Ggi::Taxon.find_by_name('Eukaryota')
   haml :'layouts/browser' do
@@ -11,8 +27,7 @@ get '/search' do
   if @node
     redirect taxon_path(@node)
   else
-    status 404
-    "404 not found"
+    halt 404
   end
 end
 
@@ -36,8 +51,7 @@ get '/taxon/:id' do
       haml :taxon, layout: false
     end
   else
-    status 404
-    "404 not found"
+    halt 404
   end
 end
 

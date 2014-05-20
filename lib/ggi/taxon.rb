@@ -66,7 +66,7 @@ class Ggi::Taxon
   end
 
   def classification_summary
-    # roots will return an empty array [ ]
+    # will return an empty array [ ] for root nodes
     [ ancestors.first, ancestors.last ].compact.uniq
   end
 

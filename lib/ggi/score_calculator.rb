@@ -58,11 +58,13 @@ private
     if children
       children.each do |child_taxon|
         if child_taxon.family?
+          # if we have a family, then apply its score and return it
           calculate_score_for_family(child_taxon)
           childs_family_scores << child_taxon.score
         else
+          # higher taxa will keep track of the families if its children
           childs_family_scores += calculate_and_assign_scores_recursively(
-            options.merge({ family_scores: [ ], taxon: child_taxon }))
+            options.merge({ taxon: child_taxon }))
         end
       end
       # we started at the root, and now we're back so we're done

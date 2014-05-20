@@ -132,6 +132,9 @@ a {
 h1 {
   @extend .headers;
   @include adjust-font-size-to(2em);
+  &.error {
+    text-align: center;
+  }
 }
 
 h2 {

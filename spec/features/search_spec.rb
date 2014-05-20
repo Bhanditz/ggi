@@ -16,7 +16,7 @@ describe 'search' do
       fill_in('search_term', with: 'whatever')
       click_button('Search')
       expect(page.status_code).to eq 404
-      expect(page.body).to match '404 not found'
+      expect(page.body).to match 'Page not found'
     end
   end
 end
