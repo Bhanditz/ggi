@@ -28,6 +28,7 @@
           %dd.assessment_summary__datum--family_count= @taxon.number_of_families
         %dt.assessment_summary__label--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
           = @taxon.family? ? 'Total score' : 'Average score'
+          %a{ title: 'Explanation of score', href: '/about' } ?
         %dd.assessment_summary__datum--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
           = taxon_score_formatted
       - if @taxon.image
@@ -42,16 +43,16 @@
                 %p= attribution
               = license_html
     %section.taxon__assessment
+      %header.assessment__header
+        %h2 Assessment
       - if @taxon.family?
-        %header.assessment__header
-          %h2 Assessment
         %table.assessment__measurements
           %caption.measurements__caption= "Assessment of knowledge about #{@taxon.name}"
           %thead
             %tr
               %th.measurement__label--source{ scope: 'col' } Source
-              %th.measurement__label--value{ scope: 'col' } Value
-              %th.measurement__label--score{ scope: 'col' } Score
+              %th.measurement__label--value{ scope: 'col' } Count
+              %th.measurement__label--score{ scope: 'col' } Percentile score
           %tbody
             - Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
               - measurement = @taxon.measurements.select{|m| m[:measurementType] == uri}.first rescue nil
@@ -61,10 +62,14 @@
                 %td.measurement__datum--value
                   = measurement.nil? ? 0 : measurement[:measurementValue]
                 %td.measurement__datum--score= score
+      - else
+        %p For a more detailed assessment of knowledge, choose a family.
       %aside.assessment__legend
         %header.legend__header
           %h3 Legend
-        %p Measurement of knowledge
+        %p
+          Relative amount of knowledge.
+          %a{ title: 'Explanation of assessment scale', href: '/about' } ?
         %dl
           %dt.legend__label--good Good
           %dd.legend__definition--good

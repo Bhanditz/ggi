@@ -57,8 +57,9 @@ shared_examples 'a rank higher than family' do
   ['GenBank', 'EOL', 'GGBN', 'GBIF', 'BOLD', 'BHL'].each do |label|
     expect_it { to_not have_selector('th', text: /#{label}/) }
   end
-  expect_it { to have_selector('dt', text: /^average score$/i) }
+  expect_it { to have_selector('dt', text: /^average score/i) }
   expect_it { to have_selector('dt', text: /^number of families$/i) }
+  expect_it { to have_selector('p', text: 'For a more detailed assessment of knowledge, choose a family') }
 end
 
 shared_examples 'a root node' do
@@ -74,7 +75,10 @@ shared_examples 'a family' do
   ['GenBank', 'EOL', 'GGBN', 'GBIF', 'BOLD', 'BHL'].each do |label|
     expect_it { to have_selector('th', text: /#{label}/) }
   end
-  expect_it { to have_selector('dt', text: /^total score$/i) }
+  ['Source', 'Count', 'Percentile score'].each do |label|
+    expect_it { to have_selector('th', text: /#{label}/) }
+  end
+  expect_it { to have_selector('dt', text: /^total score/i) }
   it_behaves_like 'a non root node'
 end
 
@@ -82,6 +86,8 @@ shared_examples 'a taxon' do
   it { expect(subject.status_code).to eq 200 }
   expect_it { to have_selector('h1', text: /^#{taxon.rank} #{taxon.name}$/) }
   expect_it { to have_selector('h3', text: 'Legend') }
+  expect_it { to have_xpath("//a[@title='Explanation of score']") }
+  expect_it { to have_xpath("//a[@title='Explanation of assessment scale']") }
   ['good', 'average', 'poor'].each do |legend_item|
     expect_it { to have_selector('dt', text: /#{legend_item}/i) }
   end
