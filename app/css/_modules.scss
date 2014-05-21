@@ -84,11 +84,9 @@ nav {
     display: block;
   }
   input[type=search] {
-    width: 96%;
-  }
-  input[type=submit] {
-    display: block;
-    margin-top: rhythm(0.5);
+    position: relative;
+    top: -1px;
+    width: 60%;
   }
 }
 

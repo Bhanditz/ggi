@@ -3,7 +3,6 @@
 
   $(function() {
     if ($('#search_form').length > 0) {
-      $('#search_form input[type=submit]').addClass('visually-hidden');
       $('#search_term').autocomplete({
         source: function( request, response ) {
           $.ajax({
