@@ -1,4 +1,5 @@
 helpers do
+
   def tree_item(taxon, state, current = false)
     html_classes = ['tree__item', "tree__item--#{state.to_s}"]
     html_classes << 'tree__item--selected' if current
@@ -39,6 +40,7 @@ helpers do
     "http://eol.org/data_objects/#{taxon.image[:dataObjectVersionID]}"
   end
 
+  # TODO - generalize this somehow with Ggi::Uri
   def measurement_source
     { 'http://eol.org/schema/terms/NumberOfSequencesInGenBank' =>
         '<a href="https://www.ncbi.nlm.nih.gov/genbank">GenBank</a> sequences '\

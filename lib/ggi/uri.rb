@@ -1,3 +1,4 @@
+# TODO - this class is NOT being used everywhere it should be.  Seach for some of those keys and URIs in the code and replace them with calls to this lib.
 class Ggi::Uri
 
   attr_reader :short_name, :long_name, :uri
