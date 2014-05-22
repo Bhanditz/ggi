@@ -18,9 +18,9 @@ helpers do
 
   def score_qualifier(score_formatted)
     return nil if score_formatted.to_s.empty?
-    return 'poor' if score_formatted.to_i < 34
-    return 'good' if score_formatted.to_i > 66
-    return 'average' if score_formatted.to_i.between?(34, 66)
+    return 'poor' if score_formatted.to_i < 51
+    return 'good' if score_formatted.to_i > 80
+    return 'average' if score_formatted.to_i.between?(51, 80)
     nil
   end
 

@@ -91,9 +91,9 @@ shared_examples 'a taxon' do
   ['good', 'average', 'poor'].each do |legend_item|
     expect_it { to have_selector('dt', text: /#{legend_item}/i) }
   end
-  expect_it { to have_selector('dd', text: /0 to 33/) }
-  expect_it { to have_selector('dd', text: /34 to 66/) }
-  expect_it { to have_selector('dd', text: /67 to 100/) }
+  expect_it { to have_selector('dd', text: /0 to 50/) }
+  expect_it { to have_selector('dd', text: /51 to 80/) }
+  expect_it { to have_selector('dd', text: /81 to 100/) }
 end
 
 describe '/taxon' do
