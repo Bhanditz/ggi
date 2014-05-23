@@ -35,7 +35,7 @@ describe Ggi::AllFamiliesDownload do
 
     it 'serializes public/ggi.xlsx by default' do
       subject
-      expect(@package).to have_received(:serialize).with('public/ggi.xlsx')
+      expect(@package).to have_received(:serialize).with('public/ggi_family_data.xlsx')
     end
 
     it 'serializes first argument if given' do

@@ -81,8 +81,8 @@ get '/help' do
   end
 end
 
-get '/download' do
+get '/downloads' do
   haml :'layouts/basic' do
-    haml :download, layout: false
+    haml :downloads, layout: false
   end
 end

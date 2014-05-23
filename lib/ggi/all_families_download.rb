@@ -6,7 +6,7 @@ class Ggi
     def self.create(args = {})
       # Set defaults:
       args = {
-        filepath: 'public/ggi.xlsx',
+        filepath: 'public/ggi_family_data.xlsx',
         # NOTE - The version CANNOT come from the source file, we need to ask what version FALO wants this to be known as, and when we last asked CP about
         # it, she said that 2.5 is likely to be the last version we harvest for a while, so we're hard-coding that value to reduce the risk of forgetting to
         # ask what it should be.
