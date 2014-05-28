@@ -1,8 +1,5 @@
 // Theme: replaceable skin, colors, font family etc.
 
-@import url(http://fonts.googleapis.com/css?family=Montserrat);
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300);
-
 $ggi-colors: (
   darkest: #222222,
   dark: #666666,
@@ -84,7 +81,7 @@ $ggi-font-weight: (
 
 body {
   @include ggi-color(lightest);
-  font-family: 'Open Sans', 'sans-serif';
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-weight: map-get($ggi-font-weight, normal);
 }
 
