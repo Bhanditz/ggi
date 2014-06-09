@@ -140,7 +140,7 @@ nav {
 
 .browser__actions {
   position: absolute;
-  top: rhythm(1.2);
+  top: rhythm(1);
   right: rhythm(0.5);
 }
 
@@ -149,7 +149,7 @@ nav {
   overflow: auto;
   @include rhythm-borders(1px, 0.5);
   @include breakpoint($ggi-breakpoint-large) {
-    height: rhythm(23);
+    height: rhythm(22);
   }
 }
 

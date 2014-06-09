@@ -3,7 +3,7 @@ $base-font-size: 12px;
 $base-line-height: 18px;
 $ggi-breakpoint-medium: 40em;
 $ggi-breakpoint-large: 64em;
-$ggi-footer-rhythm: 2;
+$ggi-footer-rhythm: 5;
 @include establish-baseline;
 @include border-box-sizing;
 
@@ -28,7 +28,7 @@ html, body {
 .page__lane {
   @include container;
   @include break;
-  padding: rhythm();
+  padding: rhythm(0.65);
   position: relative;
 }
 
@@ -66,9 +66,6 @@ header.page__header {
   }
 }
 
-.search {
-  padding-bottom: rhythm(0.5);
-}
 @include susy-breakpoint($ggi-breakpoint-medium, 2) {
   .tagline {
     @include span(1 omega at 2 of 2);
@@ -81,7 +78,7 @@ header.page__header {
 
 .browser {
   @include break;
-  @include rhythm-padding;
+  @include rhythm-padding(0.75, 1);
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     @include span(1 at 1 of 3);
   }
