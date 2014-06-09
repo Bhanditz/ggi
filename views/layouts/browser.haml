@@ -21,11 +21,12 @@
   .page__bucket
     %section.browser
       %nav
-        %ul
-          %li{ class: params[:browse_by] == 'phylogeny' ? nil : 'browser__nav--current'}
-            %a{ href: "#{request.path_info}?browse_by=taxonomy" } Taxonomy
-          %li{ class: params[:browse_by] == 'phylogeny' ? 'browser__nav--current' : nil}
-            %a{ href: "#{request.path_info}?browse_by=phylogeny" } Phylogeny
+        %ul.tabs
+          - phylo = params[:browse_by] == 'phylogeny'
+          %li{ class: phylo ? nil : 'browser__nav--current'}
+            %a{ class: phylo ? nil : 'current', href: "#{request.path_info}?browse_by=taxonomy" } Taxonomy
+          %li{ class: phylo ? 'browser__nav--current' : nil}
+            %a{ class: phylo ? 'current' : nil, href: "#{request.path_info}?browse_by=phylogeny" } Phylogeny
 
       - if params[:browse_by] == 'phylogeny'
         %h2 Browse phylogeny
