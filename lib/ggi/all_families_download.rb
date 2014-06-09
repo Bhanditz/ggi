@@ -32,7 +32,6 @@ class Ggi
 
       package.workbook.add_worksheet(name: 'FALO plus data') do |falo_sheet|
         falo_sheet.add_row [
-          'Sort',
           'Superkingdom',
           'Kingdom',
           'Subkingdom',
@@ -73,7 +72,6 @@ class Ggi
             measurements[m[:measurementType]] = m
           end
           falo_sheet.add_row [
-            nil, # TODO: sort column
             ancestors['superkingdom'],
             ancestors['kingdom'],
             ancestors['subkingdom'],

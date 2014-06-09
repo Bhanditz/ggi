@@ -3,13 +3,14 @@ helpers do
   def tree_item(taxon, state, current = false)
     html_classes = ['tree__item', "tree__item--#{state.to_s}"]
     html_classes << 'tree__item--selected' if current
-    if (qualifier = score_qualifier(formatted_score(taxon.score)))
+    score = formatted_score(taxon.score)
+    if (qualifier = score_qualifier(score))
       html_classes << "tree__item--#{qualifier}"
       icon = score_icon(qualifier)
     end
     "<li class='#{html_classes.compact.join(' ')}' data-taxon-id='#{taxon.id}' "\
       "data-children='#{taxon.children.count}'>#{icon}<a href='#{taxon_path(taxon)}'>"\
-      "#{taxon.name}</a></li>"
+      "#{taxon.name}</a> <small>(#{score})</small></li>"
   end
 
   def formatted_score(score)

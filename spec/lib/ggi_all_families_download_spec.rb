@@ -65,7 +65,6 @@ describe Ggi::AllFamiliesDownload do
       end
 
       let(:headers) { [
-        'Sort',
         'Superkingdom',
         'Kingdom',
         'Subkingdom',
@@ -115,15 +114,14 @@ describe Ggi::AllFamiliesDownload do
       it 'reads all of the ancestors from a family' do
         ancestors = []
         letters = ('A'..'Z').to_a
-        # NOTE - 15 is just the index of the last ancestor rank (before family)
-        headers[1..15].each_with_index do |rank, i|
+        # NOTE - 14 is just the index of the last ancestor rank (before family)
+        headers[0..14].each_with_index do |rank, i|
           ancestors << double(Ggi::Taxon, rank: rank.downcase, name: letters[i])
         end
         allow(@asco_fam).to receive(:ancestors) { ancestors }
         # NOTE: using row[1] because the 0th row is headers
-        # NOTE: starting with cell 1 because the 0th row is a sort column
-        end_row = @asco_fam.ancestors.count
-        expect(subject.rows[1].cells[1..end_row].map(&:value)).to \
+        end_row = @asco_fam.ancestors.count - 1
+        expect(subject.rows[1].cells[0..end_row].map(&:value)).to \
           eq(letters[0..ancestors.length-1])
       end
 
