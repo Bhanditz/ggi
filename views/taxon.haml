@@ -28,7 +28,7 @@
           %dd.assessment_summary__datum--family_count= @taxon.number_of_families
         %dt.assessment_summary__label--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
           = @taxon.family? ? 'Total score' : 'Average score'
-          %a{ title: 'Explanation of score', href: '/about' } ?
+          %a.info{ title: 'Explanation of score', href: '/about' } ?
         %dd.assessment_summary__datum--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
           = taxon_score_formatted
       - if @taxon.image
@@ -69,7 +69,7 @@
           %h3 Legend
         %p
           Relative amount of knowledge.
-          %a{ title: 'Explanation of assessment scale', href: '/about' } ?
+          %a.info{ title: 'Explanation of assessment scale', href: '/about' } ?
         %dl
           %dt.legend__label--good Good
           %dd.legend__definition--good

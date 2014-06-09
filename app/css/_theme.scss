@@ -1,5 +1,4 @@
 // Theme: replaceable skin, colors, font family etc.
-
 $ggi-colors: (
   darkest: #222222,
   dark: #666666,
@@ -316,5 +315,12 @@ header.page__header {
 
 footer.page__footer {
   @include ggi-color(dark);
+}
+
+a.info {
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  @include replace-text("info_icon.png");
 }
 
