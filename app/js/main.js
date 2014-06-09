@@ -22,11 +22,6 @@
         },
         minLength: 1,
         delay: 0,
-        // we do not want the text in the search field to change as the
-        // user mouses over the autocomplete results
-        focus: function( e, ui ) {
-          e.preventDefault();
-        },
         // when a user clicks a result, take them to the taxon page immediately
         select: function( e, ui ) {
           if (ui.item.label === NO_RESULTS_LABEL) {
