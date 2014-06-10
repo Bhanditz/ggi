@@ -133,7 +133,15 @@ class Ggi
           key_sheet.add_row [
             uri.long_name,
             uri.uri,
-            uri.definition ]
+            uri.definition
+          ]
+        end
+        Ggi::DefinitionImporter.import.each do |uri|
+          key_sheet.add_row [
+            uri["name"],
+            uri["uri"],
+            uri["definition"]
+          ]
         end
       end
       package.serialize(args[:filepath])

@@ -15,6 +15,10 @@ describe Ggi::AllFamiliesDownload do
         "E817BB93-3905-3D4B-82CE-43C39513603D" => @asco_fam,
         "B2B7712A-55A5-0929-823C-A44EBCE3D456" => @subphylum
       } }
+      allow(Ggi::DefinitionImporter).to receive(:import) { [
+        {"uri" => "http://a","name" => "foo","definition" => "defined"},
+        {"uri" => "http://b","name" => "bar","definition" => "defined again"}
+      ] }
     end
 
     subject { Ggi::AllFamiliesDownload.create }
@@ -265,6 +269,20 @@ describe Ggi::AllFamiliesDownload do
           expect(subject.rows[ i + 2 ].cells.map(&:value)).to \
             eq([uri.long_name, uri.uri, uri.definition])
         end
+      end
+
+      it 'reads eol definitions' do
+        subject
+        expect(Ggi::DefinitionImporter).to have_received(:import)
+      end
+
+      it 'adds rows for each eol definition' do
+        book = subject
+        offset = 2 + Ggi::Uri.all.count
+        expect(book.rows[ offset ].cells.map(&:value)).to \
+          eq(['foo', 'http://a', 'defined'])
+        expect(book.rows[ offset + 1 ].cells.map(&:value)).to \
+          eq(['bar', 'http://b', 'defined again'])
       end
 
     end
