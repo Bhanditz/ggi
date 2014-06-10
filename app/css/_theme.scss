@@ -134,6 +134,11 @@ h1 {
   }
 }
 
+.subhead {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
 h2 {
   @extend .headers;
 }
