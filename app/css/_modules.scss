@@ -64,6 +64,7 @@ figcaption p {
 
 figure.float {
   width: 30%;
+  min-width: 350px;
   float: left;
   margin: 1em 2em 2em 1em;
 }
