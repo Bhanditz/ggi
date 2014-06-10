@@ -1,10 +1,14 @@
 feature 'Global navigation' do
+
   before { visit '/' }
   
-  ['About', 'Help', 'Downloads'].each do |link|
-    it "links to #{link}" do
-      click_link link
-      expect(page).to have_selector('h1', text: link)
+  [ { link: 'About',     head: 'Global Genome Initiative' },
+    { link: 'Help',      head: 'Help' },
+    { link: 'Downloads', head: 'Download' }
+  ].each do |page_info|
+    it "links to #{page_info[:link]} with heading #{page_info[:head]}" do
+      click_link page_info[:link]
+      expect(page).to have_selector('h1', text: page_info[:head])
     end
   end
 end
