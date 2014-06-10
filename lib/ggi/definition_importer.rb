@@ -1,3 +1,4 @@
+# Grabs definitions for the URIs defined in Ggi::Uri.
 class Ggi::DefinitionImporter 
 
   def self.import
@@ -15,6 +16,7 @@ class Ggi::DefinitionImporter
     return @@definitions if @@definitions
     json = File.read(File.join(Sinatra::Application.root, 'public', 'eol_definitions.json'))
     @@definitions = JSON.parse(json)
+    @@definitions.select! { |uri| Ggi::Uri.all.any? { |ggi_uri| ggi_uri.uri == uri["uri"] } }
   end
 
 end

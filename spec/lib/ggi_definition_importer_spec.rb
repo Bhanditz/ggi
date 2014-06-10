@@ -2,8 +2,10 @@ describe Ggi::DefinitionImporter do
 
   describe '#import' do
 
+    let(:uri) { Ggi::Uri.all.first.uri }
+
     before do
-      allow(File).to receive(:read) { '[{"a": "1"},{"a": "2"}]' }
+      allow(File).to receive(:read) { %Q{[{"uri": "ignore"},{"uri": "#{uri}"}]} }
     end
 
     after do
@@ -13,8 +15,8 @@ describe Ggi::DefinitionImporter do
 
     subject { Ggi::DefinitionImporter.new.import }
 
-    it 'parses the JSON from the file' do
-      expect(subject).to eq([{'a' => '1'}, {'a' => '2'}])
+    it 'parses the JSON from the file, ignoring unknown uris' do
+      expect(subject).to eq([{'uri' => uri}])
     end
 
     it 'reads the right file' do
