@@ -14,7 +14,7 @@ class Ggi::DefinitionImporter
 
   def import
     return @@definitions if @@definitions
-    json = File.read(File.join(__dir__, '..', '..', 'public', 'eol_definitions.json'))
+    json = File.read(File.expand_path("../../public/eol_definitions.json", __dir__))
     @@definitions = JSON.parse(json)
     @@definitions.select! { |uri| Ggi::Uri.all.any? { |ggi_uri| ggi_uri.uri == uri["uri"] } }
   end
