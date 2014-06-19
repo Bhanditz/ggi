@@ -3,6 +3,7 @@ require 'sinatra/assetpack'
 require 'haml'
 require 'compass'
 require 'debugger' if Sinatra::Base.development? || Sinatra::Base.test?
+require 'rack-timeout'
 
 require_relative 'lib/ggi'
 require_relative 'routes'
@@ -17,6 +18,10 @@ configure do
   Compass.add_project_configuration(File.join(Sinatra::Application.root,
                                               'config', 'compass.rb'))
   set :scss, Compass.sass_engine_options
+
+  # This is used for production timeouts:
+  use Rack::Timeout
+  Rack::Timeout.timeout = 40
 
   register Sinatra::AssetPack
 
