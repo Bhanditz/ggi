@@ -21,7 +21,7 @@ configure do
 
   # This is used for production timeouts:
   use Rack::Timeout
-  Rack::Timeout.timeout = 40
+  Rack::Timeout.timeout = 1000
 
   register Sinatra::AssetPack
 
