@@ -15,7 +15,7 @@ error do
 end
 
 get '/' do
-  @taxon ||= Ggi::Taxon.find('8468B753-8BC5-AD66-BC66-45C08CCD8DA9')
+  @taxon ||= Ggi::Taxon.root
   haml :'layouts/browser' do
     haml :taxon, layout: false
   end

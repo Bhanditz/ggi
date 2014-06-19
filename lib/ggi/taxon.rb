@@ -19,6 +19,10 @@ class Ggi::Taxon
     @score = 0
   end
 
+  def self.root
+    @root ||= Ggi::Classification.find_by_name('Eukaryota')
+  end
+
   def self.find(id)
     Ggi::Classification.find(id)
   end
