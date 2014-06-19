@@ -15,7 +15,7 @@ error do
 end
 
 get '/' do
-  @taxon ||= Ggi::Taxon.find_by_name('Eukaryota')
+  @taxon ||= Ggi::Taxon.find('8468B753-8BC5-AD66-BC66-45C08CCD8DA9')
   haml :'layouts/browser' do
     haml :taxon, layout: false
   end

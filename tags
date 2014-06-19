@@ -1,0 +1,219 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+$.Widget	app/js/jquery.ui.widget.js	/^$.Widget = function( \/* options, element *\/ ) {};$/;"	f
+$.Widget	app/js/jquery.ui.widget.js	/^$.Widget.prototype = {$/;"	c
+$.Widget.defaultElement	app/js/jquery.ui.widget.js	/^	defaultElement: "<div>",$/;"	p
+$.Widget.options	app/js/jquery.ui.widget.js	/^	options: {$/;"	p
+$.Widget.widgetEventPrefix	app/js/jquery.ui.widget.js	/^	widgetEventPrefix: "",$/;"	p
+$.Widget.widgetName	app/js/jquery.ui.widget.js	/^	widgetName: "widget",$/;"	p
+$.cleanData	app/js/jquery.ui.widget.js	/^$.cleanData = function( elems ) {$/;"	f
+$.expr.toLowerCase	app/js/jquery.ui.widget.js	/^	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {$/;"	f
+$.fn	app/js/jquery.ui.widget.js	/^	$.fn[ name ] = function( options ) {$/;"	f
+$.fn.addBack	app/js/jquery.ui.core.js	/^	$.fn.addBack = function( selector ) {$/;"	f
+$.fn.position	app/js/jquery.ui.position.js	/^$.fn.position = function( options ) {$/;"	f
+$.position.getScrollInfo	app/js/jquery.ui.position.js	/^	getScrollInfo: function( within ) {$/;"	m
+$.position.scrollbarWidth	app/js/jquery.ui.position.js	/^	scrollbarWidth: function() {$/;"	m
+$.ui.position.fit	app/js/jquery.ui.position.js	/^	fit: {$/;"	p
+$.widget	app/js/jquery.ui.widget.js	/^$.widget = function( name, base, prototype ) {$/;"	f
+$.widget.bridge	app/js/jquery.ui.widget.js	/^$.widget.bridge = function( name, object ) {$/;"	f
+$.widget.extend	app/js/jquery.ui.widget.js	/^$.widget.extend = function( target ) {$/;"	f
+AllFamiliesDownload	lib/ggi/all_families_download.rb	/^  class AllFamiliesDownload$/;"	c	class:Ggi
+Animation	app/js/jquery.js	/^function Animation( elem, properties, options ) {$/;"	f
+Ggi	lib/ggi.rb	/^class Ggi$/;"	c
+Ggi	lib/ggi/all_families_download.rb	/^class Ggi$/;"	c
+Ggi	lib/ggi/autocompleter.rb	/^class Ggi::Autocompleter$/;"	c
+Ggi	lib/ggi/classification.rb	/^class Ggi::Classification$/;"	c
+Ggi	lib/ggi/classification_importer.rb	/^class Ggi::ClassificationImporter$/;"	c
+Ggi	lib/ggi/definition_importer.rb	/^class Ggi::DefinitionImporter $/;"	c
+Ggi	lib/ggi/nested_set_builder.rb	/^class Ggi::NestedSetBuilder$/;"	c
+Ggi	lib/ggi/score_calculator.rb	/^class Ggi::ScoreCalculator$/;"	c
+Ggi	lib/ggi/svg.rb	/^module Ggi::Svg$/;"	m
+Ggi	lib/ggi/taxon.rb	/^class Ggi::Taxon$/;"	c
+Ggi	lib/ggi/uri.rb	/^class Ggi::Uri$/;"	c
+Ggi	lib/ggi/version.rb	/^class Ggi$/;"	c
+NO_RESULTS_LABEL	app/js/main.js	/^  var NO_RESULTS_LABEL = 'No results';$/;"	v
+Tween	app/js/jquery.js	/^Tween.prototype = {$/;"	c
+Tween	app/js/jquery.js	/^function Tween( elem, options, prop, end, easing ) {$/;"	f
+Tween.constructor	app/js/jquery.js	/^	constructor: Tween,$/;"	p
+Tween.cur	app/js/jquery.js	/^	cur: function() {$/;"	m
+Tween.init	app/js/jquery.js	/^	init: function( elem, options, prop, end, easing, unit ) {$/;"	m
+Tween.init	app/js/jquery.js	/^Tween.prototype.init.prototype = Tween.prototype;$/;"	m
+Tween.propHooks._default	app/js/jquery.js	/^	_default: {$/;"	p
+Tween.run	app/js/jquery.js	/^	run: function( percent ) {$/;"	m
+actualDisplay	app/js/jquery.js	/^function actualDisplay( name, doc ) {$/;"	f
+addToPrefiltersOrTransports	app/js/jquery.js	/^function addToPrefiltersOrTransports( structure ) {$/;"	f
+addTogglesToTaxonomy	app/js/main.js	/^  var addTogglesToTaxonomy = function() {$/;"	f
+addTreeBrowsingActions	app/js/main.js	/^  var addTreeBrowsingActions = function() {$/;"	f
+add_ids	lib/ggi/autocompleter.rb	/^  def add_ids(name, ids)$/;"	f	class:Ggi
+ajaxConvert	app/js/jquery.js	/^function ajaxConvert( s, response, jqXHR, isSuccess ) {$/;"	f
+ajaxExtend	app/js/jquery.js	/^function ajaxExtend( target, src ) {$/;"	f
+ajaxHandleResponses	app/js/jquery.js	/^function ajaxHandleResponses( s, jqXHR, responses ) {$/;"	f
+all	lib/ggi/taxon.rb	/^  def self.all$/;"	F	class:Ggi
+all	lib/ggi/uri.rb	/^  def self.all$/;"	F	class:Ggi
+ancestors	lib/ggi/taxon.rb	/^  def ancestors$/;"	f	class:Ggi
+ancestors_of	lib/ggi/classification.rb	/^  def ancestors_of(taxon)$/;"	f	class:Ggi
+assign_nested_set_recursively	lib/ggi/nested_set_builder.rb	/^    def assign_nested_set_recursively(options = {})$/;"	f	class:Ggi
+at_limit?	lib/ggi/autocompleter.rb	/^  def at_limit?$/;"	f	class:Ggi
+augmentWidthOrHeight	app/js/jquery.js	/^function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {$/;"	f
+autocomplete	lib/ggi/classification.rb	/^  def autocomplete(search_term)$/;"	f	class:Ggi
+autocomplete	lib/ggi/taxon.rb	/^  def self.autocomplete(search_term)$/;"	F	class:Ggi
+average	lib/ggi/svg.rb	/^    def average$/;"	f	class:Ggi
+buildParams	app/js/jquery.js	/^function buildParams( prefix, obj, traditional, add ) {$/;"	f
+by	lib/ggi/svg.rb	/^    def by$/;"	f	class:Ggi
+by_nc	lib/ggi/svg.rb	/^    def by_nc$/;"	f	class:Ggi
+by_nc_nd	lib/ggi/svg.rb	/^    def by_nc_nd$/;"	f	class:Ggi
+by_nc_sa	lib/ggi/svg.rb	/^    def by_nc_sa$/;"	f	class:Ggi
+by_nd	lib/ggi/svg.rb	/^    def by_nd$/;"	f	class:Ggi
+by_sa	lib/ggi/svg.rb	/^    def by_sa$/;"	f	class:Ggi
+cache_data	lib/ggi/classification_importer.rb	/^  def self.cache_data$/;"	F	class:Ggi
+cachedScrollbarWidth	app/js/jquery.ui.position.js	/^var cachedScrollbarWidth,$/;"	v
+calculate	lib/ggi/score_calculator.rb	/^  def self.calculate$/;"	F	class:Ggi
+calculate_and_assign_scores_recursively	lib/ggi/score_calculator.rb	/^  def calculate_and_assign_scores_recursively(options = {})$/;"	f	class:Ggi
+calculate_score_for_family	lib/ggi/score_calculator.rb	/^  def calculate_score_for_family(family)$/;"	f	class:Ggi
+calculate_scores	lib/ggi/score_calculator.rb	/^  def calculate_scores$/;"	f	class:Ggi
+children	lib/ggi/taxon.rb	/^  def children$/;"	f	class:Ggi
+children_of	lib/ggi/classification.rb	/^  def children_of(taxon)$/;"	f	class:Ggi
+classification	lib/ggi/classification.rb	/^  def self.classification$/;"	F	class:Ggi
+classification_summary	lib/ggi/taxon.rb	/^  def classification_summary$/;"	f	class:Ggi
+clear_cache	lib/ggi/definition_importer.rb	/^  def self.clear_cache$/;"	F	class:Ggi
+collapseTaxonomy	app/js/main.js	/^  var collapseTaxonomy = function() {$/;"	f
+collect_measurement_statistics	lib/ggi/score_calculator.rb	/^  def collect_measurement_statistics$/;"	f	class:Ggi
+collect_statistics_for_percentiles	lib/ggi/score_calculator.rb	/^  def collect_statistics_for_percentiles$/;"	f	class:Ggi
+constructor	app/js/jquery.ui.widget.js	/^	constructor.prototype = $.widget.extend( basePrototype, {$/;"	c
+convert_taxa_to_objects	lib/ggi/classification_importer.rb	/^  def convert_taxa_to_objects$/;"	f	class:Ggi
+create	lib/ggi/all_families_download.rb	/^    def self.create(args = {})$/;"	F	class:Ggi.AllFamiliesDownload
+createActiveXHR	app/js/jquery.js	/^function createActiveXHR() {$/;"	f
+createFxNow	app/js/jquery.js	/^function createFxNow() {$/;"	f
+createStandardXHR	app/js/jquery.js	/^function createStandardXHR() {$/;"	f
+createTween	app/js/jquery.js	/^function createTween( value, prop, animation ) {$/;"	f
+css_defaultDisplay	app/js/jquery.js	/^function css_defaultDisplay( nodeName ) {$/;"	f
+curCSS	app/js/jquery.js	/^	curCSS = function( elem, name, _computed ) {$/;"	f
+dataType	app/js/jquery.js	/^		var dataType,$/;"	v
+defaultPrefilter	app/js/jquery.js	/^function defaultPrefilter( elem, props, opts ) {$/;"	f
+definition	lib/ggi/uri.rb	/^  def definition$/;"	f	class:Ggi
+display	app/js/jquery.js	/^	cssShow = { position: "absolute", visibility: "hidden", display: "block" },$/;"	p
+english_vernacular_name	lib/ggi/taxon.rb	/^  def english_vernacular_name$/;"	f	class:Ggi
+eol_dato_url	helpers.rb	/^  def eol_dato_url(taxon)$/;"	f
+eol_page_url	helpers.rb	/^  def eol_page_url(taxon)$/;"	f
+families_within	lib/ggi/classification.rb	/^  def families_within(taxon)$/;"	f	class:Ggi
+family?	lib/ggi/taxon.rb	/^  def family?$/;"	f	class:Ggi
+find	lib/ggi/classification.rb	/^  def find(taxon_id)$/;"	f	class:Ggi
+find	lib/ggi/taxon.rb	/^  def self.find(id)$/;"	F	class:Ggi
+find	lib/ggi/uri.rb	/^  def self.find(short_name)$/;"	F	class:Ggi
+find_by_name	lib/ggi/taxon.rb	/^  def self.find_by_name(name)$/;"	F	class:Ggi
+find_by_uri	lib/ggi/uri.rb	/^  def self.find_by_uri(uri)$/;"	F	class:Ggi
+focusable	app/js/jquery.ui.core.js	/^function focusable( element, isTabIndexNotNaN ) {$/;"	f
+fontWeight	app/js/jquery.js	/^		fontWeight: 400$/;"	p
+formatted_score	helpers.rb	/^  def formatted_score(score)$/;"	f
+genFx	app/js/jquery.js	/^function genFx( type, includeWidth ) {$/;"	f
+genFx.which.height	app/js/jquery.js	/^		attrs = { height: type },$/;"	p
+getDimensions	app/js/jquery.ui.position.js	/^function getDimensions( elem ) {$/;"	f
+getOffsets	app/js/jquery.ui.position.js	/^function getOffsets( offsets, width, height ) {$/;"	f
+getStyles	app/js/jquery.js	/^	getStyles = function( elem ) {$/;"	f
+getWidthOrHeight	app/js/jquery.js	/^function getWidthOrHeight( elem, name, extra ) {$/;"	f
+getWindow	app/js/jquery.js	/^function getWindow( elem ) {$/;"	f
+good	lib/ggi/svg.rb	/^    def good$/;"	f	class:Ggi
+handle_taxon_row	lib/ggi/classification_importer.rb	/^  def handle_taxon_row(row, header)$/;"	f	class:Ggi
+hooks.empty.fire	app/js/jquery.js	/^			hooks.empty.fire = function() {$/;"	f
+image	lib/ggi/taxon.rb	/^  def image$/;"	f	class:Ggi
+image_attribution	helpers.rb	/^  def image_attribution(image)$/;"	f
+import	lib/ggi/classification_importer.rb	/^  def import$/;"	f	class:Ggi
+import	lib/ggi/definition_importer.rb	/^  def import$/;"	f	class:Ggi
+import	lib/ggi/definition_importer.rb	/^  def self.import$/;"	F	class:Ggi
+import_mappings	lib/ggi/classification_importer.rb	/^  def import_mappings$/;"	f	class:Ggi
+import_taxa	lib/ggi/classification_importer.rb	/^  def import_taxa$/;"	f	class:Ggi
+import_traits	lib/ggi/classification_importer.rb	/^  def import_traits$/;"	f	class:Ggi
+initialize	lib/ggi/autocompleter.rb	/^  def initialize(term)$/;"	f	class:Ggi
+initialize	lib/ggi/classification.rb	/^  def initialize$/;"	f	class:Ggi
+initialize	lib/ggi/classification_importer.rb	/^  def initialize$/;"	f	class:Ggi
+initialize	lib/ggi/score_calculator.rb	/^  def initialize$/;"	f	class:Ggi
+initialize	lib/ggi/taxon.rb	/^  def initialize(taxon_hash)$/;"	f	class:Ggi
+initialize	lib/ggi/uri.rb	/^  def initialize(opts)$/;"	f	class:Ggi
+inspectPrefiltersOrTransports	app/js/jquery.js	/^function inspectPrefiltersOrTransports( structure, options, originalOptions, jqXHR ) {$/;"	f
+inspectPrefiltersOrTransports.inspect	app/js/jquery.js	/^	function inspect( dataType ) {$/;"	f
+isHidden	app/js/jquery.js	/^function isHidden( elem, el ) {$/;"	f
+jQuery.cssHooks.opacity.get	app/js/jquery.js	/^		get: function( elem, computed ) {$/;"	m
+jQuery.cssHooks.opacity.set	app/js/jquery.js	/^		set: function( elem, value ) {$/;"	m
+jQuery.easing.linear	app/js/jquery.js	/^	linear: function( p ) {$/;"	m
+jQuery.easing.swing	app/js/jquery.js	/^	swing: function( p ) {$/;"	m
+jQuery.expr.filters.animated	app/js/jquery.js	/^	jQuery.expr.filters.animated = function( elem ) {$/;"	f
+jQuery.expr.filters.hidden	app/js/jquery.js	/^	jQuery.expr.filters.hidden = function( elem ) {$/;"	f
+jQuery.expr.filters.visible	app/js/jquery.js	/^	jQuery.expr.filters.visible = function( elem ) {$/;"	f
+jQuery.fn.load	app/js/jquery.js	/^jQuery.fn.load = function( url, params, callback ) {$/;"	f
+jQuery.fn.offset	app/js/jquery.js	/^jQuery.fn.offset = function( options ) {$/;"	f
+jQuery.fn.offset.docElem.left	app/js/jquery.js	/^		box = { top: 0, left: 0 },$/;"	p
+jQuery.fn.offset.docElem.top	app/js/jquery.js	/^		box = { top: 0, left: 0 },$/;"	p
+jQuery.fn.size	app/js/jquery.js	/^jQuery.fn.size = function() {$/;"	f
+jQuery.fx.speeds._default	app/js/jquery.js	/^	_default: 400$/;"	p
+jQuery.fx.speeds.fast	app/js/jquery.js	/^	fast: 200,$/;"	p
+jQuery.fx.speeds.slow	app/js/jquery.js	/^	slow: 600,$/;"	p
+jQuery.fx.start	app/js/jquery.js	/^jQuery.fx.start = function() {$/;"	f
+jQuery.fx.stop	app/js/jquery.js	/^jQuery.fx.stop = function() {$/;"	f
+jQuery.fx.tick	app/js/jquery.js	/^jQuery.fx.tick = function() {$/;"	f
+jQuery.fx.timer	app/js/jquery.js	/^jQuery.fx.timer = function( timer ) {$/;"	f
+jQuery.offset.setOffset	app/js/jquery.js	/^	setOffset: function( elem, options, i ) {$/;"	m
+jQuery.param	app/js/jquery.js	/^jQuery.param = function( a, traditional ) {$/;"	f
+jQuery.speed	app/js/jquery.js	/^jQuery.speed = function( speed, easing, fn ) {$/;"	f
+letterSpacing	app/js/jquery.js	/^		letterSpacing: 0,$/;"	p
+license	helpers.rb	/^  def license(license)$/;"	f	class:image_attribution
+loadTaxonomy	app/js/main.js	/^  var loadTaxonomy = function( taxon_id ) {$/;"	f
+long_names	lib/ggi/uri.rb	/^  def self.long_names$/;"	F	class:Ggi
+measurement_source	helpers.rb	/^  def measurement_source$/;"	f
+measurements	lib/ggi/taxon.rb	/^  def measurements$/;"	f	class:Ggi
+method_missing	lib/ggi/classification.rb	/^  def self.method_missing(method_name, *arguments, &block)$/;"	F	class:Ggi
+method_missing	lib/ggi/taxon.rb	/^  def method_missing(meth, *args, &block)$/;"	f	class:Ggi
+name	lib/ggi/taxon.rb	/^  def name$/;"	f	class:Ggi
+name_matches?	lib/ggi/taxon.rb	/^  def name_matches?(matched_name)$/;"	f	class:Ggi
+number_of_families	lib/ggi/taxon.rb	/^  def number_of_families$/;"	f	class:Ggi
+number_of_families_under	lib/ggi/classification.rb	/^  def number_of_families_under(taxon)$/;"	f	class:Ggi
+oldCallbacks	app/js/jquery.js	/^var oldCallbacks = [],$/;"	v
+opt.complete	app/js/jquery.js	/^	opt.complete = function() {$/;"	f
+parseCss	app/js/jquery.ui.position.js	/^function parseCss( element, property ) {$/;"	f
+percentile	lib/ggi/score_calculator.rb	/^  def percentile(value, type)$/;"	f	class:Ggi
+poor	lib/ggi/svg.rb	/^    def poor$/;"	f	class:Ggi
+position	app/js/jquery.js	/^	cssShow = { position: "absolute", visibility: "hidden", display: "block" },$/;"	p
+process_item	lib/ggi/autocompleter.rb	/^  def process_item(item)$/;"	f	class:Ggi
+propFilter	app/js/jquery.js	/^function propFilter( props, specialEasing ) {$/;"	f
+publicdomain	lib/ggi/svg.rb	/^    def publicdomain$/;"	f	class:Ggi
+r20	app/js/jquery.js	/^var r20 = \/%20\/g,$/;"	v
+rank	lib/ggi/taxon.rb	/^  def rank$/;"	f	class:Ggi
+respond_to_missing	lib/ggi/classification.rb	/^  def self.respond_to_missing?(method_name, include_private = false)$/;"	F	class:Ggi
+return	app/js/jquery.js	/^	return new Tween.prototype.init( elem, options, prop, end, easing );$/;"	c
+return.init	app/js/jquery.js	/^	return new Tween.prototype.init( elem, options, prop, end, easing );$/;"	m
+roots	lib/ggi/classification.rb	/^  def roots$/;"	f	class:Ggi
+score_icon	helpers.rb	/^  def score_icon(score_qualifier)$/;"	f
+score_qualifier	helpers.rb	/^  def score_qualifier(score_formatted)$/;"	f
+search	lib/ggi/autocompleter.rb	/^  def self.search(term, items)$/;"	F	class:Ggi
+search	lib/ggi/classification.rb	/^  def search(search_term)$/;"	f	class:Ggi
+search_hash_for_term	lib/ggi/classification.rb	/^  def search_hash_for_term(hash, term)$/;"	f	class:Ggi
+setPositiveNumber	app/js/jquery.js	/^function setPositiveNumber( elem, value, subtract ) {$/;"	f
+short_names	lib/ggi/uri.rb	/^  def self.short_names$/;"	F	class:Ggi
+showHide	app/js/jquery.js	/^function showHide( elements, show ) {$/;"	f
+siblings	lib/ggi/taxon.rb	/^  def siblings$/;"	f	class:Ggi
+siblings_of	lib/ggi/classification.rb	/^  def siblings_of(taxon)$/;"	f	class:Ggi
+source	lib/ggi/taxon.rb	/^  def source$/;"	f	class:Ggi
+sym	lib/ggi/uri.rb	/^  def sym$/;"	f	class:Ggi
+taxa	lib/ggi/classification.rb	/^  def self.taxa$/;"	F	class:Ggi
+taxa	lib/ggi/classification.rb	/^  def taxa$/;"	f	class:Ggi
+taxon_path	helpers.rb	/^  def taxon_path(taxon)$/;"	f
+testElementStyle.background	app/js/jquery.ui.position.js	/^		background: "none"$/;"	p
+testElementStyle.border	app/js/jquery.ui.position.js	/^		border: 0,$/;"	p
+testElementStyle.height	app/js/jquery.ui.position.js	/^		height: 0,$/;"	p
+testElementStyle.margin	app/js/jquery.ui.position.js	/^		margin: 0,$/;"	p
+testElementStyle.visibility	app/js/jquery.ui.position.js	/^		visibility: "hidden",$/;"	p
+testElementStyle.width	app/js/jquery.ui.position.js	/^		width: 0,$/;"	p
+thumbnail	lib/ggi/taxon.rb	/^  def thumbnail$/;"	f	class:Ggi
+tree_item	helpers.rb	/^  def tree_item(taxon, state, current = false)$/;"	f
+uris	lib/ggi/uri.rb	/^  def self.uris$/;"	F	class:Ggi
+vendorPropName	app/js/jquery.js	/^function vendorPropName( style, name ) {$/;"	f
+verify_measurement_labels	lib/ggi/classification_importer.rb	/^  def verify_measurement_labels(taxon_hash)$/;"	f	class:Ggi
+vernacularNames	lib/ggi/taxon.rb	/^  def vernacularNames$/;"	f	class:Ggi
+version	lib/ggi/version.rb	/^  def self.version $/;"	F	class:Ggi
+version	lib/ggi/version.rb	/^  def version $/;"	f	class:Ggi
+visibility	app/js/jquery.js	/^	cssShow = { position: "absolute", visibility: "hidden", display: "block" },$/;"	p
+visible	app/js/jquery.ui.core.js	/^function visible( element ) {$/;"	f
+zero	lib/ggi/svg.rb	/^    def zero$/;"	f	class:Ggi
