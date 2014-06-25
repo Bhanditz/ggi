@@ -82,7 +82,7 @@
       url: '/api/taxonomy/' + taxon_id,
       dataType: 'html',
       success: function( html ) {
-        $('.tree__wrapper--taxonomy').html(html);
+        $('.tree--taxonomy').replaceWith(html);
         addTogglesToTaxonomy();
         addTreeBrowsingActions();
       }

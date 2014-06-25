@@ -1,21 +1,4 @@
 // Theme: replaceable skin, colors, font family etc.
-$ggi-colors: (
-  darkest: #222222,
-  dark: #666666,
-  light: #cccccc,
-  lightest: #f5f5f5,
-  bright: #35a4c9,
-  poor: #cc0000,
-  average: #247996,
-  good: green
-);
-
-$ggi-font-weight: (
-  light: 300,
-  normal: 400,
-  bold: 700
-);
-
 @function ggi-contrast-color($color, $key: false) {
   @return if($key, map-get($ggi-colors, $key), contrast-color($color));
 }
@@ -32,7 +15,7 @@ $ggi-font-weight: (
 @mixin ggi-color-input($bg-key, $fg-key: false) {
   $bg-color: map-get($ggi-colors, $bg-key);
   $fg-color: ggi-contrast-color($bg-color, $fg-key);
-  border-color: darken($bg-color, 10%) darken($bg-color, 8%) lighten($bg-color, 5%);
+  border-color: darken($bg-color, 30%) darken($bg-color, 20%) darken($bg-color, 15%);
   @include background-image(linear-gradient(darken($bg-color, 5%), $bg-color));
   color: $fg-color;
 }
@@ -84,6 +67,12 @@ body {
   font-weight: map-get($ggi-font-weight, normal);
 }
 
+.taxon {
+  @include susy-breakpoint($ggi-breakpoint-large, 3) {
+    background-color: map-get($ggi-colors, lighter);
+  }
+}
+
 a {
   abbr, abbr[title] {
     border-bottom: none;
@@ -103,6 +92,9 @@ a {
   padding: {
     left: rhythm(0.5);
     right: rhythm(0.5);
+  }
+  @include breakpoint($ggi-breakpoint-large) {
+    margin-bottom: rhythm(0.5);
   }
   text-transform: lowercase;
   border-width: 1px;
@@ -127,15 +119,26 @@ a {
 h1 {
   @extend .headers;
   @include adjust-font-size-to(2em);
-  margin-top: 0.5em;  /* This is not ideal; we should be using rhythm properly here. */
+  line-height: 1.1em;
+  margin: 0;
   &.error {
     text-align: center;
+  }
+  a {
+    text-decoration: none;
   }
 }
 
 .subhead {
-  font-size: 1.2em;
+  @include clearfix;
+  font-size: 1em;
   font-style: italic;
+  letter-spacing: 0.7px;
+  color: map-get($ggi-colors, lightest);
+  margin: {
+    top: 0;
+    bottom: rhythm(0.25);
+  }
 }
 
 h2 {
@@ -160,7 +163,7 @@ input[type=search] {
 
 input[type=submit] {
   @extend .button;
-  @include ggi-color-button(darkest);
+  @include ggi-color-button(dark);
 }
 
 thead {
@@ -175,11 +178,6 @@ th {
 
 header.page__header {
   @include ggi-color(darkest);
-}
-
-.page__subheader {
-  @include ggi-color(bright);
-  @include ggi-emboss(bright);
 }
 
 .ui-autocomplete {
@@ -235,6 +233,13 @@ header.page__header {
       text-decoration: none;
     }
   }
+  a.name {
+    color: map-get($ggi-colors, darker);
+  }
+}
+
+.nomenclature__label--reference {
+  text-transform:none;
 }
 
 .nomenclature__datum {
@@ -244,34 +249,87 @@ header.page__header {
   }
 }
 
-.assessment_summary__label {
-  &--score {
-    font-weight: map-get($ggi-font-weight, light);
-  }
-  &--poor {
-    @extend .qualifier--poor;
-  }
-  &--average {
-    @extend .qualifier--average;
-  }
-  &--good {
-    @extend .qualifier--good;
-  }
-}
+.assessment_summary {
 
-.assessment_summary__datum {
-  &--score {
-    font-weight: map-get($ggi-font-weight, bold);
+  font-size: 1.2em;
+  width: 13em;
+  margin: {
+    top: rhythm(1);
+    left: 0;
   }
-  &--poor {
-    @extend .qualifier--poor;
+
+  @include breakpoint($ggi-breakpoint-large) {
+    margin: {
+      top: rhythm(2);
+      left: rhythm(1.5);
+    }
   }
-  &--average {
-    @extend .qualifier--average;
+  @include breakpoint($ggi-breakpoint-huge) {
+    font-size: 1.5em;
+    margin: {
+      top: rhythm(4);
+      left: rhythm(3);
+    }
   }
-  &--good {
-    @extend .qualifier--good;
+
+  dt span {
+    display: inline-block;
+    width: 9em;
   }
+  
+  dd span {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+  }
+
+  &__label {
+    &--family_count {
+      text-transform: none;
+      margin: {
+        top: rhythm(1);
+        bottom: rhythm(1);
+      }
+    }
+    &--score {
+      font-weight: map-get($ggi-font-weight, bold);
+    }
+    &--poor {
+      @extend .qualifier--poor;
+    }
+    &--average {
+      @extend .qualifier--average;
+    }
+    &--good {
+      @extend .qualifier--good;
+    }
+  }
+
+  &__datum {
+    &--score {
+      font-weight: map-get($ggi-font-weight, bold);
+    }
+    &--poor {
+      @extend .qualifier--poor;
+    }
+    &--average {
+      @extend .qualifier--average;
+    }
+    &--good {
+      @extend .qualifier--good;
+    }
+    &--family_count {
+      margin: {
+        top: rhythm(1);
+        bottom: rhythm(1);
+      }
+    }
+  }
+
+  p {
+    font-size: 0.75em;
+  }
+
 }
 
 .assessment__measurement {
@@ -283,6 +341,51 @@ header.page__header {
   }
   &--good {
     @extend .qualifier--good;
+  }
+}
+
+.legend {
+  @include ggi-color(lightest);
+  @include susy-breakpoint($ggi-breakpoint-large, 3) {
+    @include columns(2);
+  }
+  text-align: center;
+  border-top: 2px solid #222;
+  padding: {
+    top: rhythm(0.3);
+    bottom: 0;
+  }
+}
+
+.legend {
+  @include susy-breakpoint($ggi-breakpoint-large, 3) {
+    height: 6em;
+  }
+  @include susy-breakpoint($ggi-breakpoint-huge, 4) {
+    height: auto;
+  }
+}
+
+.assessment__legend {
+  @include susy-breakpoint($ggi-breakpoint-large, 3) {
+    @include columns(2);
+    padding-top: rhythm(0.2);
+    .legend__header {
+      height: 4em;
+    }
+  }
+  @include susy-breakpoint($ggi-breakpoint-huge, 4) {
+    @include columns(4);
+    .legend__header {
+      height: auto;
+    }
+  }
+  
+  dl {
+    margin-left: 7em;
+    @include susy-breakpoint($ggi-breakpoint-large, 3) {
+      margin-left: 0;
+    }
   }
 }
 
@@ -303,9 +406,18 @@ footer.page__footer {
 }
 
 a.info {
-  width: 17px;
-  height: 17px;
+  width: 25px;
+  height: 25px;
   display: inline-block;
-  @include replace-text("info_icon.png");
+  @include replace-text("info-icon.svg");
+  background-size: 25px 25px;
+}
+
+a.external {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  @include replace-text("external-icon.svg");
+  background-size: 22px 22px;
 }
 

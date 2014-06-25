@@ -39,7 +39,7 @@ shared_examples 'an information rich taxon' do
     expect_it { to have_selector('dd', text: taxon.english_vernacular_name) }
   end
   context 'with a reference' do
-    expect_it { to have_selector('dt', text: 'Reference') }
+    expect_it { to have_selector('dt', text: 'Ref:') }
     expect_it { to have_selector('dd', text: taxon.source) }
   end
 end
@@ -57,8 +57,8 @@ shared_examples 'a rank higher than family' do
   ['GenBank', 'EOL', 'GGBN', 'GBIF', 'BOLD', 'BHL'].each do |label|
     expect_it { to_not have_selector('th', text: /#{label}/) }
   end
-  expect_it { to have_selector('dt', text: /^average score/i) }
-  expect_it { to have_selector('dt', text: /^number of families$/i) }
+  expect_it { to have_selector('dt', text: /^GGI score/i) }
+  expect_it { to have_selector('dt', text: /^number of families:$/i) }
   expect_it { to have_selector('p', text: 'For a more detailed assessment of knowledge, choose a family') }
 end
 
@@ -75,10 +75,10 @@ shared_examples 'a family' do
   ['GenBank', 'EOL', 'GGBN', 'GBIF', 'BOLD', 'BHL'].each do |label|
     expect_it { to have_selector('th', text: /#{label}/) }
   end
-  ['Source', 'Count', 'Percentile score'].each do |label|
+  ['Source', 'Count', '% score'].each do |label|
     expect_it { to have_selector('th', text: /#{label}/) }
   end
-  expect_it { to have_selector('dt', text: /^total score/i) }
+  expect_it { to have_selector('th', text: /^GGI score/i) }
   it_behaves_like 'a non root node'
 end
 

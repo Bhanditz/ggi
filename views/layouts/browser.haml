@@ -1,21 +1,4 @@
 %a{ name: '.' }
-.page__subheader
-  .page__bucket
-    %aside.tagline
-      %h2 About the Global Genome Initiative
-      %p Preserving the Genomic Diversity of Life on Earth
-    %section.search
-      %h2 Search
-      %form#search_form{ method: 'get', action: '/search' }
-        %label{for: 'search_term'}
-          Scientific or common name
-          %small
-            For example, enter
-            %em Solanaceae
-        %input#search_term{ type: :search, name: 'search_term',
-          placeholder: 'Enter scientific or common name',
-          value: params[:scientific_name] }
-        %input{ type: :submit, value: 'Search'}
 
 .page__content
   .page__bucket
@@ -35,6 +18,18 @@
       - else
         %h2 Browse taxonomy
         .tree__wrapper.tree__wrapper--taxonomy
+          %section.search
+            %h2 Search
+            %form#search_form{ method: 'get', action: '/search' }
+              %label{for: 'search_term'}
+                Scientific or common name
+                %small
+                  For example, enter
+                  %em Solanaceae
+              %input#search_term{ type: :search, name: 'search_term',
+                placeholder: 'Enter scientific or common name',
+                value: params[:scientific_name] }
+              %input{ type: :submit, value: 'Search'}
           = haml :_taxonomy, layout: false, locals: { taxon: @taxon }
 
     = yield

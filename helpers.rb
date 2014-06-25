@@ -9,7 +9,7 @@ helpers do
       icon = score_icon(qualifier)
     end
     "<li class='#{html_classes.compact.join(' ')}' data-taxon-id='#{taxon.id}' "\
-      "data-children='#{taxon.children.count}'>#{icon}<a href='#{taxon_path(taxon)}'>"\
+      "data-children='#{taxon.children.count}'>#{icon}<a class='name' href='#{taxon_path(taxon)}'>"\
       "#{taxon.name}</a> <small>(#{score})</small></li>"
   end
 
@@ -45,26 +45,30 @@ helpers do
   def measurement_source
     { 'http://eol.org/schema/terms/NumberOfSequencesInGenBank' =>
         '<a href="https://www.ncbi.nlm.nih.gov/genbank">GenBank</a> sequences '\
-        '<a href="http://eol.org/schema/terms/NumberOfSequencesInGenBank">?</a>',
+        '<a class="external" '\
+        'href="http://eol.org/schema/terms/NumberOfSequencesInGenBank">?</a>',
       'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' =>
         '<a href="http://eol.org"><abbr title="Encyclopedia of Life">EOL</abbr>'\
-        '</a> rich pages <a '\
+        '</a> rich pages <a class="external" '\
         'href="http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL">?</a>',
       'http://eol.org/schema/terms/NumberSpecimensInGGBN' =>
         '<a href="http://ggbn.org"><abbr title="Global Genome Biodiversity '\
         'Network">GGBN</abbr></a> records '\
-        '<a href="http://eol.org/schema/terms/NumberSpecimensInGGBN">?</a>',
+        '<a class="external" '\
+        'href="http://eol.org/schema/terms/NumberSpecimensInGGBN">?</a>',
       'http://eol.org/schema/terms/NumberRecordsInGBIF' =>
         '<a href="http://gbif.org"><abbr title="Global Biodiversity Information'\
         'Facility">GBIF</abbr></a> records '\
-        '<a href="http://eol.org/schema/terms/NumberRecordsInGBIF">?</a>',
+        '<a class="external" '\
+        'href="http://eol.org/schema/terms/NumberRecordsInGBIF">?</a>',
       'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' =>
         '<a href="http://boldsystems.org"><abbr title="Barcode of Life Data">'\
         'BOLD</abbr></a> records '\
-        '<a href="http://eol.org/schema/terms/NumberPublicRecordsInBOLD">?</a>',
+        '<a class="external" '\
+        'href="http://eol.org/schema/terms/NumberPublicRecordsInBOLD">?</a>',
       'http://eol.org/schema/terms/NumberReferencesInBHL' =>
         '<a href="http://biodiversitylibrary.org"><abbr title="Biodiversity '\
-        'Heritage Library">BHL</abbr></a> pages <a '\
+        'Heritage Library">BHL</abbr></a> pages <a class="external" '\
         'href="http://eol.org/schema/terms/NumberReferencesInBHL">?</a>' }
   end
 

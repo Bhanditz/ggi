@@ -13,24 +13,16 @@
           %dt.nomenclature__label--common-name English common name
           %dd.nomenclature__datum--common-name
             %a{ href: eol_page_url(@taxon) }= @taxon.english_vernacular_name
+      -# Creating a second list just to add some space after the name; not ideal.
+      %dl.nomenclature
         - unless @taxon.classification_summary.empty?
           %dt.nomenclature__label--classification Classification
           %dd.nomenclature__datum--classification
             = @taxon.classification_summary.map{ |t| "<a href='#{taxon_path(t)}'>#{t.name}</a>" }.join(" &gt; ")
         - unless @taxon.source.to_s.empty?
-          %dt.nomenclature__label--reference Reference
+          %dt.nomenclature__label--reference Ref:
           %dd.nomenclature__datum--reference
             %a{ href: '/about' }= @taxon.source
-      %dl.assessment_summary
-        - taxon_score_formatted = formatted_score(@taxon.score)
-        - unless @taxon.family?
-          %dt.assessment_summary__label--family_count Number of families
-          %dd.assessment_summary__datum--family_count= @taxon.number_of_families
-        %dt.assessment_summary__label--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
-          = @taxon.family? ? 'Total score' : 'Average score'
-          %a.info{ title: 'Explanation of score', href: '/about' } ?
-        %dd.assessment_summary__datum--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
-          = taxon_score_formatted
       - if @taxon.image
         - attribution = image_attribution(@taxon.image).to_s
         - license_html = license(@taxon.image[:license]).to_s
@@ -52,7 +44,7 @@
             %tr
               %th.measurement__label--source{ scope: 'col' } Source
               %th.measurement__label--value{ scope: 'col' } Count
-              %th.measurement__label--score{ scope: 'col' } Percentile score
+              %th.measurement__label--score{ scope: 'col' } % score
           %tbody
             - Ggi::ClassificationImporter::MEASUREMENT_URIS_TO_LABELS.each do |uri, label|
               - measurement = @taxon.measurements.select{|m| m[:measurementType] == uri}.first rescue nil
@@ -62,27 +54,30 @@
                 %td.measurement__datum--value
                   = measurement.nil? ? 0 : measurement[:measurementValue]
                 %td.measurement__datum--score= score
+            - taxon_score_formatted = formatted_score(@taxon.score)
+            %tr{ class: "assessment__measurement--#{score_qualifier(taxon_score_formatted)}" }
+              %th.measurement__datum--source{ scope: 'row' }
+                %span
+                  = @taxon.family? ? 'GGI score' : 'GGI score:'
+                  %a.info{ title: 'Explanation of score', href: '/help' } ?
+              %td.measurement__datum--value 
+              %td.measurement__datum--score= taxon_score_formatted
       - else
-        %p For a more detailed assessment of knowledge, choose a family.
-      %aside.assessment__legend
-        %header.legend__header
-          %h3 Legend
-        %p
-          Relative amount of knowledge.
-          %a.info{ title: 'Explanation of assessment scale', href: '/about' } ?
-        %dl
-          %dt.legend__label--good Good
-          %dd.legend__definition--good
-            = score_icon('good')
-            81 to 100
-          %dt.legend__label--average Average
-          %dd.legend__definition--average
-            = score_icon('average')
-            51 to 80
-          %dt.legend__label--poor Poor
-          %dd.legend__definition--poor
-            = score_icon('poor')
-            0 to 50
+        .assessment_summary
+          %dl
+            - taxon_score_formatted = formatted_score(@taxon.score)
+            %dt.assessment_summary__label--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
+              %span
+                = @taxon.family? ? 'GGI score' : 'GGI score:'
+                %a.info{ title: 'Explanation of score', href: '/help' } ?
+            %dd.assessment_summary__datum--score{ class: "assessment_summary__label--#{score_qualifier(taxon_score_formatted)}" }
+              %span= taxon_score_formatted
+            - unless @taxon.family?
+              %dt.assessment_summary__label--family_count 
+                %span Number of families:
+              %dd.assessment_summary__datum--family_count
+                %span= @taxon.number_of_families
+          %p For a more detailed assessment of knowledge, choose a family.
 
 - else
   %p Taxon information is missing

@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title GGI Data Portal
+    %title GGI Knowledge Portal
     %meta{ name: 'viewport', content: 'width=device-width' }
     != css :application, :media => 'screen'
     != js :app
@@ -9,18 +9,58 @@
     .page
       %header.page__header
         .page__bucket
-          %h1.site-title
-            %a{ href: '/'} GGI Data Portal
+          .site-title
+            %h1
+              %a{ href: '/'} Global Genome Initiative Knowledge Portal (Beta)
+            %p.subhead Preserving and Understanding the Genomic Diversity of Life on Earth
           %nav.site-navigation
             %ul
-              - ['about', 'help', 'downloads'].each do |n|
-                %li
-                  %a{ href: "/#{n}" }
-                    - if request.path_info == "/#{n}"
-                      %strong= n.capitalize
-                    - else
-                      = n.capitalize
+              %li
+                %a{ href: "/about" }
+                  - if request.path_info == "/about"
+                    %strong About GGI
+                  - else
+                    About GGI
+              %li
+                %a{ href: "/help" }
+                  - if request.path_info == "/help"
+                    %strong Help
+                  - else
+                    Help
+              %li
+                %a{ href: "/downloads" }
+                  - if request.path_info == "/downloads"
+                    %strong Downloads
+                  - else 
+                    Downloads
       = yield
+      - if @taxon
+        .legend
+          .assessment__legend
+            %header.legend__header
+              %h3 Legend
+            %dl
+              %dt.legend__label--good 
+                %span Good:
+              %dd.legend__definition--good
+                %span
+                  = score_icon('good')
+                  81 to 100
+              %dt.legend__label--average 
+                %span Average:
+              %dd.legend__definition--average
+                %span
+                  = score_icon('average')
+                  51 to 80
+              %dt.legend__label--poor
+                %span Poor:
+              %dd.legend__definition--poor
+                %span
+                  = score_icon('poor')
+                  0 to 50
+          %p.assessment__definition
+            Scores reflect the relative amount of knowledge of this taxonomic clade.
+            %a.info{ title: 'Explanation of assessment scale', href: '/help' } ?
       %footer.page__footer
         .page__bucket
           %h2 Sponsors

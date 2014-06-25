@@ -2,7 +2,7 @@
 ul.tabs {
   margin:0 !important;
   padding: 0;
-  height: 36px;
+  height: 2.3em;
   border-bottom: 5px solid #ddd;
 }
 
@@ -17,10 +17,11 @@ ul.tabs a {
   float: left;
   display: block;
   padding: 5px 30px;
+  text-decoration: none;
   text-align: center;
   border: 1px solid #ddd;
   border-bottom: 0px;
-  height: 30px;
+  height: 2.1em;
   background-color: #efefef;
   color: #777;
   margin-right: 2px;
