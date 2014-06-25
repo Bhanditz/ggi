@@ -99,7 +99,6 @@ a {
 }
 
 .button {
-  @include adjust-font-size-to(1.2em);
   @include adjust-leading-to(1.2);
   padding: {
     left: rhythm(0.5);
@@ -146,11 +145,6 @@ h2 {
 dt {
   text-transform: uppercase;
   font-weight: map-get($ggi-font-weight, light);
-  @include adjust-font-size-to(0.9em, 1.21);
-}
-
-dd {
-  @include adjust-leading-to(1.22);
 }
 
 figcaption {
@@ -211,17 +205,10 @@ header.page__header {
 
 .tagline {
   p {
-    @include adjust-font-size-to(1.2em);
+    @include adjust-font-size-to(1.25em);
     font-weight: map-get($ggi-font-weight, light);
+    font-style: italic;
     margin: 0;
-  }
-}
-
-.browser__actions {
-  a {
-    @include breakpoint($ggi-breakpoint-large) {
-      @include adjust-font-size-to(0.8em);
-    }
   }
 }
 
@@ -229,12 +216,6 @@ header.page__header {
   border-color: map-get($ggi-colors, light);
   ul {
     @include no-bullet;
-  }
-}
-
-.tree {
-  @include breakpoint($ggi-breakpoint-large) {
-    @include adjust-font-size-to(0.9em);
   }
 }
 
@@ -265,7 +246,6 @@ header.page__header {
 
 .assessment_summary__label {
   &--score {
-    @include adjust-font-size-to(1.4em, 2);
     font-weight: map-get($ggi-font-weight, light);
   }
   &--poor {
@@ -281,7 +261,6 @@ header.page__header {
 
 .assessment_summary__datum {
   &--score {
-    @include adjust-font-size-to(1.5em);
     font-weight: map-get($ggi-font-weight, bold);
   }
   &--poor {

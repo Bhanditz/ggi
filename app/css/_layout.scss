@@ -8,11 +8,11 @@ $ggi-footer-rhythm: 4;
 @include border-box-sizing;
 
 @include breakpoint($ggi-breakpoint-medium) {
-  @include establish-baseline(14px);
+  @include establish-baseline(17px);
 }
 
 @include breakpoint($ggi-breakpoint-large) {
-  @include establish-baseline(16px);
+  @include establish-baseline(19px);
 }
 
 html, body {
