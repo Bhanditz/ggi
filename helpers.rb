@@ -44,32 +44,17 @@ helpers do
   # TODO - generalize this somehow with Ggi::Uri
   def measurement_source
     { 'http://eol.org/schema/terms/NumberOfSequencesInGenBank' =>
-        '<a href="https://www.ncbi.nlm.nih.gov/genbank">GenBank</a> sequences '\
-        '<a class="external" '\
-        'href="http://eol.org/schema/terms/NumberOfSequencesInGenBank">?</a>',
+        'GenBank sequences',
       'http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL' =>
-        '<a href="http://eol.org"><abbr title="Encyclopedia of Life">EOL</abbr>'\
-        '</a> rich pages <a class="external" '\
-        'href="http://eol.org/schema/terms/NumberRichSpeciesPagesInEOL">?</a>',
+        'EOL',
       'http://eol.org/schema/terms/NumberSpecimensInGGBN' =>
-        '<a href="http://ggbn.org"><abbr title="Global Genome Biodiversity '\
-        'Network">GGBN</abbr></a> records '\
-        '<a class="external" '\
-        'href="http://eol.org/schema/terms/NumberSpecimensInGGBN">?</a>',
+        'GGBN',
       'http://eol.org/schema/terms/NumberRecordsInGBIF' =>
-        '<a href="http://gbif.org"><abbr title="Global Biodiversity Information'\
-        'Facility">GBIF</abbr></a> records '\
-        '<a class="external" '\
-        'href="http://eol.org/schema/terms/NumberRecordsInGBIF">?</a>',
+        'GBIF',
       'http://eol.org/schema/terms/NumberPublicRecordsInBOLD' =>
-        '<a href="http://boldsystems.org"><abbr title="Barcode of Life Data">'\
-        'BOLD</abbr></a> records '\
-        '<a class="external" '\
-        'href="http://eol.org/schema/terms/NumberPublicRecordsInBOLD">?</a>',
+        'BOLD',
       'http://eol.org/schema/terms/NumberReferencesInBHL' =>
-        '<a href="http://biodiversitylibrary.org"><abbr title="Biodiversity '\
-        'Heritage Library">BHL</abbr></a> pages <a class="external" '\
-        'href="http://eol.org/schema/terms/NumberReferencesInBHL">?</a>' }
+        'BHL' }
   end
 
   def image_attribution(image)
