@@ -335,21 +335,16 @@ header.page__header {
   @include ggi-color(lightest);
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     @include columns(2);
+    height: 6em;
+  }
+  @include susy-breakpoint($ggi-breakpoint-huge, 4) {
+    height: auto;
   }
   text-align: center;
   border-top: 2px solid #222;
   padding: {
     top: rhythm(0.3);
     bottom: 0;
-  }
-}
-
-.legend {
-  @include susy-breakpoint($ggi-breakpoint-large, 3) {
-    height: 6em;
-  }
-  @include susy-breakpoint($ggi-breakpoint-huge, 4) {
-    height: auto;
   }
 }
 

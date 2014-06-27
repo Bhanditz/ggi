@@ -111,7 +111,7 @@ header.page__header {
   padding-top: rhythm(1);
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     border-left: 2px solid black;
-    height: rhythm(25);
+    min-height: rhythm(23);
     padding-left: rhythm(2);
     @include span(5 at 3 of 7);
     @include nested(2) {
