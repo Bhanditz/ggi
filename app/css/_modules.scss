@@ -15,6 +15,10 @@ article {
     width: 60%;
     margin-left: 20%;
   }
+  margin-left: rhythm(1);
+  @include breakpoint($ggi-breakpoint-large) {
+    margin-left: 0;
+  }
 }
 
 .list__links {
@@ -173,6 +177,7 @@ nav {
 }
 
 .browser {
+  max-width: 32em;
   > h2 {
     @extend .visually-hidden;
   }

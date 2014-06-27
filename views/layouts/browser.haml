@@ -9,7 +9,7 @@
           %li{ class: phylo ? nil : 'browser__nav--current'}
             %a{ class: phylo ? nil : 'current', href: "#{request.path_info}?browse_by=taxonomy" } Taxonomy
           %li{ class: phylo ? 'browser__nav--current' : nil}
-            %a{ class: phylo ? 'current' : nil, href: "#{request.path_info}?browse_by=phylogeny" } Phylogeny
+            %span{ class: phylo ? 'current' : nil, href: "#{request.path_info}?browse_by=phylogeny" } Phylogeny
 
       - if params[:browse_by] == 'phylogeny'
         %h2 Browse phylogeny

@@ -259,9 +259,10 @@ header.page__header {
 
   font-size: 1.5em;
   width: 13em;
-  margin: rhythm(1) auto;
+  margin: rhythm(1) 0;
 
   @include breakpoint($ggi-breakpoint-large) {
+    margin: rhythm(1) auto;
     margin-top: rhythm(2.75);
   }
 
