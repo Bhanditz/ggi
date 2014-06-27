@@ -107,7 +107,7 @@ header.page__header {
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     border: 2px solid black;
     border-top: 0; // Looks weird.
-    min-height: rhythm(27.25);
+    min-height: rhythm(28);
     padding-left: rhythm(2);
     @include span(5 at 3 of 7);
     @include nested(2) {
