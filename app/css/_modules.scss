@@ -179,14 +179,14 @@ nav {
 .browser__actions {
   position: absolute;
   top: rhythm(1);
-  right: rhythm(0.5);
+  right: rhythm(1);
   @include breakpoint($ggi-breakpoint-large) {
     top: rhythm(0.25);
-    right: 0;
+    right: rhythm(0.5);
   }
   @include breakpoint($ggi-breakpoint-huge) {
     top: rhythm(1);
-    right: rhythm(0.5);
+    right: rhythm(1);
   }
 }
 

@@ -4,8 +4,10 @@ $base-line-height: 18px;
 $ggi-breakpoint-medium: 60em;
 $ggi-breakpoint-large: 80em;
 $ggi-breakpoint-huge: 110em;
-// TODO - remove this before production:
 $susy: (
+  // NOTE - we do our own padding; tighter.
+  gutters: 0,
+  // TODO - remove this before production:
   debug: (
     image: hide,
     color: blue
@@ -96,8 +98,9 @@ header.page__header {
 }
 
 .browser {
-  @include break; // Not sure what this is doing; remove it, no change
+  // NOTE - rhyhm-padding sets top and bottom spacing:
   @include rhythm-padding(0.75, 1);
+  padding-right: rhythm(0.75);
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     @include span(2 at 1 of 7);
   }
@@ -109,7 +112,7 @@ header.page__header {
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     border-left: 2px solid black;
     height: rhythm(25);
-    padding-left: 5em;
+    padding-left: rhythm(2);
     @include span(5 at 3 of 7);
     @include nested(2) {
       .taxon__information {
