@@ -84,7 +84,7 @@ a {
 }
 
 .textbox {
-  @include rhythm-borders(1px, 0.4);
+  @include rhythm-borders(1px, 0.35);
 }
 
 .button {

@@ -26,10 +26,12 @@
                 %small
                   For example, enter
                   %em Solanaceae
-              %input#search_term{ type: :search, name: 'search_term',
-                placeholder: 'Enter scientific or common name',
-                value: params[:scientific_name] }
-              %input{ type: :submit, value: 'Search'}
+              .term
+                %input#search_term{ type: :search, name: 'search_term',
+                  placeholder: 'Enter scientific or common name',
+                  value: params[:scientific_name] }
+              .actions
+                %input{ type: :submit, value: 'Search'}
           = haml :_taxonomy, layout: false, locals: { taxon: @taxon }
       .legend
         .assessment__legend

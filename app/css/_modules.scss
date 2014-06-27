@@ -99,6 +99,18 @@ nav {
 }
 
 .search {
+
+  @include breakpoint($ggi-breakpoint-large) {
+    font-size: 0.8em;
+  }
+  @include breakpoint($ggi-breakpoint-huge) {
+    font-size: 1em;
+  }
+
+  margin: {
+    top: rhythm(0.25);
+    bottom: rhythm(0.5);
+  }
   h2 {
     @extend .visually-hidden;
   }
@@ -106,20 +118,25 @@ nav {
     @extend .visually-hidden;
     display: block;
   }
-  input[type=search] {
-    position: relative;
+  .term {
+    float: left;
     width: 70%;
-    @include breakpoint($ggi-breakpoint-medium) {
-      width: 90%;
-    }
-    @include breakpoint($ggi-breakpoint-huge) {
-      width: 72%;
-    }
-    margin: {
-      top: rhythm(0.25);
-      bottom: rhythm(0.5);
+    input {
+      width: 100%;
     }
   }
+  .actions {
+    float: right;
+    width: 20%;
+    margin: {
+      top: 0;
+      right: rhythm(0.3);
+    }
+  }
+}
+
+.tree--taxonomy {
+  clear: both;
 }
 
 .ui-autocomplete {
