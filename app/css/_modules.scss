@@ -101,12 +101,15 @@ th, td {
 }
 
 nav {
+  font-size: 0.9em;
   ul {
     @extend .list__tabs;
   }
 }
 
 .search {
+
+  height: rhythm(1.5); // Seems to fix phone problems.
 
   @include breakpoint($ggi-breakpoint-large) {
     font-size: 0.8em;
@@ -203,6 +206,7 @@ nav {
 }
 
 .browser__actions {
+  font-size: 0.9em;
   position: absolute;
   top: rhythm(1);
   right: rhythm(1);

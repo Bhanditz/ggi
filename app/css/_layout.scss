@@ -2,6 +2,7 @@
 $base-font-size: 12px;
 $base-line-height: 18px;
 $ggi-breakpoint-medium: 60em;
+$ggi-breakpoint-head-split: 70em;
 $ggi-breakpoint-large: 80em;
 $ggi-breakpoint-huge: 110em;
 $susy: (
@@ -84,7 +85,13 @@ header.page__header {
   text-align: right;
 }
 
-@include susy-breakpoint($ggi-breakpoint-medium, 2) {
+.site-title {
+  small {
+    color: map-get($ggi-colors, light);
+  }
+}
+
+@include susy-breakpoint($ggi-breakpoint-head-split, 2) {
   .site-title {
     @include span(2 at 1 of 3);
     margin: 0;

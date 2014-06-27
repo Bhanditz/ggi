@@ -11,7 +11,9 @@
         .page__bucket
           .site-title
             %h1
-              %a{ href: '/'} Global Genome Initiative Knowledge Portal (Beta)
+              %a{ href: '/'}
+                Global Genome Initiative Knowledge Portal
+                %small  Beta
             %p.subhead Preserving and Understanding the Genomic Diversity of Life on Earth
           %nav.site-navigation
             %ul
@@ -33,6 +35,8 @@
                     %strong Downloads
                   - else 
                     Downloads
+              %li
+                %a{ href: "mailto:ggi@si.edu" } Contact Us
       = yield
       %footer.page__footer
         .page__bucket
