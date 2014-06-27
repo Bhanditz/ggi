@@ -251,25 +251,12 @@ header.page__header {
 
 .assessment_summary {
 
-  font-size: 1.2em;
+  font-size: 1.5em;
   width: 13em;
-  margin: {
-    top: rhythm(1);
-    left: 0;
-  }
+  margin: rhythm(1) auto;
 
   @include breakpoint($ggi-breakpoint-large) {
-    margin: {
-      top: rhythm(2);
-      left: rhythm(1.5);
-    }
-  }
-  @include breakpoint($ggi-breakpoint-huge) {
-    font-size: 1.5em;
-    margin: {
-      top: rhythm(4);
-      left: rhythm(3);
-    }
+    margin-top: rhythm(2.75);
   }
 
   dt span {

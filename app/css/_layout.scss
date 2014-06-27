@@ -87,11 +87,11 @@ header.page__header {
 
 @include susy-breakpoint($ggi-breakpoint-medium, 2) {
   .site-title {
-    @include span(3 at 1 of 4);
+    @include span(2 at 1 of 3);
     margin: 0;
   }
   .site-navigation {
-    @include span(1 at 4 of 4);
+    @include span(1 at 3 of 3);
   }
 }
 
@@ -113,13 +113,13 @@ header.page__header {
     @include span(5 at 3 of 7);
     @include nested(2) {
       .taxon__information {
-        @include span(1 at 1 of 3);
+        @include span(3 at 1 of 7);
         img {
           max-width: 100%;
         }
       }
       .taxon__assessment {
-        @include span(2 at 2 of 3);
+        @include span(4 at 4 of 7);
       }
     }
   }
