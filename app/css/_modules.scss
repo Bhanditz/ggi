@@ -15,6 +15,9 @@ article {
     width: 60%;
     margin-left: 20%;
     margin-bottom: rhythm(2);
+    a:link {
+      color: #44a;
+    }
   }
   margin-left: rhythm(1);
   @include breakpoint($ggi-breakpoint-large) {
