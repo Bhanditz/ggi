@@ -215,6 +215,12 @@ header.page__header {
   ul {
     @include no-bullet;
   }
+  width: 100%;
+  overflow: auto;
+  @include rhythm-borders(1px, 0.5);
+  @include breakpoint($ggi-breakpoint-large) {
+    height: rhythm(17);
+  }
 }
 
 .tree__item {
@@ -332,41 +338,38 @@ header.page__header {
 }
 
 .legend {
-  @include ggi-color(lightest);
-  @include susy-breakpoint($ggi-breakpoint-large, 3) {
-    @include columns(2);
-    height: 6em;
-  }
-  @include susy-breakpoint($ggi-breakpoint-huge, 4) {
-    height: auto;
-  }
-  text-align: center;
-  border-top: 2px solid #222;
-  padding: {
-    top: rhythm(0.3);
-    bottom: 0;
-  }
-}
 
-.assessment__legend {
-  @include susy-breakpoint($ggi-breakpoint-large, 3) {
-    @include columns(2);
-    padding-top: rhythm(0.2);
-    .legend__header {
-      height: 4em;
+  font-size: 0.9em;
+  padding: rhythm(1);
+  @include rhythm-borders(1.1px, 0.5);
+  border-top: 0; // there is already one there.
+  border-color: map-get($ggi-colors, light);
+
+  .legend__header {
+    h3 {
+      margin-top: 0;
+    }
+    @include span(1 at 1 of 3);
+  }
+
+  .legend__list {
+    @include span(2 at 2 of 3);
+    dt {
+    text-align: right;
+      width: 6em;
+    }
+    dd {
+      text-align: left;
     }
   }
-  @include susy-breakpoint($ggi-breakpoint-huge, 4) {
-    @include columns(4);
-    .legend__header {
-      height: auto;
-    }
-  }
-  
-  dl {
-    margin-left: 7em;
-    @include susy-breakpoint($ggi-breakpoint-large, 3) {
-      margin-left: 0;
+
+  p {
+    clear: both;
+    margin: 0;
+    a {
+      width: 14px;
+      height: 14px;
+      background-size: 14px 14px;
     }
   }
 }

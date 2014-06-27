@@ -75,10 +75,7 @@ header.page__header {
 
 .page__content {
   @extend .page__lane;
-  padding: {
-    top: 0;
-    bottom: 0;
-  }
+  padding: 0;
 }
 
 .site-navigation {
@@ -98,9 +95,7 @@ header.page__header {
 }
 
 .browser {
-  // NOTE - rhyhm-padding sets top and bottom spacing:
-  @include rhythm-padding(0.75, 1);
-  padding-right: rhythm(0.75);
+  padding: rhythm(0.75);
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     @include span(2 at 1 of 7);
   }
@@ -110,8 +105,9 @@ header.page__header {
   margin-bottom: 0;
   padding-top: rhythm(1);
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
-    border-left: 2px solid black;
-    min-height: rhythm(23);
+    border: 2px solid black;
+    border-top: 0; // Looks weird.
+    min-height: rhythm(27.25);
     padding-left: rhythm(2);
     @include span(5 at 3 of 7);
     @include nested(2) {

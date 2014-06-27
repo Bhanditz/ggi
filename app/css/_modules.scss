@@ -190,15 +190,6 @@ nav {
   }
 }
 
-.tree__wrapper {
-  width: 100%;
-  overflow: auto;
-  @include rhythm-borders(1px, 0.5);
-  @include breakpoint($ggi-breakpoint-large) {
-    height: rhythm(19);
-  }
-}
-
 .tree {
   margin-top: 0;
   padding-left: 0;
@@ -254,36 +245,6 @@ nav {
     }
     font-weight: bold;
     border-top: 3px solid map-get($ggi-colors, dark);
-  }
-}
-
-.legend__header {
-  h3 {
-    margin-top: 0;
-  }
-}
-
-.legend {
-  dt {
-    text-align: right;
-  }
-  dd {
-    text-align: left;
-  }
-}
-
-.legend__label {
-  &--good, &--average, &--poor {
-    span { 
-      display: inline-block;
-      width: 5em; 
-      text-align: left;
-    }
-  
-  @include breakpoint($ggi-breakpoint-huge) {
-    span { width: auto; }
-  }
-    // width: rhythm(4);
   }
 }
 

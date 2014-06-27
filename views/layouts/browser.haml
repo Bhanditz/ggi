@@ -31,6 +31,33 @@
                 value: params[:scientific_name] }
               %input{ type: :submit, value: 'Search'}
           = haml :_taxonomy, layout: false, locals: { taxon: @taxon }
+      .legend
+        .assessment__legend
+          %header.legend__header
+            %h3 Legend
+          .legend__list
+            %dl
+              %dt.legend__label--good 
+                %span Good:
+              %dd.legend__definition--good
+                %span
+                  = score_icon('good')
+                  81 to 100
+              %dt.legend__label--average 
+                %span Average:
+              %dd.legend__definition--average
+                %span
+                  = score_icon('average')
+                  51 to 80
+              %dt.legend__label--poor
+                %span Poor:
+              %dd.legend__definition--poor
+                %span
+                  = score_icon('poor')
+                  0 to 50
+        %p.assessment__definition
+          Scores reflect the relative amount of knowledge of this taxonomic clade.
+          %a.info{ title: 'Explanation of assessment scale', href: '/help' } ?
 
     = yield
 
