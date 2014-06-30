@@ -12,7 +12,7 @@
 article {
   padding-top: rhythm(2);
   &.narrow {
-    width: 100%;
+    width: 92%;
     margin: {
       left: rhythm(1);
       right: rhythm(1);
@@ -83,8 +83,8 @@ figcaption p {
 }
 
 figure.float {
-  width: 30%;
-  min-width: 350px;
+  clear: both;
+  width: 350px;
   float: left;
   margin: 1em 2em 2em 1em;
 }
