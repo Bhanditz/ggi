@@ -84,7 +84,10 @@ table {
   width: 80%; // As wide as possible (w/ breathing rm), within:
   min-width: 21em;
   max-width: 29em;
-  margin: rhythm(2.75) auto;
+  margin: rhythm(2.75) 0;
+  @include breakpoint($ggi-breakpoint-large) {
+    margin: rhythm(2.75) auto;
+  }
   padding: 0 rhythm(1);
 }
 
