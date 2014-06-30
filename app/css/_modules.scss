@@ -12,11 +12,22 @@
 article {
   padding-top: rhythm(2);
   &.narrow {
-    width: 60%;
-    margin-left: 20%;
-    margin-bottom: rhythm(2);
+    width: 100%;
+    margin: {
+      left: rhythm(1);
+      right: rhythm(1);
+      bottom: rhythm(2);
+    }
     a:link {
       color: #44a;
+    }
+    @include breakpoint($ggi-breakpoint-large) {
+      width: 60%;
+      margin: {
+        left: auto;
+        right: auto;
+        bottom: rhythm(2);
+      }
     }
   }
   margin-left: rhythm(1);
@@ -55,8 +66,8 @@ dd {
 }
 
 img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 hr {

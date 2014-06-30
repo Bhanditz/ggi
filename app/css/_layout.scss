@@ -47,6 +47,7 @@ $ggi-font-weight: (
   @include establish-baseline(19px);
 }
 
+/* DEBUGGING ONLY ... the border-radius on the body tells you how wide it 'thinks' the page is. */
 body {
   border-radius: 0;
   @include breakpoint($ggi-breakpoint-medium) {
