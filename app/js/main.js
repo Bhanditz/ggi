@@ -10,7 +10,7 @@
             dataType: 'json',
             data: {
               search_term: request.term,
-              batch_size: 10
+              batch_size: 7
             },
             success: function( data ) {
               if (!data.length) {

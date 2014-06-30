@@ -13,8 +13,6 @@
           %dt.nomenclature__label--common-name English common name
           %dd.nomenclature__datum--common-name
             %a{ href: eol_page_url(@taxon) }= @taxon.english_vernacular_name
-      -# Creating a second list just to add some space after the name; not ideal.
-      %dl.nomenclature
         - unless @taxon.classification_summary.empty?
           %dt.nomenclature__label--classification Classification
           %dd.nomenclature__datum--classification
@@ -31,6 +29,8 @@
             %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
           - unless (attribution.empty? && license_html.empty?)
             %figcaption
+              - unless @taxon.image[:title].empty?
+                %p= @taxon.image[:title]
               - unless attribution.empty?
                 %p= attribution
               = license_html

@@ -244,15 +244,23 @@ header.page__header {
   }
 }
 
-.nomenclature__label--reference {
-  text-transform:none;
-}
+.nomenclature {
 
-.nomenclature__datum {
-  &--classification,
-  &--common-name {
-    font-weight: map-get($ggi-font-weight, light);
+  &__label--reference {
+    text-transform:none;
   }
+
+  &__datum {
+    &--classification,
+    &--common-name {
+      font-weight: map-get($ggi-font-weight, light);
+    }
+  }
+
+  dd {
+    margin-bottom: rhythm(0.5);
+  }
+
 }
 
 .assessment_summary {
