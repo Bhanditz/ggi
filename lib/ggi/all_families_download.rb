@@ -129,18 +129,17 @@ class Ggi
           "queries up to date as of #{args[:updated]}"
         ]
         key_sheet.add_row ['Term', 'URI', 'Definition']
+        defs = Ggi::DefinitionImporter.import
         Ggi::Uri.all.each do |uri|
+          definition = uri.definition
+          unless definition && ! definition.blank?
+            new_def = defs.find { |d| d["uri"] == uri.uri }
+            definition = new_def["definition"] if new_def
+          end
           key_sheet.add_row [
             uri.long_name,
             uri.uri,
-            uri.definition
-          ]
-        end
-        Ggi::DefinitionImporter.import.each do |uri|
-          key_sheet.add_row [
-            uri["name"],
-            uri["uri"],
-            uri["definition"]
+            definition
           ]
         end
       end

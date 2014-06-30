@@ -276,14 +276,7 @@ describe Ggi::AllFamiliesDownload do
         expect(Ggi::DefinitionImporter).to have_received(:import)
       end
 
-      it 'adds rows for each eol definition' do
-        book = subject
-        offset = 2 + Ggi::Uri.all.count
-        expect(book.rows[ offset ].cells.map(&:value)).to \
-          eq(['foo', 'http://a', 'defined'])
-        expect(book.rows[ offset + 1 ].cells.map(&:value)).to \
-          eq(['bar', 'http://b', 'defined again'])
-      end
+      # TODO - the definitions are now taken from Ggi::DefinitionImporter and we should check that.
 
     end
 
