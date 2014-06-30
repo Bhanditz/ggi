@@ -162,6 +162,11 @@ nav {
 
 .tree--taxonomy {
   clear: both;
+
+  a.toggle {
+    font-weight: bold;
+    text-decoration: none;
+  }
 }
 
 .ui-autocomplete {

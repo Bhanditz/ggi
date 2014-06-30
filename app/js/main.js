@@ -66,8 +66,11 @@
   var addTogglesToTaxonomy = function() {
     $('.tree__item').each(function() {
       if (parseInt($(this).data('children')) > 0) {
+        if ($(this).hasClass('tree__item--expanded')) {
+          return true; // next
+        }
         var toggle = $('<a/>', { class: 'toggle', href: '#' }).prepend('+');
-        $(this).append(' ').append(toggle);
+        $(this).append('&thinsp;').append(toggle);
         toggle.on('click', function(e) {
           e.preventDefault();
           var taxonId = $(this).closest('.tree__item').data('taxon-id');
