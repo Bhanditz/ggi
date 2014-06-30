@@ -29,7 +29,7 @@
             %img{ src: @taxon.image[:eolThumbnailURL], alt: "Image of #{@taxon.name}" }
           - unless (attribution.empty? && license_html.empty?)
             %figcaption
-              - unless @taxon.image[:title].empty?
+              - if @taxon.image[:title] && ! @taxon.image[:title].empty?
                 %p= @taxon.image[:title]
               - unless attribution.empty?
                 %p= attribution
