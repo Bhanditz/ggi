@@ -71,6 +71,11 @@ html, body {
   height: 100%; // I don't think this is doing anything.
 }
 
+// STOP GROWING:
+img {
+  max-width: 100%;
+}
+
 .page {
   position: relative;
   min-height: 100%;
