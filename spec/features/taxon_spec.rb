@@ -23,7 +23,8 @@ shared_examples 'a media rich taxon' do |license, attribution|
     end
     if attribution == 'empty'
       context 'without attribution' do
-        expect_it { to_not have_selector('figcaption p') }
+        # TODO - this is no longer true. It CAN have a figcaption, if the image has a title:
+        # expect_it { to_not have_selector('figcaption p') }
       end
     elsif attribution
       context 'with attribution' do
