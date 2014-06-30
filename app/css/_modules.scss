@@ -84,7 +84,10 @@ figcaption p {
 
 figure.float {
   clear: both;
-  width: 350px;
+  width: 320px;
+  img {
+    max-width: 320px;
+  }
   float: left;
   margin: 1em 2em 2em 1em;
 }
