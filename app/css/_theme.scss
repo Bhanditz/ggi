@@ -8,6 +8,7 @@
   $fg-color: ggi-contrast-color($bg-color, $fg-key);
   $a-color: if($a-key, map-get($ggi-colors, $a-key), $fg-color);
   background-color: $bg-color;
+  @include background-image(linear-gradient(top, $bg-color, lighten($bg-color, 15%)));
   color: $fg-color;
   @include ggi-color-links($a-color, $a-color, $a-color, $a-color)
 }
@@ -69,7 +70,9 @@ body {
 
 .taxon {
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
-    background-color: map-get($ggi-colors, lighter);
+    @include ggi-color(lighter);
+    $bg-color: map-get($ggi-colors, lightest);
+    @include background-image(linear-gradient(top, $bg-color, darken($bg-color, 16%)));
   }
 }
 
@@ -177,6 +180,7 @@ th {
 }
 
 header.page__header {
+  border: 2px solid ggi-color(darkest);
   @include ggi-color(darkest);
 }
 
