@@ -415,3 +415,37 @@ a.external {
   background-size: 22px 22px;
 }
 
+.downloads {
+  list-style-type: none;
+  text-align: left;
+  width: 18em;
+  margin: rhythm(1) auto;
+  li {
+    margin-bottom: rhythm(1);
+    div {
+      padding: {
+        top: 6px;
+        left: 52px;
+      }
+      height: 40px;
+    }
+    span {
+      border: 1px solid map-get($ggi-colors, mid);
+    }
+    .excel {
+      @include background(image-url("excel.svg"));
+      background-size: 40px 40px;
+      background-repeat: no-repeat;
+    }
+    .pdf {
+      @include background(image-url("pdf.svg"));
+      background-size: 40px 40px;
+      background-repeat: no-repeat;
+    }
+    .word {
+      @include background(image-url("word.svg"));
+      background-size: 40px 40px;
+      background-repeat: no-repeat;
+    }
+  }
+}

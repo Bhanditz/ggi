@@ -11,6 +11,9 @@
 
 article {
   padding-top: rhythm(2);
+  &.list {
+    text-align: center;
+  }
   &.narrow {
     width: 92%;
     margin: {
