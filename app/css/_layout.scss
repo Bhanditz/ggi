@@ -103,10 +103,12 @@ header.page__header {
 .site-navigation {
   padding-top: rhythm(0.75);
   width: 100%;
-  text-align: right;
+  margin: auto auto;
+  text-align: center;
 }
 
 .site-title {
+  text-align: center;
   small {
     color: map-get($ggi-colors, light);
   }
@@ -116,9 +118,11 @@ header.page__header {
   .site-title {
     @include span(2 at 1 of 3);
     margin: 0;
+    text-align: left;
   }
   .site-navigation {
     @include span(1 at 3 of 3);
+    text-align: right;
   }
 }
 
@@ -154,10 +158,12 @@ header.page__header {
 
 footer.page__footer {
   @extend .page__lane;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  min-height: rhythm($ggi-footer-rhythm);
-  margin-top: -1 * rhythm($ggi-footer-rhythm + 0.5);
+  @include susy-breakpoint($ggi-breakpoint-medium, 1) {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    min-height: rhythm($ggi-footer-rhythm);
+    margin-top: -1 * rhythm($ggi-footer-rhythm + 0.5);
+  }
 }
 

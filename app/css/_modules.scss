@@ -21,6 +21,9 @@ article {
     a:link {
       color: #44a;
     }
+    img {
+      max-width: 25em;
+    }
     @include breakpoint($ggi-breakpoint-large) {
       width: 60%;
       margin: {
@@ -63,11 +66,6 @@ dt {
 
 dd {
   margin-left: 0;
-}
-
-img {
-  max-width: 300px;
-  max-height: 300px;
 }
 
 hr {
@@ -317,22 +315,32 @@ footer.page__footer {
     padding: 0;
     margin: 0;
   }
-  li {
-    &:nth-of-type(1) {
-      @include span(2 at 1 of 3);
+  @include susy-breakpoint($ggi-breakpoint-medium, 1) {
+    li {
+      &:nth-of-type(1) {
+        @include span(2 at 1 of 3);
+      }
+      &:nth-of-type(2) {
+        @include span(1 at 3 of 3);
+      }
     }
-    &:nth-of-type(2) {
-      text-align: right;
-      @include span(1 at 3 of 3);
+  }
+  @include susy-breakpoint($ggi-breakpoint-medium, 1) {
+    li {
+      &:nth-of-type(2) {
+        width: 20em;
+      }
+    }
+  }
+  @include susy-breakpoint($ggi-breakpoint-medium, 1) {
+    li {
+      &:nth-of-type(2) {
+        text-align: right;
+      }
     }
   }
 }
 
-.footer__link--ggi {
-  max-width: rhythm(15);
-}
-
 .footer__link--eol {
   margin: rhythm(1);
-  max-width: rhythm(7);
 }
