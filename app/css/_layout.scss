@@ -1,10 +1,11 @@
 // Layout: layout of major content panels and global header and footer
 $base-font-size: 12px;
 $base-line-height: 18px;
-$ggi-breakpoint-medium: 60em;
-$ggi-breakpoint-head-split: 70em;
+$ggi-breakpoint-medium: 50em;
+$ggi-breakpoint-head-split: 65em;
 $ggi-breakpoint-large: 80em;
-$ggi-breakpoint-huge: 110em;
+$ggi-breakpoint-larger: 90em;
+$ggi-breakpoint-huge: 100em;
 $susy: (
   // NOTE - we do our own padding; tighter.
   gutters: 0,
@@ -44,6 +45,25 @@ $ggi-font-weight: (
 
 @include breakpoint($ggi-breakpoint-large) {
   @include establish-baseline(19px);
+}
+
+body {
+  border-radius: 0;
+  @include breakpoint($ggi-breakpoint-medium) {
+    border-radius: 60px;
+  }
+  @include breakpoint($ggi-breakpoint-head-split) {
+    border-radius: 70px;
+  }
+  @include breakpoint($ggi-breakpoint-large) {
+    border-radius: 80px;
+  }
+  @include breakpoint($ggi-breakpoint-larger) {
+    border-radius: 90px;
+  }
+  @include breakpoint($ggi-breakpoint-huge) {
+    border-radius: 110px;
+  }
 }
 
 html, body {

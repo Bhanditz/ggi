@@ -111,8 +111,8 @@ nav {
 
   height: rhythm(1.5); // Seems to fix phone problems.
 
-  @include breakpoint($ggi-breakpoint-large) {
-    font-size: 0.8em;
+  @include breakpoint(10em) {
+    font-size: 0.7em;
   }
   @include breakpoint($ggi-breakpoint-huge) {
     font-size: 1em;
