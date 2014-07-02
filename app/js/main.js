@@ -48,7 +48,7 @@
   });
 
   var collapseTaxonomy = function() {
-    $('.tree--taxonomy > .tree__item:first-child a.toggle').click();
+    loadTaxonomy($('.tree--taxonomy > .tree__item:first-child').data('taxon-id'));
   }
 
   var addTreeBrowsingActions = function() {
@@ -73,8 +73,7 @@
         $(this).append('&thinsp;').append(toggle);
         toggle.on('click', function(e) {
           e.preventDefault();
-          var taxonId = $(this).closest('.tree__item').data('taxon-id');
-          loadTaxonomy(taxonId);
+          loadTaxonomy($(this).closest('.tree__item').data('taxon-id'));
         });
       }
     });
