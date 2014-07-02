@@ -27,7 +27,7 @@ article {
     img {
       max-width: 25em;
     }
-    @include breakpoint($ggi-breakpoint-large) {
+    @include breakpoint($ggi-breakpoint-larger) {
       width: 60%;
       margin: {
         left: auto;
