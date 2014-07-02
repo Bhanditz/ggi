@@ -213,12 +213,6 @@ nav {
   }
   position: relative;
   nav {
-    @include breakpoint($ggi-breakpoint-large) {
-      margin-top: rhythm(1);
-    }
-    @include breakpoint($ggi-breakpoint-huge) {
-      margin-top: 0;
-    }
     li {
       padding: 0;
     }
@@ -233,14 +227,6 @@ nav {
   position: absolute;
   top: rhythm(1);
   right: rhythm(1);
-  @include breakpoint($ggi-breakpoint-large) {
-    top: rhythm(0.25);
-    right: rhythm(0.5);
-  }
-  @include breakpoint($ggi-breakpoint-huge) {
-    top: rhythm(1);
-    right: rhythm(1);
-  }
 }
 
 .tree {

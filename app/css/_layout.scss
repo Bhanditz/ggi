@@ -80,7 +80,9 @@ img {
 .page {
   position: relative;
   min-height: 100%;
-  @include padding-trailer($ggi-footer-rhythm);
+  @include susy-breakpoint($ggi-breakpoint-large, 2) {
+    @include padding-trailer($ggi-footer-rhythm);
+  }
 }
 
 .page__lane {
@@ -94,7 +96,8 @@ img {
   position: relative;
   max-width: 120em;
   margin: 0 auto;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 header.page__header {
