@@ -35,7 +35,9 @@ get '/autocomplete' do
   autocomplete_results = Ggi::Taxon.autocomplete(params[:search_term])
   cache_control :public, max_age: (60 * 60 * 24)
   content_type :json
-  autocomplete_results.map do |r|
+  batch_size = params[:batch_size].to_i
+  batch_size = 7 if batch_size == 0
+  autocomplete_results[0..batch_size-1].map do |r|
     { id: r[:taxon].id,
       value: r[:taxon].name,
       label: haml(:_taxon_autocomplete, layout: false, locals:
