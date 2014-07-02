@@ -12,3 +12,11 @@
   - siblings.each do |s|
     = tree_item(s, :collapsed)
   = "</ul>" * ancestors.length
+  -# TODO - this is a TEMPORARY fix to  the problem of hiding the other roots.
+  -# we need to re-write the above; START with this, and then expand the first node
+  -# that's in ancestors.
+  - Ggi::Classification.roots.each do |sib|
+    - next if ancestors.include?(sib)
+    - next if siblings.include?(sib)
+    - next if sib == taxon
+    = tree_item(sib, :collapsed)
