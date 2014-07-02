@@ -3,14 +3,19 @@
   @return if($key, map-get($ggi-colors, $key), contrast-color($color));
 }
 
+@mixin ggi-color-gradient($bg-key, $fg-key: false, $a-key: false) {
+  $bg-color: map-get($ggi-colors, $bg-key);
+  @include ggi-color($bg-key, $fg-key: false, $a-key: false);
+  @include background-image(linear-gradient(top, $bg-color, lighten($bg-color, 15%)));
+}
+
 @mixin ggi-color($bg-key, $fg-key: false, $a-key: false) {
   $bg-color: map-get($ggi-colors, $bg-key);
   $fg-color: ggi-contrast-color($bg-color, $fg-key);
   $a-color: if($a-key, map-get($ggi-colors, $a-key), $fg-color);
   background-color: $bg-color;
-  @include background-image(linear-gradient(top, $bg-color, lighten($bg-color, 15%)));
   color: $fg-color;
-  @include ggi-color-links($a-color, $a-color, $a-color, $a-color)
+  @include ggi-color-links($a-color, $a-color, $a-color, $a-color);
 }
 
 @mixin ggi-color-input($bg-key, $fg-key: false) {
@@ -180,8 +185,8 @@ th {
 }
 
 header.page__header {
-  border: 2px solid ggi-color(darkest);
-  @include ggi-color(darkest);
+  border: 3px solid map-get($ggi-colors, darker);
+  @include ggi-color-gradient(darkest);
 }
 
 .ui-autocomplete {
@@ -274,8 +279,7 @@ header.page__header {
   margin: rhythm(1) 0;
 
   @include breakpoint($ggi-breakpoint-large) {
-    margin: rhythm(1) auto;
-    margin-top: rhythm(2.4);
+    margin: 0 auto;
   }
 
   dt span {
@@ -400,7 +404,7 @@ header.page__header {
 }
 
 footer.page__footer {
-  @include ggi-color(dark);
+  @include ggi-color-gradient(dark);
 }
 
 a.info {

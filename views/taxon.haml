@@ -4,10 +4,6 @@
       %h1
         %a{ href: eol_page_url(@taxon) }
           = "%s %s" % [ @taxon.rank, @taxon.name ]
-
-    %section.taxon__information
-      %header.information__header
-        %h2 Taxonomic information
       %dl.nomenclature
         - unless @taxon.english_vernacular_name.to_s.empty?
           %dt.nomenclature__label--common-name English common name
@@ -21,6 +17,10 @@
           %dt.nomenclature__label--reference Ref:
           %dd.nomenclature__datum--reference
             %a{ href: '/about' }= @taxon.source
+
+    %section.taxon__information
+      %header.information__header
+        %h2 Taxonomic information
       - if @taxon.image
         - attribution = image_attribution(@taxon.image).to_s
         - license_html = license(@taxon.image[:license]).to_s

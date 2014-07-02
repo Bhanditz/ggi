@@ -97,12 +97,11 @@ figure.float {
 }
 
 table {
-  width: 80%; // As wide as possible (w/ breathing rm), within:
+  width: 72%; // As wide as possible (w/ breathing rm), within:
   min-width: 21em;
   max-width: 29em;
-  margin: rhythm(2.75) 0;
   @include breakpoint($ggi-breakpoint-large) {
-    margin: rhythm(2.75) auto;
+    margin: 0 auto;
   }
   padding: 0 rhythm(1);
 }
@@ -275,12 +274,6 @@ nav {
   }
 }
 
-.information__media {
-  img {
-    max-height: rhythm(12);
-  }
-}
-
 .measurement__label, .measurement__datum {
   &--score, &--value {
     text-align: right;
@@ -290,7 +283,6 @@ nav {
 .assessment__measurements {
 
   font-size: 1.1em;
-  margin-bottom: rhythm(3);
 
   thead tr {
     border-bottom: 1px solid map-get($ggi-colors, dark);

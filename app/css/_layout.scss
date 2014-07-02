@@ -142,6 +142,12 @@ header.page__header {
 .taxon {
   margin-bottom: 0;
   padding-top: rhythm(1);
+  .taxon__information {
+    margin-bottom: rhythm(2);
+    img {
+      width: 30em;
+    }
+  }
   @include susy-breakpoint($ggi-breakpoint-large, 3) {
     border: 2px solid black;
     border-top: 0; // Looks weird.
@@ -156,6 +162,7 @@ header.page__header {
         }
       }
       .taxon__assessment {
+        margin-bottom: rhythm(3);
         @include span(4 at 4 of 7);
       }
     }
